@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-public class CarMovement : MonoBehaviour, IClickable
+public class CarMovement : MonoBehaviour
 {
     [SerializeField] private int _clickLimit = 5;
 
@@ -17,7 +17,7 @@ public class CarMovement : MonoBehaviour, IClickable
     [Header("--- Models")]
     [SerializeField] private Transform _modelParent;
     [SerializeField] private GameObject[] _models;
-    [SerializeField] private ClickEngine _clickEngine;
+    [SerializeField] private ClickObjects[] _clickObjects;
 
     private Transform[] _movementPoints;
     private int _currentClicks = 0;
@@ -42,32 +42,33 @@ public class CarMovement : MonoBehaviour, IClickable
     {
         int rdn = Random.Range(0, _models.Length);
         _saveModel = Instantiate(_models[rdn], _modelParent);
-        _clickEngine.Init(this, _clickLimit);
+
+        for (int i = 0; i < _clickObjects.Length; i++)
+        {
+            _clickObjects[i].Init(this, _clickLimit);
+        }
     }
     private void MoveToClickPoint()
     {
         transform.DOMove(_movementPoints[1].position, _spawnDuration).OnComplete(() => { _isAtClickPoint = true; });
     }
 
-    public void OnClicked()
-    {
-        if (_isAtClickPoint && _currentClicks < _clickLimit)
-        {
-            _currentClicks++;
-            ProvideFeedback();
-
-            if (_currentClicks >= _clickLimit)
-            {
-                MoveToExitPoint();
-            }
-        }
-    }
-
-    private void ProvideFeedback()
+    public void ProvideFeedback()
     {
         transform.DOPunchScale(Vector3.one * 0.2f, 0.05f, 10, 1);
     }
 
+    public void CheckAllRepairing()
+    {
+        foreach (var obj in _clickObjects)
+        {
+            if(!obj.IsRepaired) return;
+        }
+        
+        MoveToExitPoint();
+    }
+
+    #region GoDeath
     public void MoveToExitPoint()
     {
         transform.DOMove(_movementPoints[2].position, _exitDuration).SetEase(Ease.InQuart).OnComplete(DestroyCar);
@@ -84,4 +85,6 @@ public class CarMovement : MonoBehaviour, IClickable
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
+    
+    #endregion
 }

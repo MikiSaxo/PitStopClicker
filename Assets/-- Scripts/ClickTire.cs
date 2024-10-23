@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClickEngine : ClickObjects
+public class ClickTire : ClickObjects
 {
     private CarMovement _myCar;
     private float _smokeIntensity = 1f;
