@@ -2,18 +2,28 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-public class CarMovement : MonoBehaviour
+public class CarMovement : MonoBehaviour, IClickable
 {
+    [SerializeField] private int _clickLimit = 5;
+
+    [Header("--- Timing")]
     [SerializeField] private float _spawnDuration = 2f;
     [SerializeField] private float _exitDuration = 1f;
-    [SerializeField] private int _clickLimit = 5;
+    
+    [Header("--- Models")]
+    [SerializeField] private Transform _modelParent;
+    [SerializeField] private GameObject[] _models;
+    [SerializeField] private ClickEngine _clickEngine;
 
     private Transform[] _movementPoints;
     private int _currentClicks = 0;
     private bool _isAtClickPoint = false;
+    private GameObject _saveModel;
+
 
     public UnityAction OnCarDestroyed;
 
@@ -21,17 +31,25 @@ public class CarMovement : MonoBehaviour
     {
         _movementPoints = movPoints;
         transform.position = _movementPoints[0].position;
+        
+        AddRandomModel();
         MoveToClickPoint();
 
         _clickLimit = 5;
     }
 
-    void MoveToClickPoint()
+    private void AddRandomModel()
+    {
+        int rdn = Random.Range(0, _models.Length);
+        _saveModel = Instantiate(_models[rdn], _modelParent);
+        _clickEngine.Init(this, _clickLimit);
+    }
+    private void MoveToClickPoint()
     {
         transform.DOMove(_movementPoints[1].position, _spawnDuration).OnComplete(() => { _isAtClickPoint = true; });
     }
 
-    public void OnCarClicked()
+    public void OnClicked()
     {
         if (_isAtClickPoint && _currentClicks < _clickLimit)
         {
@@ -40,24 +58,19 @@ public class CarMovement : MonoBehaviour
 
             if (_currentClicks >= _clickLimit)
             {
-                Debug.Log("Car repaired after " + _clickLimit + " clicks!");
                 MoveToExitPoint();
             }
         }
     }
-    
-    void ProvideFeedback()
+
+    private void ProvideFeedback()
     {
         transform.DOPunchScale(Vector3.one * 0.2f, 0.05f, 10, 1);
     }
 
-    void MoveToExitPoint()
+    public void MoveToExitPoint()
     {
-        transform.DOMove(_movementPoints[2].position, _exitDuration).SetEase(Ease.InQuart).OnComplete(() =>
-        {
-            Debug.Log("Car has exited!");
-            DestroyCar();
-        });
+        transform.DOMove(_movementPoints[2].position, _exitDuration).SetEase(Ease.InQuart).OnComplete(DestroyCar);
     }
 
     private void DestroyCar()

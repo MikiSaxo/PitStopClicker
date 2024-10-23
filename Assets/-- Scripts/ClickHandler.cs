@@ -11,12 +11,17 @@ public class ClickHandler : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                var carMov = hit.transform.GetComponent<CarMovement>();
-                if (carMov != null)
+                IClickable clickable = hit.transform.GetComponent<IClickable>();
+                if (clickable != null)
                 {
-                    carMov.OnCarClicked();
+                    clickable.OnClicked();
                 }
             }
         }
     }
+}
+
+public interface IClickable
+{
+    void OnClicked();
 }
