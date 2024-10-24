@@ -24,7 +24,6 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private GameObject[] _circuitFX;
 
     private Transform[] _movementPoints;
-    private int _currentClicks = 0;
     private bool _isAtClickPoint = false;
 
 
