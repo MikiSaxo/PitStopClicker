@@ -7,6 +7,7 @@ public class ClickObjects : MonoBehaviour,IClickable
     [SerializeField] protected ParticleSystem _fxPrefab;
     [SerializeField] protected Transform _fxParent;
     public bool IsRepaired { get; protected set; }
+    public bool IsActive { get; protected set; }
     
     protected int _currentClicks = 0;
 

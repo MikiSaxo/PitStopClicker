@@ -22,11 +22,12 @@ public class ClickEngine : ClickObjects
 
         SetFX();
         _smokeFX.Play();
+        IsActive = true;
     }
 
     public override void OnClicked()
     {
-        if (_myCar == null || _smokeFX == null) return;
+        if (_myCar == null || _smokeFX == null || !IsActive) return;
         
         _currentClicks++;
 

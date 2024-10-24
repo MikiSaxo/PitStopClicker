@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
@@ -5,9 +6,21 @@ using UnityEngine.Serialization;
 
 public class CarSpawner : MonoBehaviour
 {
+    public static CarSpawner Instance;
+    
     [Tooltip("0: spawn, 1: click, 2: exit")]
     [SerializeField] private Transform[] _movementPoints;
     [SerializeField] private GameObject _carPrefab;
+    
+    public GameObject SaveModel { get; set; }
+
+    
+    public UnityAction OnCarDestroyed;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -27,7 +40,7 @@ public class CarSpawner : MonoBehaviour
 
         if (carMovement != null)
         {
-            carMovement.OnCarDestroyed += HandleCarDestroyed; 
+            OnCarDestroyed += HandleCarDestroyed;
         }
         
         carMovement.Init(_movementPoints);
