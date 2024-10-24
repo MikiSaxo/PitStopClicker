@@ -35,6 +35,7 @@ public class CarSpawner : MonoBehaviour
 
     private void SpawnCar()
     {
+        print("spawn car");
         GameObject newCar = Instantiate(_carPrefab, _movementPoints[0].position, Quaternion.identity);
         CarMovement carMovement = newCar.GetComponent<CarMovement>();
 
@@ -50,5 +51,6 @@ public class CarSpawner : MonoBehaviour
     {
         print("car is destroyed");
         SpawnCar();
+        OnCarDestroyed -= HandleCarDestroyed;
     }
 }

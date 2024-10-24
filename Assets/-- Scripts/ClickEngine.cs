@@ -27,8 +27,8 @@ public class ClickEngine : ClickObjects
 
     public override void OnClicked()
     {
-        if (_myCar == null || _smokeFX == null || !IsActive) return;
-        
+        if (_myCar == null || _smokeFX == null || !IsActive || IsRepaired) return;
+
         _currentClicks++;
 
         SetFX();
@@ -38,7 +38,7 @@ public class ClickEngine : ClickObjects
         {
             _smokeFX.Stop();
         }
-        
+
         if (_currentClicks >= _clickNeeded && !IsRepaired)
         {
             IsRepaired = true;

@@ -17,14 +17,8 @@ public class CarSpawnerCircuit : MonoBehaviour
         Instance = this;
     }
 
-    // private void Start()
-    // {
-    //     CarSpawner.Instance.OnCarDestroyed += SpawnCar;
-    // }
-
     public void GoSpawnCar(GameObject car)
     {
-        // GameObject spawnedCar = Instantiate(CarSpawner.Instance.SaveModel, _spawnPoint.position, _spawnPoint.rotation);
         car.transform.position = _spawnPoint.position;
         car.transform.rotation = _spawnPoint.rotation;
         MoveCarToEndPoint(car);

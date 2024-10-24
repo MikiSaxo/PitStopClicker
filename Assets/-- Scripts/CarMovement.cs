@@ -94,7 +94,7 @@ public class CarMovement : MonoBehaviour
 
     #region GoDeath
 
-    public void MoveToExitPoint()
+    private void MoveToExitPoint()
     {
         transform.DOMove(_movementPoints[2].position, _exitDuration).SetEase(Ease.InQuart).OnComplete(DestroyCar);
     }
@@ -103,14 +103,8 @@ public class CarMovement : MonoBehaviour
     {
         CarSpawner.Instance.OnCarDestroyed?.Invoke();
         GoToCircuit();
-        // StartCoroutine(WaitToDeath());
     }
 
-    private IEnumerator WaitToDeath()
-    {
-        yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
-    }
 
     private void GoToCircuit()
     {

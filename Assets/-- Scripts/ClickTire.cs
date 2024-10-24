@@ -28,7 +28,7 @@ public class ClickTire : ClickObjects
     public override void OnClicked()
     {
         if (_myCar == null || _smokeFX == null || !IsActive || IsRepaired) return;
-        
+
         _currentClicks++;
 
         SetFX();
@@ -38,7 +38,7 @@ public class ClickTire : ClickObjects
         {
             _smokeFX.Stop();
         }
-        
+
         if (_currentClicks >= _clickNeeded && !IsRepaired)
         {
             IsRepaired = true;
