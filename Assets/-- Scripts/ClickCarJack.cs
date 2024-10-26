@@ -11,6 +11,7 @@ public class ClickCarJack : ClickObjects
     [SerializeField] private Transform _jackPoint;
     [SerializeField] private float _goDuration = 1f;
     [SerializeField] private float _returnDuration = 1f;
+    [SerializeField] private float _heightCar = 1f;
 
     public bool IsSet { get; set; }
 
@@ -35,7 +36,7 @@ public class ClickCarJack : ClickObjects
         transform.DOKill();
 
         IsSet = true;
-        transform.DOMove(_jackPoint.position, _goDuration).SetEase(Ease.InOutQuad);
+        transform.DOMove(_jackPoint.position, _goDuration).SetEase(Ease.InOutQuad).OnComplete(() => SetHeightCurrentCar(true));
         transform.DORotateQuaternion(_jackPoint.rotation, _goDuration).SetEase(Ease.InOutQuad);
     }
 
@@ -44,6 +45,8 @@ public class ClickCarJack : ClickObjects
         transform.DOKill();
 
         IsSet = false;
+        
+        SetHeightCurrentCar(false);
         transform.DOMove(_startPos, _returnDuration).SetEase(Ease.InOutQuad);
         transform.DORotateQuaternion(_startRota, _returnDuration).SetEase(Ease.InOutQuad);
     }
@@ -63,6 +66,17 @@ public class ClickCarJack : ClickObjects
         transform.DOMove(randomPosition, 0.1f).SetEase(Ease.Linear)
             .OnComplete(() => transform.DOMove(_startPos, 0.2f));
     }
+    
+    private void SetHeightCurrentCar(bool isUp)
+    {
+        _currentCar = CarSpawner.Instance.CurrentCar;
+
+        if(isUp)
+            _currentCar.transform.DOMoveY(_currentCar.transform.position.y + _heightCar, 0.25f);
+        else
+            _currentCar.transform.DOMoveY(_currentCar.transform.position.y - _heightCar, 0.1f);
+            
+    }
 
     public override void OnClicked(Vector3 hitPoint)
     {
@@ -72,5 +86,11 @@ public class ClickCarJack : ClickObjects
             ReturnFromJackPoint();
         else
             MoveToJackPoint();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+            OnClicked(Vector3.zero);
     }
 }
