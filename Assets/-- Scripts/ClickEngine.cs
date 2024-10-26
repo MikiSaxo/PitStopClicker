@@ -34,7 +34,7 @@ public class ClickEngine : ClickObjects
         _currentClicks++;
 
         SetFX();
-        _myCar.OnClickFeedback();
+        //_myCar.OnClickFeedback();
 
         if (_smokeIntensity <= 0f)
         {

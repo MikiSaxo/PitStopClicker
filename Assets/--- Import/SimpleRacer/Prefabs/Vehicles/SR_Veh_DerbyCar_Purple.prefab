@@ -433,5 +433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wheels:
-  - {fileID: 134214}
-  - {fileID: 171140}
+  - {fileID: 445172}
+  - {fileID: 406728}
+  _wheelRadius: 0.65

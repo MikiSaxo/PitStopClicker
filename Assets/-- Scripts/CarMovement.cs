@@ -2,30 +2,21 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class CarMovement : MonoBehaviour
 {
     [SerializeField] private int _clickLimit = 5;
-
-    [Header("--- Timing")]
     [SerializeField] private float _spawnDuration = 2f;
     [SerializeField] private float _exitDuration = 1f;
-
-    [Header("--- Models")]
     [SerializeField] private Transform _modelParent;
     [SerializeField] private GameObject[] _models;
     [SerializeField] private ClickObjects[] _clickObjects;
-    
-    [Header("--- FX")]
-    [SerializeField] private GameObject[] _circuitFX;
+    [SerializeField] private ParticleSystem[] _circuitFX;
 
-    private Transform[] _movementPoints;
-    private bool _isAtClickPoint = false;
+    public bool IsAtClickPoint { get; set; }
     
+    private WheelAnim _wheelAnim;
+    private Transform[] _movementPoints;
     private Vector3 _initClickPos;
     private Quaternion _initClickRota;
 
@@ -33,6 +24,9 @@ public class CarMovement : MonoBehaviour
     {
         _movementPoints = movPoints;
         transform.position = _movementPoints[0].position;
+        
+        _initClickPos = _movementPoints[1].position;
+        _initClickRota = transform.rotation;
 
         AddRandomModel();
         AddRandomRepair();
@@ -44,7 +38,10 @@ public class CarMovement : MonoBehaviour
     private void AddRandomModel()
     {
         int rdn = Random.Range(0, _models.Length);
-        CarSpawner.Instance.SaveModel = Instantiate(_models[rdn], _modelParent);
+        GameObject go = Instantiate(_models[rdn], _modelParent);
+        
+        CarSpawner.Instance.SaveModel = go;
+        _wheelAnim = go.GetComponent<WheelAnim>();
     }
 
     private void AddRandomRepair()
@@ -73,18 +70,23 @@ public class CarMovement : MonoBehaviour
     
     private void MoveToClickPoint()
     {
+        float distance = Vector3.Distance(transform.position, _movementPoints[1].position);
+        float linearSpeed = distance / _spawnDuration;
+        
+        _wheelAnim.StartRotation(linearSpeed);
+
         transform.DOMove(_movementPoints[1].position, _spawnDuration).OnComplete(() =>
         {
-            _isAtClickPoint = true;
-            _initClickRota = transform.rotation;
-            _initClickPos = transform.position;
+            IsAtClickPoint = true;
+            _wheelAnim.StopRotation();
+            SetActiveCircuitFX(false);
         });
     }
 
     public void OnClickFeedback()
     {
         transform.DOKill();
-        float randomAngle = Random.Range(-20f, 20f); // Random rotation angle between -30 and 30 degrees
+        float randomAngle = Random.Range(-20f, 20f);
         transform.DOPunchScale(Vector3.one * 0.05f, 0.05f, 10, 1);
         transform.DORotate(new Vector3(0, 0, randomAngle), 0.1f, RotateMode.LocalAxisAdd).SetEase(Ease.OutQuad)
             .OnComplete(() => 
@@ -106,11 +108,20 @@ public class CarMovement : MonoBehaviour
         MoveToExitPoint();
     }
 
-    #region GoDeath
-
     private void MoveToExitPoint()
     {
-        transform.DOMove(_movementPoints[2].position, _exitDuration).SetEase(Ease.InQuart).OnComplete(DestroyCar);
+        float distance = Vector3.Distance(transform.position, _movementPoints[2].position);
+        float linearSpeed = distance / _exitDuration;
+        
+        _wheelAnim.StartRotation(linearSpeed);
+
+        SetActiveCircuitFX(true);
+        
+        transform.DOMove(_movementPoints[2].position, _exitDuration).SetEase(Ease.InQuart).OnComplete(() =>
+        {
+            _wheelAnim.StopRotation();
+            DestroyCar();
+        });
     }
 
     private void DestroyCar()
@@ -119,14 +130,26 @@ public class CarMovement : MonoBehaviour
         GoToCircuit();
     }
 
-
+    private void SetActiveCircuitFX(bool isActive)
+    {
+        if(isActive)
+        {
+            foreach (var fx in _circuitFX)
+            {
+                fx.Play();
+            }
+        }
+        else
+        {
+            foreach (var fx in _circuitFX)
+            {
+                print("stop fx ");
+                fx.Stop();
+            }
+        }
+    }
     private void GoToCircuit()
     {
-        foreach (var fx in _circuitFX)
-        {
-            fx.gameObject.SetActive(true);
-        }
-
         foreach (var obj in _clickObjects)
         {
             obj.gameObject.SetActive(false);
@@ -134,6 +157,4 @@ public class CarMovement : MonoBehaviour
         
         CarSpawnerCircuit.Instance.GoSpawnCar(this.gameObject);
     }
-
-    #endregion
 }

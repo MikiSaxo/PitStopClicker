@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ClickObjects : MonoBehaviour,IClickable
 {
+    [Header("--- FX")]
     [SerializeField] protected ParticleSystem _fxPrefab;
     [SerializeField] protected Transform _fxParent;
     public bool IsRepaired { get; protected set; }

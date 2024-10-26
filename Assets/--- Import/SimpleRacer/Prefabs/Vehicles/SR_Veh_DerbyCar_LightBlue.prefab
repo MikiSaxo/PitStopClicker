@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 476716}
   - component: {fileID: 3371470}
   - component: {fileID: 2360794}
-  - component: {fileID: 4790202425777662164}
+  - component: {fileID: 8203006426694033746}
   m_Layer: 0
   m_Name: SR_Veh_DerbyCar_LightBlue
   m_TagString: Untagged
@@ -420,7 +420,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4790202425777662164
+--- !u!114 &8203006426694033746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -433,5 +433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wheels:
-  - {fileID: 117620}
-  - {fileID: 123962}
+  - {fileID: 488044}
+  - {fileID: 466916}
+  _wheelRadius: 0.65

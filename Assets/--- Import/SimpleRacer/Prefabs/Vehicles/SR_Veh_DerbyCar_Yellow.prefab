@@ -350,8 +350,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wheels:
-  - {fileID: 128796}
-  - {fileID: 173738}
+  - {fileID: 433614}
+  - {fileID: 408956}
+  _wheelRadius: 0.65
 --- !u!1 &173738
 GameObject:
   m_ObjectHideFlags: 0
