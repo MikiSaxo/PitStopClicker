@@ -105,11 +105,14 @@ public class CarMovement : MonoBehaviour
             if (!obj.IsRepaired) return;
         }
 
+        ClickCarJack.Instance.ReturnFromJackPoint();
         MoveToExitPoint();
     }
 
     private void MoveToExitPoint()
     {
+        IsAtClickPoint = false;
+        
         float distance = Vector3.Distance(transform.position, _movementPoints[2].position);
         float linearSpeed = distance / _exitDuration;
         
@@ -143,7 +146,6 @@ public class CarMovement : MonoBehaviour
         {
             foreach (var fx in _circuitFX)
             {
-                print("stop fx ");
                 fx.Stop();
             }
         }

@@ -13,6 +13,7 @@ public class CarSpawner : MonoBehaviour
     [SerializeField] private GameObject _carPrefab;
     
     public GameObject SaveModel { get; set; }
+    public CarMovement CurrentCar { get; set; }
 
     
     public UnityAction OnCarDestroyed;
@@ -37,6 +38,7 @@ public class CarSpawner : MonoBehaviour
     {
         GameObject newCar = Instantiate(_carPrefab, _movementPoints[0].position, Quaternion.identity);
         CarMovement carMovement = newCar.GetComponent<CarMovement>();
+        CurrentCar = carMovement;
 
         if (carMovement != null)
         {

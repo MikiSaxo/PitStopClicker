@@ -5,8 +5,9 @@ public class ClickHandler : MonoBehaviour
 {
     public static ClickHandler Instance;
     
+    [Header("--- FX")]
     [SerializeField] private GameObject _fxClick;
-
+    [SerializeField] private GameObject _fxRepairGood;
 
     private void Awake()
     {
@@ -34,6 +35,10 @@ public class ClickHandler : MonoBehaviour
     public void CreateFXClick(Vector3 position)
     {
         Instantiate(_fxClick, position, Quaternion.identity);
+    }
+    public void CreateFXRepairGood(Vector3 position)
+    {
+        Instantiate(_fxRepairGood, position, _fxRepairGood.transform.rotation);
     }
 }
 

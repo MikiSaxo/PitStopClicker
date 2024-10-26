@@ -27,8 +27,14 @@ public class ClickCarRepair : ClickObjects
 
     public override void OnClicked(Vector3 hitPoint)
     {
-        if (_myCar == null || _smokeFX == null || !IsActive || IsRepaired || !_myCar.IsAtClickPoint) return;
-     
+        if (!CanClick()) return;
+
+        if (!ClickCarJack.Instance.IsSet)
+        {
+            ClickCarJack.Instance.SelectMeAnim();
+            return;
+        }
+        
         base.OnClicked(hitPoint);
 
         _currentClicks++;
@@ -44,6 +50,7 @@ public class ClickCarRepair : ClickObjects
         if (_currentClicks >= _clickNeeded && !IsRepaired)
         {
             IsRepaired = true;
+            ClickHandler.Instance.CreateFXRepairGood(transform.position);
             _myCar.CheckAllRepairing();
         }
     }
@@ -55,5 +62,14 @@ public class ClickCarRepair : ClickObjects
 
         var main = _smokeFX.main;
         main.startSize = Mathf.Lerp(_initialStartSize, 0.1f, progress);
+    }
+
+    private bool CanClick()
+    {
+        return _myCar != null
+               && _smokeFX != null
+               && IsActive
+               && !IsRepaired
+               && _myCar.IsAtClickPoint;
     }
 }
