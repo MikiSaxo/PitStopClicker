@@ -25,14 +25,16 @@ public class ClickTire : ClickObjects
         IsActive = true;
     }
 
-    public override void OnClicked()
+    public override void OnClicked(Vector3 hitPoint)
     {
+        base.OnClicked(hitPoint);
+
         if (_myCar == null || _smokeFX == null || !IsActive || IsRepaired) return;
 
         _currentClicks++;
 
         SetFX();
-        _myCar.ProvideFeedback();
+        _myCar.OnClickFeedback();
 
         if (_smokeIntensity <= 0f)
         {

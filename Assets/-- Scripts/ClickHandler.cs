@@ -1,7 +1,18 @@
+using System;
 using UnityEngine;
 
 public class ClickHandler : MonoBehaviour
 {
+    public static ClickHandler Instance;
+    
+    [SerializeField] private GameObject _fxClick;
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -14,14 +25,19 @@ public class ClickHandler : MonoBehaviour
                 IClickable clickable = hit.transform.GetComponent<IClickable>();
                 if (clickable != null)
                 {
-                    clickable.OnClicked();
+                    clickable.OnClicked(hit.point);
                 }
             }
         }
+    }
+    
+    public void CreateFXClick(Vector3 position)
+    {
+        Instantiate(_fxClick, position, Quaternion.identity);
     }
 }
 
 public interface IClickable
 {
-    void OnClicked();
+    void OnClicked(Vector3 hitPoint);
 }

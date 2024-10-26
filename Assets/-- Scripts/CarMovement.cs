@@ -25,7 +25,9 @@ public class CarMovement : MonoBehaviour
 
     private Transform[] _movementPoints;
     private bool _isAtClickPoint = false;
-
+    
+    private Vector3 _initClickPos;
+    private Quaternion _initClickRota;
 
     public void Init(Transform[] movPoints)
     {
@@ -71,12 +73,25 @@ public class CarMovement : MonoBehaviour
     
     private void MoveToClickPoint()
     {
-        transform.DOMove(_movementPoints[1].position, _spawnDuration).OnComplete(() => { _isAtClickPoint = true; });
+        transform.DOMove(_movementPoints[1].position, _spawnDuration).OnComplete(() =>
+        {
+            _isAtClickPoint = true;
+            _initClickRota = transform.rotation;
+            _initClickPos = transform.position;
+        });
     }
 
-    public void ProvideFeedback()
+    public void OnClickFeedback()
     {
-        transform.DOPunchScale(Vector3.one * 0.2f, 0.05f, 10, 1);
+        transform.DOKill();
+        float randomAngle = Random.Range(-20f, 20f); // Random rotation angle between -30 and 30 degrees
+        transform.DOPunchScale(Vector3.one * 0.05f, 0.05f, 10, 1);
+        transform.DORotate(new Vector3(0, 0, randomAngle), 0.1f, RotateMode.LocalAxisAdd).SetEase(Ease.OutQuad)
+            .OnComplete(() => 
+            {
+                transform.DOMove(_initClickPos, 0.1f);
+                transform.DORotateQuaternion(_initClickRota, 0.1f);
+            });
     }
 
     public void CheckAllRepairing()

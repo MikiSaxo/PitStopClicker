@@ -16,9 +16,10 @@ public class ClickObjects : MonoBehaviour,IClickable
     {
         
     }
-    public virtual void OnClicked()
+    public virtual void OnClicked(Vector3 hitPoint)
     {
-        
+        if(!IsRepaired)
+            ClickHandler.Instance.CreateFXClick(hitPoint);
     }
 
     public virtual void SetFX()
