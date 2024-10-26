@@ -319,6 +319,10 @@ PrefabInstance:
       value: CarJack
       objectReference: {fileID: 0}
     - target: {fileID: 3356908037935666019, guid: 4f24bcbce6413db489bd9148d8914641, type: 3}
+      propertyPath: _heightCar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356908037935666019, guid: 4f24bcbce6413db489bd9148d8914641, type: 3}
       propertyPath: _jackPoint
       value: 
       objectReference: {fileID: 1548960589}
