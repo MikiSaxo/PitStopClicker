@@ -21,6 +21,9 @@ public class ClickCarJack : ClickObjects
     private CarMovement _currentCar;
     private bool _isJumping;
 
+    readonly float _jumpPower = 0.2f;
+    readonly float _duration = 0.25f;
+
     private void Awake()
     {
         Instance = this;
@@ -61,12 +64,7 @@ public class ClickCarJack : ClickObjects
         transform.DOComplete();
         _isJumping = true;
 
-        Vector3 initPos = transform.position;
-        float jumpPower = 0.2f;
-        int numJumps = 1;
-        float duration = 0.25f;
-
-        transform.DOJump(initPos, jumpPower, numJumps, duration)
+        transform.DOJump(transform.position, _jumpPower, 1, _duration)
             .OnComplete(() => { _isJumping = false; });
     }
 

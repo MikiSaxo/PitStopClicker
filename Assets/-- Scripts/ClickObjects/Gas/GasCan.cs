@@ -26,6 +26,10 @@ public class GasCan : ClickObjects
     private CarMovement _currentCar;
     private Transform _gasPoint;
     private Collider _collider;
+    private float _currentRotaY;
+    
+    private readonly float _rotateDuration = 0.1f;
+
 
     private void Awake()
     {
@@ -70,28 +74,19 @@ public class GasCan : ClickObjects
     {
         transform.DOKill();
 
-        float _currentRotaY = transform.rotation.eulerAngles.y;
+        _currentRotaY = transform.rotation.eulerAngles.y;
         float randomAngle = Random.Range(_currentRotaY - 20f, _currentRotaY + 20f);
-        // transform.DOPunchScale(Vector3.one * 0.05f, 0.05f, 10, 1);
-        // transform.DORotate(new Vector3(0, 360, 0), 0.5f, RotateMode.FastBeyond360).SetEase(Ease.OutQuad)
-        //     .OnComplete(() =>
-        //     {
-        //         transform.DOMove(_initPos, 0.1f);
-        //         transform.DORotateQuaternion(_initRota, 0.1f);
-        //     });
-        float rotateAngle = 20f;
-        float rotateDuration = 0.1f;
 
         // Rotate left
-        transform.DORotate(new Vector3(0, -randomAngle, 0), rotateDuration).SetEase(Ease.InOutQuad)
+        transform.DORotate(new Vector3(0, -randomAngle, 0), _rotateDuration).SetEase(Ease.InOutQuad)
             .OnComplete(() =>
             {
                 // Rotate right
-                transform.DORotate(new Vector3(0, randomAngle, 0), rotateDuration).SetEase(Ease.InOutQuad)
+                transform.DORotate(new Vector3(0, randomAngle, 0), _rotateDuration).SetEase(Ease.InOutQuad)
                     .OnComplete(() =>
                     {
                         // Return to initial rotation
-                        transform.DORotateQuaternion(_initRota, rotateDuration).SetEase(Ease.InOutQuad);
+                        transform.DORotateQuaternion(_initRota, _rotateDuration).SetEase(Ease.InOutQuad);
                     });
             });
     }

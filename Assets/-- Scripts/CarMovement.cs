@@ -6,14 +6,22 @@ using System.Collections.Generic;
 public class CarMovement : MonoBehaviour
 {
     [SerializeField] private int _clickLimit = 5;
-    [SerializeField] private float _spawnDuration = 2f;
-    [SerializeField] private float _exitDuration = 1f;
+    
+    [Header("--- Car Models")]
     [SerializeField] private Transform _modelParent;
     [SerializeField] private GameObject[] _models;
+    
+    [Header("--- Car Repair")]
     [SerializeField] private ClickObjects[] _clickObjects;
+    
+    [Header("--- Timing")]
+    [SerializeField] private float _spawnDuration = 2f;
+    [SerializeField] private float _exitDuration = 1f;
+    
+    [Header("--- FX Drive")]
     [SerializeField] private ParticleSystem[] _circuitFX;
 
-    public bool IsAtClickPoint { get; set; }
+    public bool IsAtClickPoint { get; private set; }
     
     private WheelAnim _wheelAnim;
     private Transform[] _movementPoints;

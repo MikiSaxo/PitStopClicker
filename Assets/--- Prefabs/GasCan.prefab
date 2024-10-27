@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fxPrefab: {fileID: 0}
   _fxParent: {fileID: 0}
-  _goDuration: 1
+  _goDuration: 0.5
   _returnDuration: 1
   _fillGas: {fileID: 8834453992265447003}
   _fillDuration: 2

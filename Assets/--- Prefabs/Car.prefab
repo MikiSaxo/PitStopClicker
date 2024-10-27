@@ -382,8 +382,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clickLimit: 5
-  _spawnDuration: 1
-  _exitDuration: 0.75
   _modelParent: {fileID: 5099756823855406363}
   _models:
   - {fileID: 126226, guid: abaef0c19e4c11f45a3ffc7193011649, type: 3}
@@ -401,6 +399,8 @@ MonoBehaviour:
   - {fileID: 3748299333297726055}
   - {fileID: 2080891793962600128}
   - {fileID: 8760370461094615074}
+  _spawnDuration: 1
+  _exitDuration: 0.75
   _circuitFX:
   - {fileID: 3862831614405778948}
   - {fileID: 3606960127435851745}
