@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class StandsAnim : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _objectsToAnimate = new List<GameObject>();
+    [SerializeField] private List<GameObjectList> _objectsToAnimate = new List<GameObjectList>();
     [SerializeField] private float _jumpPower = 1f;
     [SerializeField] private float _jumpDuration = 0.5f;
     [SerializeField] private float _delayBetweenJumps = 0.2f;
@@ -18,9 +18,12 @@ public class StandsAnim : MonoBehaviour
 
     private IEnumerator AnimateWave()
     {
-        foreach (GameObject obj in _objectsToAnimate)
+        foreach (var gameObjectList in _objectsToAnimate)
         {
-            obj.transform.DOJump(obj.transform.position, _jumpPower, 1, _jumpDuration);
+            foreach (var go in gameObjectList.GameObjectsList)
+            {
+                go.transform.DOJump(go.transform.position, _jumpPower, 1, _jumpDuration);
+            }
             yield return new WaitForSeconds(_delayBetweenJumps);
         }
 
@@ -31,6 +34,12 @@ public class StandsAnim : MonoBehaviour
     
     public void SetActiveCrowd(bool active, int index)
     {
-        _objectsToAnimate[index].SetActive(active);
+        //_objectsToAnimate[index].SetActive(active);
     }
+}
+
+[System.Serializable]
+public class GameObjectList 
+{
+    public List<GameObject> GameObjectsList;
 }

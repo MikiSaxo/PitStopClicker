@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 7457730991217824356}
   - component: {fileID: 2581944265999485116}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: NoGas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

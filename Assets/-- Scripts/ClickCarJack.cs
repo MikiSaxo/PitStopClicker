@@ -9,15 +9,17 @@ public class ClickCarJack : ClickObjects
 
     [Header("--- Car Jack ")]
     [SerializeField] private Transform _jackPoint;
+
     [SerializeField] private float _goDuration = 1f;
     [SerializeField] private float _returnDuration = 1f;
     [SerializeField] private float _heightCar = 1f;
 
     public bool IsSet { get; set; }
 
-    private Vector3 _startPos;
-    private Quaternion _startRota;
+    private Vector3 _initPos;
+    private Quaternion _initRota;
     private CarMovement _currentCar;
+    private bool _isJumping;
 
     private void Awake()
     {
@@ -27,8 +29,9 @@ public class ClickCarJack : ClickObjects
     private void Start()
     {
         IsSet = false;
-        _startPos = transform.position;
-        _startRota = transform.rotation;
+        
+        _initPos = transform.position;
+        _initRota = transform.rotation;
     }
 
     private void MoveToJackPoint()
@@ -45,43 +48,42 @@ public class ClickCarJack : ClickObjects
         transform.DOKill();
 
         IsSet = false;
-        
+
         SetHeightCurrentCar(false);
-        transform.DOMove(_startPos, _returnDuration).SetEase(Ease.InOutQuad);
-        transform.DORotateQuaternion(_startRota, _returnDuration).SetEase(Ease.InOutQuad);
+        transform.DOMove(_initPos, _returnDuration).SetEase(Ease.InOutQuad);
+        transform.DORotateQuaternion(_initRota, _returnDuration).SetEase(Ease.InOutQuad);
     }
 
     public void SelectMeAnim()
     {
-        transform.DOKill();
-    
-        float shakeStrength = 0.2f;
+        if (_isJumping) return;
 
-        float randomX = _startPos.x + Random.Range(-shakeStrength, shakeStrength);
-        float randomZ = _startPos.z + Random.Range(-shakeStrength, shakeStrength);
-        Vector3 randomPosition = new Vector3(randomX, _startPos.y, randomZ);
+        transform.DOComplete();
+        _isJumping = true;
 
-        transform.DOPunchScale(Vector3.one * 0.05f, 0.05f, 10, 1);
+        Vector3 initPos = transform.position;
+        float jumpPower = 0.2f;
+        int numJumps = 1;
+        float duration = 0.25f;
 
-        transform.DOMove(randomPosition, 0.1f).SetEase(Ease.Linear)
-            .OnComplete(() => transform.DOMove(_startPos, 0.2f));
+        transform.DOJump(initPos, jumpPower, numJumps, duration)
+            .OnComplete(() => { _isJumping = false; });
     }
-    
+
     private void SetHeightCurrentCar(bool isUp)
     {
         _currentCar = CarSpawner.Instance.CurrentCar;
 
-        if(isUp)
+        if (isUp)
             _currentCar.transform.DOMoveY(_currentCar.transform.position.y + _heightCar, 0.25f);
         else
             _currentCar.transform.DOMoveY(_currentCar.transform.position.y - _heightCar, 0.1f);
-            
     }
 
     public override void OnClicked(Vector3 hitPoint)
     {
-        if(CarSpawner.Instance.CurrentCar != null && !CarSpawner.Instance.CurrentCar.IsAtClickPoint) return;
-        
+        if (CarSpawner.Instance.CurrentCar != null && !CarSpawner.Instance.CurrentCar.IsAtClickPoint) return;
+
         if (IsSet)
             ReturnFromJackPoint();
         else
@@ -90,7 +92,7 @@ public class ClickCarJack : ClickObjects
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
             OnClicked(Vector3.zero);
     }
 }
