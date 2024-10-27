@@ -83,16 +83,14 @@ public class ClickCarJack : ClickObjects
     public override void OnClicked(Vector3 hitPoint)
     {
         if (CarSpawner.Instance.CurrentCar != null && !CarSpawner.Instance.CurrentCar.IsAtClickPoint) return;
-
-        if (IsSet)
-            ReturnFromJackPoint();
-        else
+        
+        if (!IsSet)
             MoveToJackPoint();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !IsSet)
             OnClicked(Vector3.zero);
     }
 }

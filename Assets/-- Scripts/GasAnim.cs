@@ -1,13 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GasAnim : MonoBehaviour
 {
     [SerializeField] private Renderer _renderer;
     [SerializeField] private Color _targetColor = Color.red;
-    [SerializeField] private float _duration = 1f;
+    [SerializeField] private float _durationBlink = .25f;
 
     private Color _initialColor;
+    private bool _isFilling;
 
     private void Start()
     {
@@ -17,10 +19,10 @@ public class GasAnim : MonoBehaviour
 
     private IEnumerator ChangeColorCoroutine()
     {
-        while (true)
+        while (!_isFilling)
         {
-            yield return StartCoroutine(LerpColor(_initialColor, _targetColor, _duration));
-            yield return StartCoroutine(LerpColor(_targetColor, _initialColor, _duration));
+            yield return StartCoroutine(LerpColor(_initialColor, _targetColor, _durationBlink));
+            yield return StartCoroutine(LerpColor(_targetColor, _initialColor, _durationBlink));
         }
     }
 
@@ -36,5 +38,14 @@ public class GasAnim : MonoBehaviour
         }
 
         _renderer.material.color = toColor;
+    }
+    
+    public void FillGas(float duration)
+    {
+        _isFilling = true;
+        StopCoroutine(ChangeColorCoroutine());
+        
+        _renderer.material.color = _targetColor;
+        StartCoroutine(LerpColor(_targetColor, _initialColor, duration));
     }
 }

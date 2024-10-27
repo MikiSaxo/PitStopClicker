@@ -489,33 +489,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5036814dd66e93b48b6b753e6976015c, type: 3}
---- !u!1 &241181815 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1880359669718619203, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
-  m_PrefabInstance: {fileID: 1090231989}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &241181816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7506524503724852676, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
   m_PrefabInstance: {fileID: 1090231989}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &241181817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241181815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ee2eac7f3e3a44cabe77ebb05e6d12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fxPrefab: {fileID: 0}
-  _fxParent: {fileID: 0}
-  _goDuration: 1
-  _returnDuration: 1
-  _heightCar: 1
 --- !u!1 &449563721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,10 +1213,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1880359669718619203, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 241181817}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
 --- !u!1001 &1151185103
 PrefabInstance:
