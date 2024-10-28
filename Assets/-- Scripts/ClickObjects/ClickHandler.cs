@@ -9,12 +9,20 @@ public class ClickHandler : MonoBehaviour
     [SerializeField] private GameObject _fxClick;
     [SerializeField] private GameObject _fxRepairGood;
 
+    private IClickable _clickable;
+    
     private void Awake()
     {
         Instance = this;
     }
 
     void Update()
+    {
+        ClickedDown();
+        ClickedUp();
+    }
+
+    private void ClickedDown()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -26,9 +34,20 @@ public class ClickHandler : MonoBehaviour
                 IClickable clickable = hit.transform.GetComponent<IClickable>();
                 if (clickable != null)
                 {
+                    _clickable = clickable;
                     clickable.OnClicked(hit.point);
                 }
+                _clickable = null;
             }
+        }
+    }
+
+    private void ClickedUp()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            if(_clickable != null)
+                _clickable.OnClickedUp();
         }
     }
     
@@ -45,4 +64,5 @@ public class ClickHandler : MonoBehaviour
 public interface IClickable
 {
     void OnClicked(Vector3 hitPoint);
+    void OnClickedUp();
 }

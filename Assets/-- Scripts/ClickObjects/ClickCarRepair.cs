@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ClickCarRepair : ClickObjects
 {
-    private CarMovement _myCar;
     private float _smokeIntensity = 1f;
     private int _clickNeeded;
     private ParticleSystem _smokeFX;
@@ -12,7 +11,7 @@ public class ClickCarRepair : ClickObjects
 
     public override void Init(CarMovement myCar, int clickNeeded)
     {
-        _myCar = myCar;
+        base.Init(myCar, clickNeeded);
         _clickNeeded = clickNeeded;
 
         _smokeFX = Instantiate(_fxPrefab, _fxParent);

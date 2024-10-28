@@ -6,8 +6,6 @@ using UnityEngine;
 public class ClickGasCan : ClickObjects
 {
     private GasAnim _gasAnim;
-    private CarMovement _myCar;
-
     private void Start()
     {
         _gasAnim = GetComponent<GasAnim>();
@@ -15,7 +13,8 @@ public class ClickGasCan : ClickObjects
 
     public override void Init(CarMovement myCar, int clickNeeded)
     {
-        _myCar = myCar;
+        base.Init(myCar, clickNeeded);
+
         IsActive = true;
         GasCan.Instance.ClickGasCan = this;
     }
