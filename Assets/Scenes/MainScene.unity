@@ -1233,7 +1233,6 @@ Transform:
   m_Children:
   - {fileID: 1249290131}
   - {fileID: 916979424}
-  - {fileID: 2049642464}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1090231989
@@ -1544,7 +1543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6195603007158222854, guid: 9b9be8fce3000254caa307d46810423a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.13
+      value: -2.39
       objectReference: {fileID: 0}
     - target: {fileID: 6195603007158222854, guid: 9b9be8fce3000254caa307d46810423a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1577,18 +1576,6 @@ PrefabInstance:
     - target: {fileID: 6195603007158222854, guid: 9b9be8fce3000254caa307d46810423a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922003502963376002, guid: 9b9be8fce3000254caa307d46810423a, type: 3}
-      propertyPath: _cleanFX
-      value: 
-      objectReference: {fileID: 101130, guid: dcc64738c5492be40a347b4604f1ff0b, type: 3}
-    - target: {fileID: 6922003502963376002, guid: 9b9be8fce3000254caa307d46810423a, type: 3}
-      propertyPath: _cleanRotation.x
-      value: -75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922003502963376002, guid: 9b9be8fce3000254caa307d46810423a, type: 3}
-      propertyPath: _cleanRotation.y
-      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2808,7 +2795,7 @@ Transform:
   m_GameObject: {fileID: 2049642463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2610321, y: -2.9060493, z: -0.078308105}
+  m_LocalPosition: {x: 149.92627, y: 3.0459113, z: -134.91441}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2822,7 +2809,7 @@ Transform:
   - {fileID: 1362033320}
   - {fileID: 241181816}
   - {fileID: 357246815}
-  m_Father: {fileID: 1083261676}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2086752913 stripped
 Transform:
@@ -2962,3 +2949,4 @@ SceneRoots:
   - {fileID: 865675072}
   - {fileID: 1083261676}
   - {fileID: 1758641124}
+  - {fileID: 2049642464}

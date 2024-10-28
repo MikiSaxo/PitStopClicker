@@ -47,9 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e600f0eb1af34448fd223cd67df929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fxPrefab: {fileID: 0}
+  _fxParent: {fileID: 0}
   _returnDuration: 0.25
-  _cleanTarget: 2
-  _cleanPower: 0.1
+  _cleanPower: 0.05
+  _cleanFX: {fileID: 101130, guid: dcc64738c5492be40a347b4604f1ff0b, type: 3}
+  _cleanRotation: {x: -75, y: 90, z: 0}
 --- !u!65 &6120565206448951518
 BoxCollider:
   m_ObjectHideFlags: 0

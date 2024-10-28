@@ -70,7 +70,7 @@ public class GasCan : ClickObjects
         transform.DORotateQuaternion(_initRota, _returnDuration).SetEase(Ease.InOutQuad);
     }
 
-    public void SelectMeAnim()
+    public override void SelectMeAnim()
     {
         transform.DOKill();
 

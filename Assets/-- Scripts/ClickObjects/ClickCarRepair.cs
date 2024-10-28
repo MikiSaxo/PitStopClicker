@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class ClickCarRepair : ClickObjects
 {
-    private float _smokeIntensity = 1f;
+    private float _fxIntensity = 1f;
     private int _clickNeeded;
-    private ParticleSystem _smokeFX;
-    private float _initialStartSize;
+    private ParticleSystem _fxToRepair;
 
     public override void Init(CarMovement myCar, int clickNeeded)
     {
         base.Init(myCar, clickNeeded);
         _clickNeeded = clickNeeded;
 
-        _smokeFX = Instantiate(_fxPrefab, _fxParent);
+        _fxToRepair = Instantiate(_fxPrefab, _fxParent);
 
-        var main = _smokeFX.main;
+        var main = _fxToRepair.main;
         _initialStartSize = main.startSize.constant;
 
         SetFX();
-        _smokeFX.Play();
+        _fxToRepair.Play();
         IsActive = true;
     }
 
@@ -41,9 +40,9 @@ public class ClickCarRepair : ClickObjects
         SetFX();
         _myCar.OnClickFeedback();
 
-        if (_smokeIntensity <= 0f)
+        if (_fxIntensity <= 0f)
         {
-            _smokeFX.Stop();
+            _fxToRepair.Stop();
         }
 
         if (_currentClicks >= _clickNeeded && !IsRepaired)
@@ -57,16 +56,16 @@ public class ClickCarRepair : ClickObjects
     public override void SetFX()
     {
         float progress = (float)_currentClicks / _clickNeeded;
-        _smokeIntensity = Mathf.Clamp01(1f - progress);
+        _fxIntensity = Mathf.Clamp01(1f - progress);
 
-        var main = _smokeFX.main;
+        var main = _fxToRepair.main;
         main.startSize = Mathf.Lerp(_initialStartSize, 0.1f, progress);
     }
 
     private bool CanClick()
     {
         return _myCar != null
-               && _smokeFX != null
+               && _fxToRepair != null
                && IsActive
                && !IsRepaired
                && _myCar.IsAtClickPoint;

@@ -19,7 +19,6 @@ public class ClickHandler : MonoBehaviour
     void Update()
     {
         ClickedDown();
-        ClickedUp();
     }
 
     private void ClickedDown()
@@ -41,15 +40,6 @@ public class ClickHandler : MonoBehaviour
             }
         }
     }
-
-    private void ClickedUp()
-    {
-        if (Input.GetMouseButtonUp(0))
-        {
-            if(_clickable != null)
-                _clickable.OnClickedUp();
-        }
-    }
     
     public void CreateFXClick(Vector3 position)
     {
@@ -64,5 +54,4 @@ public class ClickHandler : MonoBehaviour
 public interface IClickable
 {
     void OnClicked(Vector3 hitPoint);
-    void OnClickedUp();
 }

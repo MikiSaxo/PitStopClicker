@@ -57,7 +57,7 @@ public class ClickCarJack : ClickObjects
         transform.DORotateQuaternion(_initRota, _returnDuration).SetEase(Ease.InOutQuad);
     }
 
-    public void SelectMeAnim()
+    public override void SelectMeAnim()
     {
         if (_isJumping) return;
 

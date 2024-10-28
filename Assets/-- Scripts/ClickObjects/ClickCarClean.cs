@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
 
 public class ClickCarClean : ClickObjects
 {
+    [SerializeField] private DecalProjector _decalProjector;
+    
     private int _requiredScrubs = 10;
     private int _currentScrubs = 0;
+    private float _fxIntensity = 1f;
+    private ParticleSystem _fxToRepair;
 
     
     public override void Init(CarMovement myCar, int clickNeeded)
@@ -14,29 +19,44 @@ public class ClickCarClean : ClickObjects
         base.Init(myCar, clickNeeded);
 
         IsActive = true;
-        CleanDirty.Instance.ClickCarClean = this;
+        CleanDirty.Instance.NewCarComing(this);
+        
+        _fxToRepair = Instantiate(_fxPrefab, _fxParent);
     }
+
     public override void OnClicked(Vector3 hitPoint)
     {
         if (!CanClick()) return;
-
-        //base.OnClicked(hitPoint);
-
-        // if (!CleanDirty.Instance.IsSet)
-            // CleanDirty.Instance.MoveToCleanPoint();
+        
+        if (ClickCarJack.Instance.IsSet == false)
+        {
+            ClickCarJack.Instance.SelectMeAnim();
+            return;
+        }
+        
+        CleanDirty.Instance.SelectMeAnim();
     }
 
-    public void LaunchCleanAnim(float duration)
+    public void UpdateDecalProjector(float intensity)
     {
-        StartCoroutine(WaitToClean(duration));
+        _decalProjector.fadeFactor -= intensity;
+        SetFX();
     }
 
-    private IEnumerator WaitToClean(float duration)
+    public void CleanFinished()
     {
-        yield return new WaitForSeconds(duration);
-
         IsRepaired = true;
+        _fxToRepair.Stop();
         _myCar.CheckAllRepairing();
+    }
+    
+    public override void SetFX()
+    {
+        float progress = 1 / (float)_currentClicks;
+        _fxIntensity = Mathf.Clamp01(1f - progress);
+    
+        var main = _fxToRepair.main;
+        main.startSize = Mathf.Lerp(_initialStartSize, 0.1f, progress);
     }
 
     private bool CanClick()
