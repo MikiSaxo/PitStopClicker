@@ -20,7 +20,7 @@ public class ClickCarClean : ClickObjects
     {
         if (!CanClick()) return;
 
-        base.OnClicked(hitPoint);
+        //base.OnClicked(hitPoint);
 
         // if (!CleanDirty.Instance.IsSet)
             // CleanDirty.Instance.MoveToCleanPoint();

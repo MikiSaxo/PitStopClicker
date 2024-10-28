@@ -12,7 +12,8 @@ public class CleanDirty : MonoBehaviour
     [SerializeField] private float _returnDuration = 0.5f; 
 
     [Header("--- Clean ")]
-    [SerializeField] private float _cleanDuration = 2f;
+    [SerializeField] private float _cleanTarget = 2f;
+    [SerializeField] private float _cleanPower;
     
     public ClickCarClean ClickCarClean { get; set; }
     public bool IsSet { get; set; }
@@ -23,6 +24,11 @@ public class CleanDirty : MonoBehaviour
     private GameObject _dirtObject;
     private bool _hasClickedOnIt;
 
+    private Vector3 _lastPosition;
+    private bool _isCollidingWithCleanable;
+    private float _cleanProgress;
+    private float _cleaningThreshold = 0.2f;
+    
     private void Awake()
     {
         Instance = this;
@@ -53,6 +59,11 @@ public class CleanDirty : MonoBehaviour
             {
                 Vector3 _hitPoint = _ray.GetPoint(_hitDistance);
                 transform.position = _hitPoint;
+                
+                if (_isCollidingWithCleanable)
+                {
+                    DetectBackAndForth();
+                }
             }
         }
         
@@ -69,9 +80,39 @@ public class CleanDirty : MonoBehaviour
         transform.DOMove(_initPos, _returnDuration).SetEase(Ease.InOutQuad);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-      
+        if (other.gameObject.GetComponent<ClickCarClean>() != null)
+        {
+            _isCollidingWithCleanable = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<ClickCarClean>() != null)
+        {
+            _isCollidingWithCleanable = false;
+        }
+    }
+
+    private void DetectBackAndForth()
+    {
+        Vector3 direction = transform.position - _lastPosition;
+        if (direction.magnitude > _cleaningThreshold)
+        {
+            if (Vector3.Dot(direction.normalized, (_lastPosition - _initPos).normalized) < 0)
+            {
+                _cleanProgress += _cleanPower;
+                if (_cleanProgress >= _cleanTarget)
+                {
+                    Debug.Log("Nettoyage terminé !");
+                    _isCollidingWithCleanable = false;
+                    // Ajoute ici le code pour finaliser le nettoyage (ex: désactiver la tâche)
+                }
+            }
+            _lastPosition = transform.position;
+        }
     }
 
     private void CleanDirt(GameObject dirt)
