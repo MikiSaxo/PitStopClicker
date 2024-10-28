@@ -14,6 +14,8 @@ public class CleanDirty : MonoBehaviour
     [Header("--- Clean ")]
     [SerializeField] private float _cleanTarget = 2f;
     [SerializeField] private float _cleanPower;
+    [SerializeField] private GameObject _cleanFX;
+    [SerializeField] private Vector3 _cleanRotation;
     
     public ClickCarClean ClickCarClean { get; set; }
     public bool IsSet { get; set; }
@@ -21,6 +23,7 @@ public class CleanDirty : MonoBehaviour
     private Camera _mainCamera;
     private Plane _plane;
     private Vector3 _initPos;
+    private Vector3 _initRota;
     private GameObject _dirtObject;
     private bool _hasClickedOnIt;
 
@@ -37,6 +40,7 @@ public class CleanDirty : MonoBehaviour
     {
         IsSet = false;
         _initPos = transform.position;
+        _initRota = transform.rotation.eulerAngles;
         
         _mainCamera = Camera.main;
         Vector3 _offset = new Vector3(0, 2.5f, 0); // -> Faire en sorte de récup la hauteur du decal dirty
@@ -78,6 +82,7 @@ public class CleanDirty : MonoBehaviour
     {
         transform.DOKill();
         transform.DOMove(_initPos, _returnDuration).SetEase(Ease.InOutQuad);
+        transform.DORotate(_initRota, _returnDuration).SetEase(Ease.InOutQuad);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -85,6 +90,9 @@ public class CleanDirty : MonoBehaviour
         if (other.gameObject.GetComponent<ClickCarClean>() != null)
         {
             _isCollidingWithCleanable = true;
+
+            transform.DOKill();
+            transform.DORotate(_cleanRotation, 0.1f);
         }
     }
 
@@ -93,6 +101,7 @@ public class CleanDirty : MonoBehaviour
         if (other.gameObject.GetComponent<ClickCarClean>() != null)
         {
             _isCollidingWithCleanable = false;
+            transform.DORotate(_initRota, 0.5f);
         }
     }
 
@@ -104,10 +113,10 @@ public class CleanDirty : MonoBehaviour
             if (Vector3.Dot(direction.normalized, (_lastPosition - _initPos).normalized) < 0)
             {
                 _cleanProgress += _cleanPower;
+                Instantiate(_cleanFX, transform.position, _cleanFX.transform.rotation);
                 if (_cleanProgress >= _cleanTarget)
                 {
                     Debug.Log("Nettoyage terminé !");
-                    _isCollidingWithCleanable = false;
                     // Ajoute ici le code pour finaliser le nettoyage (ex: désactiver la tâche)
                 }
             }
