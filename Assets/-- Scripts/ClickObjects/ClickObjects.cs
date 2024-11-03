@@ -34,4 +34,16 @@ public class ClickObjects : MonoBehaviour, IClickable
     public virtual void SetFX()
     {
     }
+
+    protected virtual void CantSelectAnim()
+    {
+        transform.DOKill();
+
+        Vector3 reducedScale = Vector3.one * 0.95f; 
+
+        transform.DOScale(reducedScale, 0.05f).SetEase(Ease.InOutQuad).OnComplete(() =>
+        {
+            transform.DOScale(Vector3.one, 0.05f).SetEase(Ease.InOutQuad);
+        });
+    }
 }

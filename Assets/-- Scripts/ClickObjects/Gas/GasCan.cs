@@ -47,9 +47,15 @@ public class GasCan : ClickObjects
 
     public void MoveToGasPoint()
     {
-        transform.DOKill();
-        _gasPoint = ClickGasCan.transform;
+        if (ClickGasCan == null)
+        {
+            print("hello");
+            return;
+        }
 
+        transform.DOKill();
+        
+        _gasPoint = ClickGasCan.transform;
         _collider.enabled = false;
 
         IsSet = true;
@@ -93,11 +99,20 @@ public class GasCan : ClickObjects
 
     public override void OnClicked(Vector3 hitPoint)
     {
-        if (CarSpawner.Instance.CurrentCar != null && !CarSpawner.Instance.CurrentCar.IsAtClickPoint) return;
+        if (CarSpawner.Instance.CurrentCar == null 
+            || !CarSpawner.Instance.CurrentCar.IsAtClickPoint
+            || ClickGasCan == null
+            || ClickGasCan.IsRepaired)
+        {
+            CantSelectAnim();
+            return;
+        }
 
-        if (ClickGasCan != null && ClickGasCan.IsRepaired) return;
-
-        if (ClickCarJack.Instance.IsSet == false) return;
+        if (ClickCarJack.Instance.IsSet == false)
+        {
+            ClickCarJack.Instance.SelectMeAnim();
+            return;
+        }
 
         if (!IsSet)
             MoveToGasPoint();

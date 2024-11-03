@@ -13,6 +13,7 @@ public class CleanDirty : ClickObjects
 
     [Header("--- Clean ")]
     [SerializeField] private float _cleanPower;
+
     [SerializeField] private GameObject _cleanFX;
     [SerializeField] private Vector3 _cleanRotation;
 
@@ -55,19 +56,28 @@ public class CleanDirty : ClickObjects
         ClickCarClean = clickCarClean;
         _isRepaired = false;
         _cleanProgress = 0;
-        
+
         _hasClickedOnIt = false;
         GoInitPos();
     }
 
     private void OnMouseDown()
     {
-        if (!ClickCarJack.Instance.IsSet)
+        if (CarSpawner.Instance.CurrentCar == null
+            || !CarSpawner.Instance.CurrentCar.IsAtClickPoint
+            || ClickCarClean == null
+            || ClickCarClean.IsRepaired)
+        {
+            CantSelectAnim();
+            return;
+        }
+
+        if (ClickCarJack.Instance.IsSet == false)
         {
             ClickCarJack.Instance.SelectMeAnim();
             return;
         }
-        
+
         _hasClickedOnIt = true;
     }
 
@@ -131,7 +141,7 @@ public class CleanDirty : ClickObjects
     private void DetectBackAndForth()
     {
         Vector3 direction = transform.position - _lastPosition;
-        
+
         if (direction.magnitude <= _cleaningThreshold) return;
 
         if (Vector3.Dot(direction.normalized, (_lastPosition - _initPos).normalized) < 0)
@@ -143,8 +153,6 @@ public class CleanDirty : ClickObjects
                 if (!_isRepaired)
                 {
                     _isRepaired = true;
-                    
-                    Debug.Log("Nettoyage terminé !");
                     ClickHandler.Instance.CreateFXRepairGood(transform.position);
                     ClickCarClean.CleanFinished();
                 }
@@ -160,18 +168,12 @@ public class CleanDirty : ClickObjects
 
     public override void SelectMeAnim()
     {
-        print("call SelectMeAnim");
         if (_isJumping) return;
 
-        print("call SelectMeAnim 2");
         _isJumping = true;
 
         transform.DOJump(transform.position, _jumpPower, 1, _duration)
-            .OnComplete(() =>
-            {
-                _isJumping = false;
-                print("jump false");
-            });
+            .OnComplete(() => { _isJumping = false; });
 
         StartCoroutine(ResetIsJumping());
     }
