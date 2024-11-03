@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   headerSettings:
-    headerText: New Header
-    headerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    headerText: Clickable
+    headerColor: {r: 0.2514777, g: 0.6784314, b: 0.07843135, a: 1}
     textAlignmentOptions: 0
     fontStyleOptions: 0
     fontSize: 12

@@ -72,6 +72,7 @@ MonoBehaviour:
   _jackPoint: {fileID: 0}
   _goDuration: 0.3
   _returnDuration: 1
+  _heightCar: 0.2
 --- !u!1001 &1233777545277804713
 PrefabInstance:
   m_ObjectHideFlags: 0

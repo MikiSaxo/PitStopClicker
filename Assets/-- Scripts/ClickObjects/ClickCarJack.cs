@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -80,7 +81,13 @@ public class ClickCarJack : ClickObjects
 
     public override void OnClicked(Vector3 hitPoint)
     {
-        if (CarSpawner.Instance.CurrentCar != null && !CarSpawner.Instance.CurrentCar.IsAtClickPoint) return;
+        if (CarSpawner.Instance.CurrentCar == null) return;
+
+        if (!CarSpawner.Instance.CurrentCar.IsAtClickPoint)
+        {
+            CantSelectAnim();
+            return;
+        }
         
         if (!IsSet)
             MoveToJackPoint();

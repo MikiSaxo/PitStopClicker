@@ -83,11 +83,11 @@ public class PointsManager : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            float rdnZ = Random.Range(-1.5f, 1.5f);
+            float rdn = Random.Range(-1.5f, 1.5f);
             float rdnY = Random.Range(0f, 2f);
 
-            GameObject go = Instantiate(_psPrefab, pos, Quaternion.identity);
-            go.transform.DOMove(new Vector3(pos.x, pos.y + 4f + rdnY, pos.z + rdnZ), _initialMoveDuration).SetEase(Ease.OutQuad);
+            GameObject go = Instantiate(_psPrefab, pos + new Vector3(0, 2f, 0), Quaternion.identity);
+            go.transform.DOMove(new Vector3(pos.x + rdn, pos.y + 4f + rdnY, pos.z + rdn), _initialMoveDuration).SetEase(Ease.OutQuad);
 
             psList.Add(go);
 

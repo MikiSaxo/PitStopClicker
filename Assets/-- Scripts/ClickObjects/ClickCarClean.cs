@@ -8,8 +8,6 @@ public class ClickCarClean : ClickObjects
 {
     [SerializeField] private DecalProjector _decalProjector;
     
-    private int _requiredScrubs = 10;
-    private int _currentScrubs = 0;
     private float _fxIntensity = 1f;
     private ParticleSystem _fxToRepair;
 
