@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.083}
-  m_SizeDelta: {x: 20, y: 5}
+  m_SizeDelta: {x: 20, y: 7.5558}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1034035300876420807
 MeshRenderer:
@@ -99,7 +99,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 156000 PS
+  m_text: 'Car Jack - Auto
+
+    654320 PS'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 914d21d5b75367e4a8efdf500cb02f8c, type: 2}
   m_sharedMaterial: {fileID: -630206947402521141, guid: 914d21d5b75367e4a8efdf500cb02f8c, type: 2}
@@ -126,8 +128,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

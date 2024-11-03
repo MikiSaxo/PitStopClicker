@@ -114,7 +114,7 @@ public class CarMovement : MonoBehaviour
         }
 
         ClickCarJack.Instance.ReturnFromJackPoint();
-        PointsManager.Instance.CreatePS(transform.position);
+        PointsManager.Instance.AddPS(transform.position);
         MoveToExitPoint();
     }
 

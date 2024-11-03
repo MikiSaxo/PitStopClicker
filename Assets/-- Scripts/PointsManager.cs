@@ -13,7 +13,7 @@ public class PointsManager : MonoBehaviour
     [Header("--- Points")]
     [SerializeField] private int _points = 0;
 
-    [SerializeField] private TMP_Text _pointsText;
+    [SerializeField] private TMP_Text[] _pointsText;
     [SerializeField] private float _textAnimDuration = 0.5f;
 
     [Header("--- PS")]
@@ -35,14 +35,20 @@ public class PointsManager : MonoBehaviour
 
     private void Start()
     {
-        SetPointsText(_points);
+        UpdatePoints(0);
     }
 
     public void UpdatePoints(int pointsToAdd)
     {
         int targetPoints = _points + pointsToAdd;
-        StartCoroutine(AnimatePoints(_points, targetPoints));
         _points = targetPoints;
+        
+        for (int i = 1; i < _pointsText.Length; i++)
+        {
+            SetPointsText(_points, i);
+        }
+        
+        StartCoroutine(AnimatePoints(_points, targetPoints));
     }
 
     private void Update()
@@ -60,19 +66,19 @@ public class PointsManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / _textAnimDuration);
             int currentPoints = Mathf.RoundToInt(Mathf.Lerp(startPoints, endPoints, t));
-            SetPointsText(currentPoints);
+            SetPointsText(currentPoints,0);
             yield return null;
         }
 
-        SetPointsText(endPoints);
+        SetPointsText(endPoints,0);
     }
 
-    private void SetPointsText(int points)
+    private void SetPointsText(int points, int index)
     {
-        _pointsText.SetText($"{points} PS");
+        _pointsText[index].SetText($"{points} PS");
     }
 
-    public void CreatePS(Vector3 pos)
+    public void AddPS(Vector3 pos)
     {
         StartCoroutine(SpawnAndAnimatePS(pos));
     }
