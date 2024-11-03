@@ -60,7 +60,7 @@ public class CarMovement : MonoBehaviour
         }
 
         int totalObjects = _clickObjects.Length;
-        int randomActiveCount = Random.Range(1, totalObjects + 1);
+        int randomActiveCount = Random.Range(1, totalObjects - 1);
 
         List<int> activeIndexes = new List<int>();
 
@@ -114,6 +114,7 @@ public class CarMovement : MonoBehaviour
         }
 
         ClickCarJack.Instance.ReturnFromJackPoint();
+        PointsManager.Instance.CreatePS(transform.position);
         MoveToExitPoint();
     }
 

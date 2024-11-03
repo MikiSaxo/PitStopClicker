@@ -13,7 +13,7 @@ public class StandsAnim : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(AnimateWave());
+        //StartCoroutine(AnimateWave());
     }
 
     private IEnumerator AnimateWave()
