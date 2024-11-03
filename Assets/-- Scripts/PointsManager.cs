@@ -52,6 +52,6 @@ public class PointsManager : MonoBehaviour
 
     private void SetPointsText(int points)
     {
-        _pointsText.SetText($"{points} ps");
+        _pointsText.SetText($"{points} PS");
     }
 }
