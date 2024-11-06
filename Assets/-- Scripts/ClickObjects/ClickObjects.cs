@@ -5,16 +5,21 @@ using UnityEngine;
 
 public class ClickObjects : MonoBehaviour, IClickable
 {
+    [Header("--- Type")]
+    [SerializeField] protected UpgradeType _myType;
+    
     [Header("--- FX")]
     [SerializeField] protected ParticleSystem _fxPrefab;
     [SerializeField] protected Transform _fxParent;
 
     public bool IsActive { get; protected set; }
     public bool IsRepaired { get; protected set; }
-    
+
     protected CarMovement _myCar;
     protected float _initialStartSize = 1f;
     protected int _currentClicks = 0;
+    protected int _clickPower = 1;
+
 
     public virtual void Init(CarMovement myCar, int clickNeeded)
     {
@@ -45,5 +50,13 @@ public class ClickObjects : MonoBehaviour, IClickable
         {
             transform.DOScale(Vector3.one, 0.05f).SetEase(Ease.InOutQuad);
         });
+    }
+
+    public virtual void UpdatePower(UpgradeType type, float power)
+    {
+        if(type == _myType)
+            _clickPower = (int)power;
+        
+        print("Power: " + _clickPower);
     }
 }

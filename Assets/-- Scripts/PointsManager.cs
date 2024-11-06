@@ -40,15 +40,11 @@ public class PointsManager : MonoBehaviour
 
     public void UpdatePoints(int pointsToAdd)
     {
+        int startPoints = _points;
         int targetPoints = _points + pointsToAdd;
         _points = targetPoints;
-        
-        for (int i = 1; i < _pointsText.Length; i++)
-        {
-            SetPointsText(_points, i);
-        }
-        
-        StartCoroutine(AnimatePoints(_points, targetPoints));
+
+        StartCoroutine(AnimatePoints(startPoints, targetPoints));
     }
 
     private void Update()
@@ -67,10 +63,9 @@ public class PointsManager : MonoBehaviour
             float t = Mathf.Clamp01(elapsedTime / _textAnimDuration);
             int currentPoints = Mathf.RoundToInt(Mathf.Lerp(startPoints, endPoints, t));
             SetPointsText(currentPoints,0);
+            SetPointsText(currentPoints,1);
             yield return null;
         }
-
-        SetPointsText(endPoints,0);
     }
 
     private void SetPointsText(int points, int index)
@@ -120,5 +115,17 @@ public class PointsManager : MonoBehaviour
         Vector3 upScale = Vector3.one * 1.1f;
 
         transform.DOScale(upScale, 0.05f).SetEase(Ease.InOutQuad).OnComplete(() => { transform.DOScale(Vector3.one, 0.05f).SetEase(Ease.InOutQuad); });
+    }
+    
+    public bool CanBuy(int price)
+    {
+        if(_points >= price)
+        {
+            _points -= price;
+            UpdatePoints(0);
+            
+            return true;
+        }
+        return false;
     }
 }

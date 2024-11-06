@@ -11,11 +11,13 @@ public class BtnScreen : MonoBehaviour
     
     private Vector3 _initPos;
     private Vector3 _initScale;
+    protected Vector3 _initRota;
 
-    private void Start()
+    public virtual void Start()
     {
         _initPos = transform.localPosition;
         _initScale = transform.localScale;
+        _initRota = transform.localEulerAngles;
     }
 
     public virtual void OnMouseDown()

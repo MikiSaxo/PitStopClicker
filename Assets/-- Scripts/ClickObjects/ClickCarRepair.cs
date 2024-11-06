@@ -35,7 +35,7 @@ public class ClickCarRepair : ClickObjects
         
         base.OnClicked(hitPoint);
 
-        _currentClicks++;
+        _currentClicks += _clickPower;
 
         SetFX();
         _myCar.OnClickFeedback();

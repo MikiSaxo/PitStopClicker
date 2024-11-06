@@ -8,9 +8,7 @@ public class ClickCarClean : ClickObjects
 {
     [SerializeField] private DecalProjector _decalProjector;
     
-    private float _fxIntensity = 1f;
     private ParticleSystem _fxToRepair;
-
     
     public override void Init(CarMovement myCar, int clickNeeded)
     {
@@ -51,8 +49,6 @@ public class ClickCarClean : ClickObjects
     public override void SetFX()
     {
         float progress = 1 / (float)_currentClicks;
-        _fxIntensity = Mathf.Clamp01(1f - progress);
-    
         var main = _fxToRepair.main;
         main.startSize = Mathf.Lerp(_initialStartSize, 0.1f, progress);
     }
@@ -63,5 +59,11 @@ public class ClickCarClean : ClickObjects
                && IsActive
                && !IsRepaired
                && _myCar.IsAtClickPoint;
+    }
+
+    public override void UpdatePower(UpgradeType type, float power)
+    {
+        // if(type == _myType)
+        //     _clickPower = power;
     }
 }

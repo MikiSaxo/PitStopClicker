@@ -168,4 +168,12 @@ public class CarMovement : MonoBehaviour
         
         CarSpawnerCircuit.Instance.GoSpawnCar(this.gameObject);
     }
+
+    public void UpdateClickPower(UpgradeType _type, float power)
+    {
+        foreach (var obj in _clickObjects)
+        {
+            obj.UpdatePower(_type, power);
+        }
+    }
 }
