@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430507729116380304}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000011920929}
-  m_LocalPosition: {x: 0, y: 0, z: 0.08799982}
+  m_LocalPosition: {x: 0, y: 0, z: 0.041}
   m_LocalScale: {x: 0.080773994, y: 0.080774, z: 0.080774}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 2675757106544184726}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.086748, z: 0.003}
+  m_LocalPosition: {x: 0, y: 0.086748, z: -0.043999933}
   m_LocalScale: {x: 1.6860518, y: 0.6688708, z: 0.1425155}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -319,7 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2257818689181215789}
   m_Layer: 0
-  m_Name: Screen
+  m_Name: Screen_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BtnCam : MonoBehaviour
+public class BtnCam : BtnScreen
 {
     [SerializeField] private int _camIndex;
 
-    private void OnMouseDown()
+    public override void OnMouseDown()
     {
+        base.OnMouseDown();
         ChangeCamPos();
     }
 

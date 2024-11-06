@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class BtnScreen : MonoBehaviour
 {
-    [SerializeField] private float _moveDistance = -.3f;
+    [SerializeField] private float _moveDistance = -0.035f;
     [SerializeField] private float _moveDuration = .25f;
     
     private Vector3 _initPos;
@@ -18,7 +18,7 @@ public class BtnScreen : MonoBehaviour
         _initScale = transform.localScale;
     }
 
-    private void OnMouseDown()
+    public virtual void OnMouseDown()
     {
         AnimateCassette();
     }
