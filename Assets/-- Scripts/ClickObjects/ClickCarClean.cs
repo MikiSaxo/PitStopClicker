@@ -60,10 +60,4 @@ public class ClickCarClean : ClickObjects
                && !IsRepaired
                && _myCar.IsAtClickPoint;
     }
-
-    public override void UpdatePower(UpgradeType type, float power)
-    {
-        // if(type == _myType)
-        //     _clickPower = power;
-    }
 }

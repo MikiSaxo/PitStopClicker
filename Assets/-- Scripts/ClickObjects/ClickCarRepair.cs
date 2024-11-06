@@ -12,6 +12,7 @@ public class ClickCarRepair : ClickObjects
     {
         base.Init(myCar, clickNeeded);
         _clickNeeded = clickNeeded;
+        _power = UpgradeManager.Instance.CurrentRepairPower[(int)_myType];
 
         _fxToRepair = Instantiate(_fxPrefab, _fxParent);
 
@@ -35,7 +36,7 @@ public class ClickCarRepair : ClickObjects
         
         base.OnClicked(hitPoint);
 
-        _currentClicks += _clickPower;
+        _currentClicks += (int)_power;
 
         SetFX();
         _myCar.OnClickFeedback();

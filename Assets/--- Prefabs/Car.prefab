@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3236041d11c0c4543b63eeb37b65722c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _myType: 0
   _fxPrefab: {fileID: 2216172659447519292, guid: 5d44bbc8759c18c41bc4c4d8c4076b47, type: 3}
   _fxParent: {fileID: 4201274769168460493}
 --- !u!1 &1552569127128008758
@@ -201,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3236041d11c0c4543b63eeb37b65722c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _myType: 1
   _fxPrefab: {fileID: 19885000, guid: 3a73a5bfaa568274a891e4212e24a824, type: 3}
   _fxParent: {fileID: 2291745719412283385}
 --- !u!1 &3974298652853223179
@@ -335,7 +337,7 @@ GameObject:
   - component: {fileID: 8473263149200985577}
   - component: {fileID: 2343803378325662086}
   m_Layer: 0
-  m_Name: --Glass
+  m_Name: --Wash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32dcf38c5d935345b41660f88929a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _myType: 2
   _fxPrefab: {fileID: 2216172659447519292, guid: ec4fa22c80417fe46919185db0e992e5, type: 3}
   _fxParent: {fileID: 8634361736057093569}
   _decalProjector: {fileID: 1340877776880291611}
@@ -664,6 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3236041d11c0c4543b63eeb37b65722c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _myType: 0
   _fxPrefab: {fileID: 2452922066540291424, guid: 4b49e3982aead1044808637d0604b127, type: 3}
   _fxParent: {fileID: 2886972346937837897}
 --- !u!1001 &1646972535900396610
@@ -721,6 +725,10 @@ PrefabInstance:
     - target: {fileID: 6531497647346875577, guid: 8d480c7151038014ea610d617b2f2d93, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8018710051348038752, guid: 8d480c7151038014ea610d617b2f2d93, type: 3}
+      propertyPath: _myType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

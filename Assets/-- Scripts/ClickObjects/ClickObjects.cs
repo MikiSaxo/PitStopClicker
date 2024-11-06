@@ -18,7 +18,7 @@ public class ClickObjects : MonoBehaviour, IClickable
     protected CarMovement _myCar;
     protected float _initialStartSize = 1f;
     protected int _currentClicks = 0;
-    protected int _clickPower = 1;
+    protected float _power;
 
 
     public virtual void Init(CarMovement myCar, int clickNeeded)
@@ -50,13 +50,5 @@ public class ClickObjects : MonoBehaviour, IClickable
         {
             transform.DOScale(Vector3.one, 0.05f).SetEase(Ease.InOutQuad);
         });
-    }
-
-    public virtual void UpdatePower(UpgradeType type, float power)
-    {
-        if(type == _myType)
-            _clickPower = (int)power;
-        
-        print("Power: " + _clickPower);
     }
 }

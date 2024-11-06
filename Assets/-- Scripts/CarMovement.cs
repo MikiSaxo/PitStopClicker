@@ -171,9 +171,6 @@ public class CarMovement : MonoBehaviour
 
     public void UpdateClickPower(UpgradeType _type, float power)
     {
-        foreach (var obj in _clickObjects)
-        {
-            obj.UpdatePower(_type, power);
-        }
+        UpgradeManager.Instance.CurrentRepairPower[(int)_type] = power;
     }
 }
