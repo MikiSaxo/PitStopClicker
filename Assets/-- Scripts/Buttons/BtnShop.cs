@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -43,13 +44,18 @@ public class BtnShop : BtnScreen
         if (PointsManager.Instance.CanBuy(_pointsToUpgrade))
         {
             _currentLevel++;
-            
             PointsManager.Instance.UpdatePoints(-_pointsToUpgrade);
             
             if (_isOneTimePurchase)
+            {
                 _isPurchased = true;
+                UpgradeManager.Instance.CurrentRepairPower[(int)_upgradeType] = 1;
+                ClickCarJack.Instance.CheckUpgradeAutoMove();
+                GasCan.Instance.CheckUpgradeAutoMove();
+            }
             else
                 UpdatePointsToUpgrade();
+
          
             base.OnMouseDown();
             UpdateScreenText();

@@ -16,14 +16,10 @@ public class UpgradeManager : MonoBehaviour
     {
         Instance = this;
        
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < Repairlvl.Count; i++)
         {
             CurrentRepairPower.Add(Repairlvl[i].UpgradePrices[0].Bonus);
         }
-    }
-
-    private void Start()
-    {
     }
 }
 

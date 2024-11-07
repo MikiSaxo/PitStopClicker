@@ -36,13 +36,22 @@ public class ClickCarJack : ClickObjects
         
         _initPos = transform.position;
         _initRota = transform.rotation;
+        
+        CarSpawner.Instance.OnCarAtPosition += CheckUpgradeAutoMove;
     }
 
+    public void CheckUpgradeAutoMove()
+    {
+        if(UpgradeManager.Instance.CurrentRepairPower[(int)_myType] == 1 && !IsSet)
+            MoveToJackPoint();
+    }
     private void MoveToJackPoint()
     {
         transform.DOKill();
 
         IsSet = true;
+        GasCan.Instance.CheckUpgradeAutoMove();
+        
         transform.DOMove(_jackPoint.position, _goDuration).SetEase(Ease.InOutQuad).OnComplete(() => SetHeightCurrentCar(true));
         transform.DORotateQuaternion(_jackPoint.rotation, _goDuration).SetEase(Ease.InOutQuad);
     }
@@ -81,6 +90,9 @@ public class ClickCarJack : ClickObjects
 
     public override void OnClicked(Vector3 hitPoint)
     {
+        if (UpgradeManager.Instance.CurrentRepairPower[(int)_myType] == 1)
+            return;
+§        
         if (CarSpawner.Instance.CurrentCar == null) return;
 
         if (!CarSpawner.Instance.CurrentCar.IsAtClickPoint)

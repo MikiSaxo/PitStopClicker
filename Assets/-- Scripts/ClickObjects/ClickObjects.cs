@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ClickObjects : MonoBehaviour, IClickable
 {
-    [Header("--- Type")]
-    [SerializeField] protected UpgradeType _myType;
-    
     [Header("--- FX")]
     [SerializeField] protected ParticleSystem _fxPrefab;
     [SerializeField] protected Transform _fxParent;
+    
+    [Header("--- Type")]
+    [SerializeField] protected UpgradeType _myType;
 
     public bool IsActive { get; protected set; }
     public bool IsRepaired { get; protected set; }

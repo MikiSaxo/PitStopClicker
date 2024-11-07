@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class GasCan : ClickObjects
 {
     public static GasCan Instance;
+    
+    [SerializeField] private UpgradeType _mySecondType;
 
     [Header("--- Move ")]
     [SerializeField] private float _goDuration = 1f;
@@ -25,6 +29,7 @@ public class GasCan : ClickObjects
     private Collider _collider;
     private float _currentRotaY;
     private float _fillDuration => UpgradeManager.Instance.CurrentRepairPower[(int)_myType];
+    private float _fillAuto => UpgradeManager.Instance.CurrentRepairPower[(int)_mySecondType];
     
     private readonly float _rotateDuration = 0.1f;
 
@@ -38,20 +43,29 @@ public class GasCan : ClickObjects
     {
         IsSet = false;
         
-        print($"gas fill duration: {_fillDuration} - mytype {(int)_myType} - {_myType}");
-
         _initPos = transform.position;
         _initRota = transform.rotation;
         _collider = GetComponent<Collider>();
+
+        CarSpawner.Instance.OnCarAtPosition += CheckUpgradeAutoMove;
+    }
+    
+    public void CheckUpgradeAutoMove()
+    {
+        if (UpgradeManager.Instance.CurrentRepairPower[(int)_mySecondType] == 1
+            && ClickCarJack.Instance.IsSet
+            && CarSpawner.Instance.CurrentCar.IsAtClickPoint
+            && ClickGasCan != null
+            && !ClickGasCan.IsRepaired)
+        {
+            MoveToGasPoint();
+        }
     }
 
     public void MoveToGasPoint()
     {
         if (ClickGasCan == null)
-        {
-            print("hello");
             return;
-        }
 
         transform.DOKill();
         
@@ -123,5 +137,10 @@ public class GasCan : ClickObjects
     {
         _fillGas.transform.DOScale(new Vector3(1, 0.01f, 1), _fillDuration).SetEase(Ease.InOutQuad).OnComplete(ReturnFromGasPoint);
         ClickGasCan.LaunchGasAnim(_fillDuration);
+    }
+
+    private void OnDisable()
+    {
+        CarSpawner.Instance.OnCarAtPosition -= CheckUpgradeAutoMove;
     }
 }

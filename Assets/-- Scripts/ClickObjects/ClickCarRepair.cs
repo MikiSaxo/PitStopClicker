@@ -14,7 +14,6 @@ public class ClickCarRepair : ClickObjects
     {
         base.Init(myCar, clickNeeded);
         _clickNeeded = clickNeeded;
-        print($"power : {_power}");
 
         _fxToRepair = Instantiate(_fxPrefab, _fxParent);
 

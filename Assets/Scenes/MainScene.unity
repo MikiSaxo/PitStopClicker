@@ -1504,6 +1504,10 @@ PrefabInstance:
       value: CarJack
       objectReference: {fileID: 0}
     - target: {fileID: 3356908037935666019, guid: 4f24bcbce6413db489bd9148d8914641, type: 3}
+      propertyPath: _myType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356908037935666019, guid: 4f24bcbce6413db489bd9148d8914641, type: 3}
       propertyPath: _jackPoint
       value: 
       objectReference: {fileID: 1548960589}
@@ -1647,7 +1651,7 @@ MonoBehaviour:
   - MyUpgradeType: 3
     UpgradePrices:
     - PriceLevel: 0
-      Bonus: 5
+      Bonus: 3
     - PriceLevel: 100
       Bonus: 2
     - PriceLevel: 500
@@ -1660,16 +1664,18 @@ MonoBehaviour:
       Bonus: 25
   - MyUpgradeType: 4
     UpgradePrices:
-    - PriceLevel: 1000
+    - PriceLevel: 0
       Bonus: 0
-    - PriceLevel: 1000
-      Bonus: 0
+    - PriceLevel: 100
+      Bonus: 1
   - MyUpgradeType: 5
     UpgradePrices:
-    - PriceLevel: 5000
+    - PriceLevel: 0
       Bonus: 0
-    - PriceLevel: 5000
-      Bonus: 0
+    - PriceLevel: 100
+      Bonus: 1
+    - PriceLevel: 100
+      Bonus: 1
   CurrentRepairPower: []
 --- !u!1001 &480318296
 PrefabInstance:
@@ -3559,6 +3565,10 @@ PrefabInstance:
     - target: {fileID: 4441340621740597047, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
       propertyPath: _myType
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441340621740597047, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
+      propertyPath: _mySecondType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7506524503724852676, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
       propertyPath: m_LocalPosition.x

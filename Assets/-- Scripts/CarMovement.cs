@@ -88,6 +88,7 @@ public class CarMovement : MonoBehaviour
             IsAtClickPoint = true;
             _wheelAnim.StopRotation();
             SetActiveCircuitFX(false);
+            CarSpawner.Instance.OnCarAtPosition?.Invoke();
         });
     }
 

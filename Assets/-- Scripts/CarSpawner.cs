@@ -17,6 +17,7 @@ public class CarSpawner : MonoBehaviour
 
     
     public UnityAction OnCarDestroyed;
+    public UnityAction OnCarAtPosition;
 
     private void Awake()
     {
