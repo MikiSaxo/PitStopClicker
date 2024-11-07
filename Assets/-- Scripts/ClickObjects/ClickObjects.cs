@@ -18,7 +18,6 @@ public class ClickObjects : MonoBehaviour, IClickable
     protected CarMovement _myCar;
     protected float _initialStartSize = 1f;
     protected int _currentClicks = 0;
-    protected float _power;
 
 
     public virtual void Init(CarMovement myCar, int clickNeeded)

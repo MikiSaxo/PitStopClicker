@@ -9,19 +9,21 @@ public class UpgradeManager : MonoBehaviour
     public static UpgradeManager Instance;
     
     public List<UpgradeInfo> Repairlvl = new List<UpgradeInfo>();
+     
     public List<float> CurrentRepairPower = new List<float>();
 
     private void Awake()
     {
         Instance = this;
+       
+        for (int i = 0; i < 4; i++)
+        {
+            CurrentRepairPower.Add(Repairlvl[i].UpgradePrices[0].Bonus);
+        }
     }
 
     private void Start()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            CurrentRepairPower.Add(1);
-        }
     }
 }
 

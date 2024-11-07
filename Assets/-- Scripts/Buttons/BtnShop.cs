@@ -25,7 +25,7 @@ public class BtnShop : BtnScreen
     public override void Start()
     {
         base.Start();
-        _currentLevel = 0;
+        _currentLevel = 1;
         UpdatePointsToUpgrade();
         UpdateScreenText();
         PointsManager.Instance.OnPointsUpdated += UpdateScreenText;
@@ -89,7 +89,7 @@ public class BtnShop : BtnScreen
                 ? $"<color=#{ColorUtility.ToHtmlStringRGBA(_colorCanBuy[0])}>{_pointsToUpgrade} PS" 
                 : $"<color=#{ColorUtility.ToHtmlStringRGBA(_colorCanBuy[1])}>{_pointsToUpgrade} PS";
 
-            _textLevel.text = !_isOneTimePurchase ? $"lvl. {_currentLevel + 1}" : $"";
+            _textLevel.text = !_isOneTimePurchase ? $"lvl. {_currentLevel}" : $"";
         }
     }
     

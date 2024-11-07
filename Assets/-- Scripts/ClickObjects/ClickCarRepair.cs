@@ -5,14 +5,16 @@ using UnityEngine;
 public class ClickCarRepair : ClickObjects
 {
     private float _fxIntensity = 1f;
+    private float _power => UpgradeManager.Instance.CurrentRepairPower[(int)_myType];
     private int _clickNeeded;
     private ParticleSystem _fxToRepair;
+
 
     public override void Init(CarMovement myCar, int clickNeeded)
     {
         base.Init(myCar, clickNeeded);
         _clickNeeded = clickNeeded;
-        _power = UpgradeManager.Instance.CurrentRepairPower[(int)_myType];
+        print($"power : {_power}");
 
         _fxToRepair = Instantiate(_fxPrefab, _fxParent);
 

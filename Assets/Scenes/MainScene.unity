@@ -1604,8 +1604,10 @@ MonoBehaviour:
   Repairlvl:
   - MyUpgradeType: 0
     UpgradePrices:
+    - PriceLevel: 0
+      Bonus: 1
     - PriceLevel: 100
-      Bonus: 2
+      Bonus: 20
     - PriceLevel: 500
       Bonus: 3
     - PriceLevel: 2500
@@ -1616,6 +1618,8 @@ MonoBehaviour:
       Bonus: 25
   - MyUpgradeType: 1
     UpgradePrices:
+    - PriceLevel: 0
+      Bonus: 1
     - PriceLevel: 100
       Bonus: 2
     - PriceLevel: 500
@@ -1628,18 +1632,22 @@ MonoBehaviour:
       Bonus: 25
   - MyUpgradeType: 2
     UpgradePrices:
+    - PriceLevel: 0
+      Bonus: 0.05
     - PriceLevel: 100
-      Bonus: 2
+      Bonus: 0.06
     - PriceLevel: 500
-      Bonus: 3
+      Bonus: 0.1
     - PriceLevel: 2500
-      Bonus: 5
+      Bonus: 0.2
     - PriceLevel: 15000
-      Bonus: 10
+      Bonus: 0.5
     - PriceLevel: 50000
-      Bonus: 25
+      Bonus: 1
   - MyUpgradeType: 3
     UpgradePrices:
+    - PriceLevel: 0
+      Bonus: 5
     - PriceLevel: 100
       Bonus: 2
     - PriceLevel: 500
@@ -1654,8 +1662,12 @@ MonoBehaviour:
     UpgradePrices:
     - PriceLevel: 1000
       Bonus: 0
+    - PriceLevel: 1000
+      Bonus: 0
   - MyUpgradeType: 5
     UpgradePrices:
+    - PriceLevel: 5000
+      Bonus: 0
     - PriceLevel: 5000
       Bonus: 0
   CurrentRepairPower: []
@@ -3544,6 +3556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GasCan
       objectReference: {fileID: 0}
+    - target: {fileID: 4441340621740597047, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
+      propertyPath: _myType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7506524503724852676, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.23
@@ -4887,6 +4903,10 @@ PrefabInstance:
     - target: {fileID: 6195603007158222854, guid: 9b9be8fce3000254caa307d46810423a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922003502963376002, guid: 9b9be8fce3000254caa307d46810423a, type: 3}
+      propertyPath: _myType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

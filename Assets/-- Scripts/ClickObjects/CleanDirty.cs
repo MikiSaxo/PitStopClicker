@@ -12,10 +12,9 @@ public class CleanDirty : ClickObjects
     [SerializeField] private float _returnDuration = 0.5f;
 
     [Header("--- Clean ")]
-    [SerializeField] private float _cleanPower;
-
     [SerializeField] private GameObject _cleanFX;
     [SerializeField] private Vector3 _cleanRotation;
+    private float _cleanPower => UpgradeManager.Instance.CurrentRepairPower[(int)_myType];
 
     public ClickCarClean ClickCarClean { get; set; }
 

@@ -10,13 +10,10 @@ public class GasCan : ClickObjects
 
     [Header("--- Move ")]
     [SerializeField] private float _goDuration = 1f;
-
     [SerializeField] private float _returnDuration = 1f;
 
     [Header("--- Fill ")]
     [SerializeField] private GameObject _fillGas;
-
-    [SerializeField] private float _fillDuration = 2f;
 
     public bool IsSet { get; set; }
     public ClickGasCan ClickGasCan { get; set; }
@@ -27,6 +24,7 @@ public class GasCan : ClickObjects
     private Transform _gasPoint;
     private Collider _collider;
     private float _currentRotaY;
+    private float _fillDuration => UpgradeManager.Instance.CurrentRepairPower[(int)_myType];
     
     private readonly float _rotateDuration = 0.1f;
 
@@ -39,6 +37,8 @@ public class GasCan : ClickObjects
     private void Start()
     {
         IsSet = false;
+        
+        print($"gas fill duration: {_fillDuration} - mytype {(int)_myType} - {_myType}");
 
         _initPos = transform.position;
         _initRota = transform.rotation;
@@ -70,6 +70,7 @@ public class GasCan : ClickObjects
         IsSet = false;
         _collider.enabled = true;
 
+        // Refuel Gas
         transform.DOMove(_initPos, _returnDuration).SetEase(Ease.InOutQuad).OnComplete(()
             => _fillGas.transform.DOScale(new Vector3(1, 1, 1), _fillDuration * .25f).SetEase(Ease.InOutQuad));
 
