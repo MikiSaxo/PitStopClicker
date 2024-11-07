@@ -205,6 +205,62 @@ MonoBehaviour:
   _myType: 1
   _fxPrefab: {fileID: 19885000, guid: 3a73a5bfaa568274a891e4212e24a824, type: 3}
   _fxParent: {fileID: 2291745719412283385}
+--- !u!1 &3907070130877019803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3384441691710232815}
+  - component: {fileID: 1026443360893015550}
+  m_Layer: 0
+  m_Name: Decal_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3384441691710232815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907070130877019803}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.54846436, y: -0.44629255, z: 0.4462452, w: 0.5485208}
+  m_LocalPosition: {x: 0.297, y: 1.076, z: 0.26}
+  m_LocalScale: {x: 0.96113, y: -0.48441437, z: 0.96113}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8840257448607315854}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 78.26}
+--- !u!114 &1026443360893015550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907070130877019803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 59b41dc9ebf7172418d0f316e1d06446, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_DecalLayerMask: 1
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: -0.30935097, z: 0.5}
+  m_Size: {x: 1.33406, y: 0.706234, z: 1}
+  m_FadeFactor: 1
 --- !u!1 &3974298652853223179
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +351,7 @@ Transform:
   m_GameObject: {fileID: 5829396953402823958}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000021919608, y: 0.7071059, z: 0.000023819504, w: 0.7071077}
-  m_LocalPosition: {x: 0, y: -0.061, z: 0.009}
+  m_LocalPosition: {x: 0, y: -0.132, z: 0.072}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -358,6 +414,7 @@ Transform:
   m_Children:
   - {fileID: 8634361736057093569}
   - {fileID: 5460832307112925692}
+  - {fileID: 3384441691710232815}
   m_Father: {fileID: 2493168454707055830}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8473263149200985577
@@ -375,7 +432,9 @@ MonoBehaviour:
   _myType: 2
   _fxPrefab: {fileID: 2216172659447519292, guid: ec4fa22c80417fe46919185db0e992e5, type: 3}
   _fxParent: {fileID: 8634361736057093569}
-  _decalProjector: {fileID: 1340877776880291611}
+  _decalProjector:
+  - {fileID: 1340877776880291611}
+  - {fileID: 1026443360893015550}
 --- !u!65 &2343803378325662086
 BoxCollider:
   m_ObjectHideFlags: 0

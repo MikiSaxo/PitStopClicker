@@ -60,6 +60,38 @@ PrefabInstance:
       propertyPath: _textPrice
       value: 
       objectReference: {fileID: 6833404862680406848}
+    - target: {fileID: 7207402598171243168, guid: eef5874c076ede84d84713850ef93410, type: 3}
+      propertyPath: _colorCanBuy.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207402598171243168, guid: eef5874c076ede84d84713850ef93410, type: 3}
+      propertyPath: _colorCanBuy.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207402598171243168, guid: eef5874c076ede84d84713850ef93410, type: 3}
+      propertyPath: _colorCanBuy.Array.data[0].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207402598171243168, guid: eef5874c076ede84d84713850ef93410, type: 3}
+      propertyPath: _colorCanBuy.Array.data[0].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207402598171243168, guid: eef5874c076ede84d84713850ef93410, type: 3}
+      propertyPath: _colorCanBuy.Array.data[0].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207402598171243168, guid: eef5874c076ede84d84713850ef93410, type: 3}
+      propertyPath: _colorCanBuy.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207402598171243168, guid: eef5874c076ede84d84713850ef93410, type: 3}
+      propertyPath: _colorCanBuy.Array.data[1].g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207402598171243168, guid: eef5874c076ede84d84713850ef93410, type: 3}
+      propertyPath: _colorCanBuy.Array.data[1].r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7430183872059571140, guid: eef5874c076ede84d84713850ef93410, type: 3}
       propertyPath: m_Name
       value: TextBtn

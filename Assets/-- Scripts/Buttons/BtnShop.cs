@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -14,6 +15,7 @@ public class BtnShop : BtnScreen
     [SerializeField] private TMP_Text _textPrice;
     [SerializeField] private TMP_Text _textLevel;
     [SerializeField] private TMP_Text _textBtn;
+    [SerializeField] private Color[] _colorCanBuy;
 
     private int _currentLevel = 0;
     private int _pointsToUpgrade = 100;
@@ -26,25 +28,29 @@ public class BtnShop : BtnScreen
         _currentLevel = 0;
         UpdatePointsToUpgrade();
         UpdateScreenText();
+        PointsManager.Instance.OnPointsUpdated += UpdateScreenText;
     }
 
     public override void OnMouseDown()
     {
         if (_isOneTimePurchase && _isPurchased) return;
 
-        CheckEnoughMoney();
+        CheckEnoughMoneyBuy();
     }
 
-    private void CheckEnoughMoney()
+    private void CheckEnoughMoneyBuy()
     {
         if (PointsManager.Instance.CanBuy(_pointsToUpgrade))
         {
+            _currentLevel++;
+            
+            PointsManager.Instance.UpdatePoints(-_pointsToUpgrade);
+            
             if (_isOneTimePurchase)
                 _isPurchased = true;
             else
                 UpdatePointsToUpgrade();
          
-            _currentLevel++;
             base.OnMouseDown();
             UpdateScreenText();
             ClickHandler.Instance.CreateFXRepairGood(transform.position);
@@ -79,12 +85,11 @@ public class BtnShop : BtnScreen
         }
         else
         {
-            _textPrice.text = $"<color=green>{_pointsToUpgrade} PS";
-            
-            if(!_isOneTimePurchase)
-                _textLevel.text = $"lvl. {_currentLevel + 1}";
-            else
-                _textLevel.text = $"";
+            _textPrice.text = PointsManager.Instance.CanBuy(_pointsToUpgrade) 
+                ? $"<color=#{ColorUtility.ToHtmlStringRGBA(_colorCanBuy[0])}>{_pointsToUpgrade} PS" 
+                : $"<color=#{ColorUtility.ToHtmlStringRGBA(_colorCanBuy[1])}>{_pointsToUpgrade} PS";
+
+            _textLevel.text = !_isOneTimePurchase ? $"lvl. {_currentLevel + 1}" : $"";
         }
     }
     
@@ -95,5 +100,10 @@ public class BtnShop : BtnScreen
         {
             transform.DOLocalRotate(_initRota, .25f);
         });
+    }
+
+    private void OnDisable()
+    {
+        PointsManager.Instance.OnPointsUpdated -= UpdateScreenText;
     }
 }

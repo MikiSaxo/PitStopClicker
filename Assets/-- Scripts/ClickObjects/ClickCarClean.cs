@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public class ClickCarClean : ClickObjects
 {
-    [SerializeField] private DecalProjector _decalProjector;
+    [SerializeField] private DecalProjector[] _decalProjector;
     
     private ParticleSystem _fxToRepair;
     
@@ -35,7 +35,11 @@ public class ClickCarClean : ClickObjects
 
     public void UpdateDecalProjector(float intensity)
     {
-        _decalProjector.fadeFactor -= intensity;
+        foreach (var decal in _decalProjector)
+        {
+            decal.fadeFactor -= intensity;
+        }
+
         SetFX();
     }
 

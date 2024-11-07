@@ -1658,6 +1658,7 @@ MonoBehaviour:
     UpgradePrices:
     - PriceLevel: 5000
       Bonus: 0
+  CurrentRepairPower: []
 --- !u!1001 &480318296
 PrefabInstance:
   m_ObjectHideFlags: 0

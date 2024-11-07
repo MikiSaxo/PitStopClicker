@@ -27,6 +27,8 @@ public class PointsManager : MonoBehaviour
     [SerializeField] private float _initialMoveDuration = 0.5f;
     [SerializeField] private float _moveToTargetDuration = 0.5f;
     [SerializeField] private float _delayBetweenMovesToTarget = 0.075f;
+    
+    public Action OnPointsUpdated;
 
     private void Awake()
     {
@@ -43,6 +45,8 @@ public class PointsManager : MonoBehaviour
         int startPoints = _points;
         int targetPoints = _points + pointsToAdd;
         _points = targetPoints;
+
+        OnPointsUpdated?.Invoke();
 
         StartCoroutine(AnimatePoints(startPoints, targetPoints));
     }
@@ -121,9 +125,6 @@ public class PointsManager : MonoBehaviour
     {
         if(_points >= price)
         {
-            _points -= price;
-            UpdatePoints(0);
-            
             return true;
         }
         return false;
