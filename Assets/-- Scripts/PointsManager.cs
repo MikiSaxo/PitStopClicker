@@ -66,8 +66,12 @@ public class PointsManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / _textAnimDuration);
             int currentPoints = Mathf.RoundToInt(Mathf.Lerp(startPoints, endPoints, t));
-            SetPointsText(currentPoints,0);
-            SetPointsText(currentPoints,1);
+
+            for (int i = 0; i < _pointsText.Length; i++)
+            {
+                SetPointsText(currentPoints, i);
+            }
+            
             yield return null;
         }
     }

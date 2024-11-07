@@ -9,8 +9,10 @@ public class UpgradeManager : MonoBehaviour
     public static UpgradeManager Instance;
     
     public List<UpgradeInfo> Repairlvl = new List<UpgradeInfo>();
+    public List<MecanoInfo> MecanoLvl = new List<MecanoInfo>();
      
-    public List<float> CurrentRepairPower = new List<float>();
+    [HideInInspector] public List<float> CurrentRepairPower = new List<float>();
+    [HideInInspector] public List<float> CurrentMecanoPower = new List<float>();
 
     private void Awake()
     {
@@ -34,7 +36,23 @@ public class UpgradePrice
 public class UpgradeInfo
 {
     public UpgradeType MyUpgradeType;
-    public List<UpgradePrice> UpgradePrices;
+    public List<UpgradePrice> UpgradePrices = new List<UpgradePrice>();
+}
+
+[System.Serializable]
+public class MecanoInfo
+{
+    public UpgradeType MyUpgradeType;
+    public List<MecanoPrice> UpgradePrices = new List<MecanoPrice>();
+}
+
+[System.Serializable]
+public class MecanoPrice
+{
+    public int PriceLevel;
+    public float Bonus;
+    public Mesh MecanoMesh;
+    public Material MecanoMaterial;
 }
 
 public enum UpgradeType

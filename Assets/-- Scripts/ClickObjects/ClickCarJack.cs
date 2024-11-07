@@ -92,7 +92,7 @@ public class ClickCarJack : ClickObjects
     {
         if (UpgradeManager.Instance.CurrentRepairPower[(int)_myType] == 1)
             return;
-§        
+        
         if (CarSpawner.Instance.CurrentCar == null) return;
 
         if (!CarSpawner.Instance.CurrentCar.IsAtClickPoint)
