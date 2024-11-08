@@ -9,8 +9,8 @@ using UnityEngine.Serialization;
 
 public class BtnShop : BtnScreen
 {
-    [SerializeField] private bool _isOneTimePurchase;
-    [FormerlySerializedAs("_updateType")] [SerializeField] private UpgradeType _upgradeType;
+    [SerializeField] protected bool _isOneTimePurchase;
+    [FormerlySerializedAs("_updateType")] [SerializeField] protected UpgradeType _upgradeType;
 
     [Header("--- Texts")] 
     [SerializeField] private TMP_Text _textPrice;
@@ -18,10 +18,10 @@ public class BtnShop : BtnScreen
     [SerializeField] private TMP_Text _textBtn;
     [SerializeField] private Color[] _colorCanBuy;
 
-    private int _currentLevel = 0;
-    private int _pointsToUpgrade = 100;
-    private float _bonusPower;
-    private bool _isPurchased;
+    protected int _currentLevel = 0;
+    protected int _pointsToUpgrade = 100;
+    protected float _bonusPower;
+    protected bool _isPurchased;
 
     public override void Start()
     {
@@ -46,16 +46,7 @@ public class BtnShop : BtnScreen
             _currentLevel++;
             PointsManager.Instance.UpdatePoints(-_pointsToUpgrade);
             
-            if (_isOneTimePurchase)
-            {
-                _isPurchased = true;
-                UpgradeManager.Instance.CurrentRepairPower[(int)_upgradeType] = 1;
-                ClickCarJack.Instance.CheckUpgradeAutoMove();
-                GasCan.Instance.CheckUpgradeAutoMove();
-            }
-            else
-                UpdatePointsToUpgrade();
-
+            CheckOneTimePurchase();
          
             base.OnMouseDown();
             UpdateScreenText();
@@ -68,8 +59,13 @@ public class BtnShop : BtnScreen
             CantBuyAnim();
         }
     }
+    
+    public virtual void CheckOneTimePurchase()
+    { 
+        UpdatePointsToUpgrade();
+    } 
 
-    private void UpdatePointsToUpgrade()
+    public virtual void UpdatePointsToUpgrade( )
     {
         foreach (var repair in UpgradeManager.Instance.Repairlvl)
         {

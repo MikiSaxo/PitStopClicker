@@ -18,9 +18,14 @@ public class UpgradeManager : MonoBehaviour
     {
         Instance = this;
        
-        for (int i = 0; i < Repairlvl.Count; i++)
+        foreach (var repair in Repairlvl)
         {
-            CurrentRepairPower.Add(Repairlvl[i].UpgradePrices[0].Bonus);
+            CurrentRepairPower.Add(repair.UpgradePrices[0].Bonus);
+        }
+        
+        foreach (var mecano in MecanoLvl)
+        {
+            CurrentMecanoPower.Add(mecano.UpgradePrices[0].Bonus);
         }
     }
 }
