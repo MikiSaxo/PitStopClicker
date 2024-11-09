@@ -88,7 +88,7 @@ public class CarMovement : MonoBehaviour
             IsAtClickPoint = true;
             _wheelAnim.StopRotation();
             SetActiveCircuitFX(false);
-            CarSpawner.Instance.OnCarAtPosition?.Invoke();
+            CarSpawner.Instance.OnCarAtClickPoint?.Invoke();
         });
     }
 
@@ -116,6 +116,8 @@ public class CarMovement : MonoBehaviour
 
         ClickCarJack.Instance.ReturnFromJackPoint();
         PointsManager.Instance.AddPS(transform.position);
+        CarSpawner.Instance.OnCarRepaired?.Invoke();
+        
         MoveToExitPoint();
     }
 

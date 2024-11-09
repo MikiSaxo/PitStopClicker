@@ -11,7 +11,7 @@ public class BtnMecano : BtnShop
         if (_isOneTimePurchase)
         {
             _isPurchased = true;
-            UpgradeManager.Instance.CurrentRepairPower[(int)_upgradeType] = 1;
+            UpgradeManager.Instance.CurrentMecanoPower[(int)_upgradeType] = 1;
             ClickCarJack.Instance.CheckUpgradeAutoMove();
             GasCan.Instance.CheckUpgradeAutoMove();
         }
@@ -37,7 +37,8 @@ public class BtnMecano : BtnShop
                     _bonus *= 1.5f;
                     _power *= 1.5f;
                 }
-                UpgradeManager.Instance.CurrentMecanoPower[(int)_upgradeType] = _bonus;
+                UpgradeManager.Instance.CurrentMecanoSpeed[(int)_upgradeType] = _bonus;
+                UpgradeManager.Instance.CurrentMecanoPower[(int)_upgradeType] = _power;
                 
                 break;
             }
@@ -48,7 +49,9 @@ public class BtnMecano : BtnShop
     {
         base.BuyUpgrade();
 
+        MecanoManager.Instance.SetActiveMecano((int)_upgradeType, true);
+        
         if(_boughtable != null)
-            MecanoManager.Instance.UpdateMecanoMesh((int)_upgradeType, _currentLevel - 1);
+            MecanoManager.Instance.UpdateMecanoMesh((int)_upgradeType, _currentLevel);
     }
 }

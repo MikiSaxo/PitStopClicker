@@ -16,8 +16,9 @@ public class CarSpawner : MonoBehaviour
     public CarMovement CurrentCar { get; set; }
 
     
+    public UnityAction OnCarAtClickPoint;
+    public UnityAction OnCarRepaired;
     public UnityAction OnCarDestroyed;
-    public UnityAction OnCarAtPosition;
 
     private void Awake()
     {

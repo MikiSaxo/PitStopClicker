@@ -11,9 +11,10 @@ public class UpgradeManager : MonoBehaviour
     
     public List<UpgradeInfo> Repairlvl = new List<UpgradeInfo>();
     public List<MecanoInfo> MecanoLvl = new List<MecanoInfo>();
-     
+     [Space(50)]
     public List<float> CurrentRepairPower = new List<float>();
     public List<float> CurrentMecanoPower = new List<float>();
+    public List<float> CurrentMecanoSpeed = new List<float>();
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class UpgradeManager : MonoBehaviour
         for (int i = 0; i < MecanoLvl.Count+1; i++)
         {
             CurrentMecanoPower.Add(0);
+            CurrentMecanoSpeed.Add(0);
         }
     }
 }

@@ -175,10 +175,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62381b3da638b8f44acfdaafb3fa2de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MyType>k__BackingField: 0
   _transformA: {fileID: 112361522}
   _transformB: {fileID: 437337578}
   _moveDuration: 0.5
   _roundTripDuration: 0.03
+  _isOneTimePurchased: 0
 --- !u!23 &14917019 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3284116206967424777, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
@@ -1051,7 +1053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8723288276697657072, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
       propertyPath: m_Name
-      value: Meca_TireRearAuto
+      value: Meca_TireRearAuto_Circuit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1976,7 +1978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8723288276697657072, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
       propertyPath: m_Name
-      value: Meca_EngineAuto
+      value: Meca_EngineAuto_Circuit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2036,7 +2038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8723288276697657072, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
       propertyPath: m_Name
-      value: Meca_TireFrontAuto
+      value: Meca_TireFrontAuto_Circuit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2573,7 +2575,7 @@ MonoBehaviour:
       Bonus: 25
   - MyUpgradeType: 1
     UpgradePrices:
-    - PriceLevel: 0
+    - PriceLevel: 50
       Bonus: 1
     - PriceLevel: 100
       Bonus: 2
@@ -2587,7 +2589,7 @@ MonoBehaviour:
       Bonus: 25
   - MyUpgradeType: 2
     UpgradePrices:
-    - PriceLevel: 0
+    - PriceLevel: 60
       Bonus: 0.05
     - PriceLevel: 100
       Bonus: 0.06
@@ -2601,7 +2603,7 @@ MonoBehaviour:
       Bonus: 1
   - MyUpgradeType: 3
     UpgradePrices:
-    - PriceLevel: 0
+    - PriceLevel: 70
       Bonus: 3
     - PriceLevel: 100
       Bonus: 2
@@ -2613,150 +2615,117 @@ MonoBehaviour:
       Bonus: 10
     - PriceLevel: 50000
       Bonus: 25
-  - MyUpgradeType: 4
-    UpgradePrices:
-    - PriceLevel: 0
-      Bonus: 0
-    - PriceLevel: 100
-      Bonus: 1
-  - MyUpgradeType: 5
-    UpgradePrices:
-    - PriceLevel: 0
-      Bonus: 0
-    - PriceLevel: 100
-      Bonus: 1
-    - PriceLevel: 100
-      Bonus: 1
   MecanoLvl:
   - MyUpgradeType: 1
     MecanoPrices:
-    - PriceLevel: 0
+    - PriceLevel: 15
       Speed: 0
       Power: 0
       MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
-    - PriceLevel: 101
+    - PriceLevel: 100
       Speed: 0.5
       Power: 1
       MecanoMesh: {fileID: 4300000, guid: c81a40491ec7bab4e84a8a6d6f899eb5, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
     - PriceLevel: 101
       Speed: 0.4
-      Power: 1
+      Power: 2
       MecanoMesh: {fileID: 4300000, guid: 172467d6a5769ac45b7717fdbd75c019, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
     - PriceLevel: 101
       Speed: 1
-      Power: 0
+      Power: 5
       MecanoMesh: {fileID: 4300000, guid: 703e652989779ff45809b190c677f988, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
     - PriceLevel: 101
       Speed: 1
-      Power: 0
+      Power: 10
       MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
   - MyUpgradeType: 0
     MecanoPrices:
-    - PriceLevel: 0
+    - PriceLevel: 11
       Speed: 0
       Power: 0
       MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
     - PriceLevel: 120
-      Speed: 1
-      Power: 0
+      Speed: 0.5
+      Power: 1
       MecanoMesh: {fileID: 4300000, guid: c81a40491ec7bab4e84a8a6d6f899eb5, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
     - PriceLevel: 120
-      Speed: 1
-      Power: 0
+      Speed: 0.4
+      Power: 2
       MecanoMesh: {fileID: 4300000, guid: 172467d6a5769ac45b7717fdbd75c019, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
     - PriceLevel: 120
-      Speed: 1
-      Power: 0
+      Speed: 0.3
+      Power: 3
       MecanoMesh: {fileID: 4300000, guid: 703e652989779ff45809b190c677f988, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
     - PriceLevel: 120
-      Speed: 1
-      Power: 0
+      Speed: 0.2
+      Power: 5
       MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
   - MyUpgradeType: 2
     MecanoPrices:
-    - PriceLevel: 0
+    - PriceLevel: 10
       Speed: 0
       Power: 0
       MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
     - PriceLevel: 20
-      Speed: 1
-      Power: 0
+      Speed: 0.5
+      Power: 1
       MecanoMesh: {fileID: 4300000, guid: c81a40491ec7bab4e84a8a6d6f899eb5, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
-    - PriceLevel: 30
-      Speed: 2
-      Power: 0
+    - PriceLevel: 29
+      Speed: 0.4
+      Power: 2
       MecanoMesh: {fileID: 4300000, guid: 172467d6a5769ac45b7717fdbd75c019, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
     - PriceLevel: 40
-      Speed: 3
-      Power: 0
+      Speed: 0.3
+      Power: 3
       MecanoMesh: {fileID: 4300000, guid: 703e652989779ff45809b190c677f988, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
-    - PriceLevel: 50
-      Speed: 4
-      Power: 0
-      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
-      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
     - PriceLevel: 100
-      Speed: 5
-      Power: 0
-      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
-      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
-    - PriceLevel: 112
-      Speed: 6
-      Power: 0
-      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
-      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
-    - PriceLevel: 120
-      Speed: 7
-      Power: 0
-      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
-      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
-    - PriceLevel: 130
-      Speed: 8
-      Power: 0
+      Speed: 0.2
+      Power: 5
       MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
   - MyUpgradeType: 3
     MecanoPrices: []
   - MyUpgradeType: 5
     MecanoPrices:
-    - PriceLevel: 0
+    - PriceLevel: 550
       Speed: 0
       Power: 0
       MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: d55f410006df1db498b1db3d3d026636, type: 2}
     - PriceLevel: 132
       Speed: 1
-      Power: 0
+      Power: 1
       MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: d55f410006df1db498b1db3d3d026636, type: 2}
   - MyUpgradeType: 4
     MecanoPrices:
-    - PriceLevel: 0
+    - PriceLevel: 500
       Speed: 0
       Power: 0
       MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 767cd705718eae7498e67f6b833eec5d, type: 2}
     - PriceLevel: 132
       Speed: 1
-      Power: 0
+      Power: 1
       MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 767cd705718eae7498e67f6b833eec5d, type: 2}
   CurrentRepairPower: []
   CurrentMecanoPower: []
+  CurrentMecanoSpeed: []
 --- !u!1001 &480318296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3204,7 +3173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 641411375}
   m_Layer: 0
-  m_Name: Mecanos
+  m_Name: Meca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5570,10 +5539,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62381b3da638b8f44acfdaafb3fa2de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MyType>k__BackingField: 2
   _transformA: {fileID: 128329011}
   _transformB: {fileID: 1123547492}
   _moveDuration: 0.5
   _roundTripDuration: 0.03
+  _isOneTimePurchased: 0
 --- !u!4 &1160280827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438532, guid: bd409a4a526fda841a2d311cb872fb53, type: 3}
@@ -6299,10 +6270,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62381b3da638b8f44acfdaafb3fa2de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MyType>k__BackingField: 1
   _transformA: {fileID: 1380038143}
   _transformB: {fileID: 12467485}
   _moveDuration: 0.5
   _roundTripDuration: 0.03
+  _isOneTimePurchased: 0
+--- !u!1 &1341637433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8723288276697657072, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
+  m_PrefabInstance: {fileID: 1653790091}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1341637438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341637433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62381b3da638b8f44acfdaafb3fa2de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MyType>k__BackingField: 5
+  _transformA: {fileID: 0}
+  _transformB: {fileID: 0}
+  _moveDuration: 0.5
+  _roundTripDuration: 0.05
+  _isOneTimePurchased: 1
 --- !u!4 &1351639809 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3221529889536992851, guid: f03bb0716b00364449637c122b2b4341, type: 3}
@@ -7061,8 +7057,8 @@ Transform:
   - {fileID: 1320706686}
   - {fileID: 1380038143}
   - {fileID: 12467485}
-  - {fileID: 249625028}
   - {fileID: 590528204}
+  - {fileID: 249625028}
   m_Father: {fileID: 476258286}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1524428503 stripped
@@ -7814,7 +7810,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8723288276697657072, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1341637438}
   m_SourcePrefab: {fileID: 100100000, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
 --- !u!4 &1657903995 stripped
 Transform:
@@ -8357,10 +8356,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62381b3da638b8f44acfdaafb3fa2de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MyType>k__BackingField: 0
   _transformA: {fileID: 239423678}
   _transformB: {fileID: 1614252758}
   _moveDuration: 0.5
   _roundTripDuration: 0.03
+  _isOneTimePurchased: 0
 --- !u!4 &1830202880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 425856, guid: 88b8a00058d11254d948ddba0654218d, type: 3}
@@ -8531,7 +8532,7 @@ GameObject:
   - component: {fileID: 1877034033}
   - component: {fileID: 1877034034}
   m_Layer: 0
-  m_Name: -- Mecanos
+  m_Name: ------ Mecanos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8567,20 +8568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7109559132555748a3f5395900e1a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mecanoMeshesGarage:
-  - {fileID: 877252802}
-  - {fileID: 642944390}
-  - {fileID: 1093411017}
-  - {fileID: 0}
-  - {fileID: 325434749}
-  - {fileID: 1171974764}
-  _mecanoMeshesCircuit:
-  - {fileID: 1824597798}
-  - {fileID: 1320706690}
-  - {fileID: 1156573553}
-  - {fileID: 0}
-  - {fileID: 249625032}
-  - {fileID: 590528208}
   _mecanoMeshes:
   - MecanoMR:
     - {fileID: 877252802}
@@ -8594,11 +8581,11 @@ MonoBehaviour:
     - {fileID: 1156573553}
   - MecanoMR: []
   - MecanoMR:
-    - {fileID: 325434749}
-    - {fileID: 249625032}
-  - MecanoMR:
     - {fileID: 1171974764}
     - {fileID: 590528208}
+  - MecanoMR:
+    - {fileID: 325434749}
+    - {fileID: 249625032}
 --- !u!4 &1878763770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8474903572646646570, guid: 4f24bcbce6413db489bd9148d8914641, type: 3}
@@ -10272,7 +10259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8723288276697657072, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
       propertyPath: m_Name
-      value: Meca_WashAuto
+      value: Meca_WashAuto_Circuit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10339,6 +10326,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 486962, guid: d240979e942084b4a906276548ebdcae, type: 3}
   m_PrefabInstance: {fileID: 1989728518}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2135386635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8723288276697657072, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
+  m_PrefabInstance: {fileID: 3102355080720917443}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2135386640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135386635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62381b3da638b8f44acfdaafb3fa2de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MyType>k__BackingField: 4
+  _transformA: {fileID: 0}
+  _transformB: {fileID: 0}
+  _moveDuration: 0.5
+  _roundTripDuration: 0.05
+  _isOneTimePurchased: 1
 --- !u!1001 &2136960070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10601,7 +10611,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8723288276697657072, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2135386640}
   m_SourcePrefab: {fileID: 100100000, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

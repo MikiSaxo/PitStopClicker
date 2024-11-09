@@ -104,7 +104,7 @@ public class BtnShop : BtnScreen
         if (_isPurchased)
         {
             _textPrice.text = $"<color=yellow>---------";
-            _textLevel.text = $"<color=yellow>Already Bought";
+            _textLevel.text = $"";
             _textBtn.text = $"<color=yellow>Owned";
         }
         else

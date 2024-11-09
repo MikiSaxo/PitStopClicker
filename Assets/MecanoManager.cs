@@ -8,9 +8,9 @@ public class MecanoManager : MonoBehaviour
 {
     public static MecanoManager Instance;
 
-    [SerializeField] private List<MeshRenderer> _mecanoMeshesGarage = new List<MeshRenderer>();
-    [SerializeField] private List<MeshRenderer> _mecanoMeshesCircuit = new List<MeshRenderer>();
     [SerializeField] private List<MecanoMeshes> _mecanoMeshes = new List<MecanoMeshes>();
+    
+    private List<MecanoAnim> _mecanoAnims = new List<MecanoAnim>();
 
     private void Awake()
     {
@@ -19,20 +19,37 @@ public class MecanoManager : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < _mecanoMeshesGarage.Count; i++)
+        ClickCarJack.Instance.OnCarJackSet += LaunchMecano;
+        CarSpawner.Instance.OnCarRepaired += GoBackMecano;
+        
+        GetMecanoAnim();
+        
+        for (int i = 0; i < _mecanoMeshes.Count; i++)
         {
             UpdateMecanoMesh(i, 0);
+            
+            SetActiveMecano(i, false);
+            
+            if(_mecanoMeshes[i].MecanoMR.Length > 0)
+                _mecanoMeshes[i].MecanoMR[0].gameObject.SetActive(true);
         }
+    }
 
-        // for (int i = 0; i < MecanoMeshesCircuit.Count; i++)
-        // {
-        //     SetActiveMecano(i, false);
-        // }
+    private void GetMecanoAnim()
+    {
+        foreach (var mecanoMesh in _mecanoMeshes)
+        {
+            foreach (var mr in mecanoMesh.MecanoMR)
+            {
+                if(mr.GetComponent<MecanoAnim>() != null)
+                    _mecanoAnims.Add(mr.GetComponent<MecanoAnim>());
+            }
+        }
     }
 
     public void UpdateMecanoMesh(int index, int level)
     {
-        if (_mecanoMeshesGarage[index] == null) return;
+        if (_mecanoMeshes[index] == null) return;
 
         if (level >= UpgradeManager.Instance.MecanoLvl[index].MecanoPrices.Count)
         {
@@ -48,9 +65,32 @@ public class MecanoManager : MonoBehaviour
 
     public void SetActiveMecano(int index, bool active)
     {
-        if (_mecanoMeshesCircuit[index] == null) return;
+        if (_mecanoMeshes[index] == null || _mecanoMeshes[index].MecanoMR.Length == 0) return;
+        
+        foreach (var mecano in _mecanoMeshes[index].MecanoMR)
+        {
+            mecano.gameObject.SetActive(active);
+        }
+    }
 
-        //MecanoMeshesCircuit[index].gameObject.SetActive(active);
+    private void LaunchMecano()
+    {
+        foreach (var meca in _mecanoAnims)
+        {
+            if(meca.gameObject.activeSelf)
+                meca.LaunchAnim();
+        }
+    }
+
+    private void GoBackMecano()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        CarSpawner.Instance.OnCarAtClickPoint -= LaunchMecano;
+        CarSpawner.Instance.OnCarRepaired -= GoBackMecano;
     }
 }
 

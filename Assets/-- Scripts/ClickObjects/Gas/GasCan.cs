@@ -47,12 +47,12 @@ public class GasCan : ClickObjects
         _initRota = transform.rotation;
         _collider = GetComponent<Collider>();
 
-        CarSpawner.Instance.OnCarAtPosition += CheckUpgradeAutoMove;
+        CarSpawner.Instance.OnCarAtClickPoint += CheckUpgradeAutoMove;
     }
     
     public void CheckUpgradeAutoMove()
     {
-        if (UpgradeManager.Instance.CurrentRepairPower[(int)_mySecondType] == 1
+        if (UpgradeManager.Instance.CurrentMecanoPower[(int)_mySecondType] == 1
             && ClickCarJack.Instance.IsSet
             && CarSpawner.Instance.CurrentCar.IsAtClickPoint
             && ClickGasCan != null
@@ -80,13 +80,15 @@ public class GasCan : ClickObjects
     public void ReturnFromGasPoint()
     {
         transform.DOKill();
-
-        IsSet = false;
-        _collider.enabled = true;
-
-        // Refuel Gas
-        transform.DOMove(_initPos, _returnDuration).SetEase(Ease.InOutQuad).OnComplete(()
-            => _fillGas.transform.DOScale(new Vector3(1, 1, 1), _fillDuration * .25f).SetEase(Ease.InOutQuad));
+        
+        // Go Back
+        transform.DOMove(_initPos, _returnDuration).SetEase(Ease.InOutQuad).OnComplete(() =>
+        {
+            // Refuel Gas
+            _fillGas.transform.DOScale(new Vector3(1, 1, 1), _fillDuration * .25f).SetEase(Ease.InOutQuad);
+            _collider.enabled = true;
+            IsSet = false;
+        });
 
         transform.DORotateQuaternion(_initRota, _returnDuration).SetEase(Ease.InOutQuad);
     }
@@ -141,6 +143,6 @@ public class GasCan : ClickObjects
 
     private void OnDisable()
     {
-        CarSpawner.Instance.OnCarAtPosition -= CheckUpgradeAutoMove;
+        CarSpawner.Instance.OnCarAtClickPoint -= CheckUpgradeAutoMove;
     }
 }

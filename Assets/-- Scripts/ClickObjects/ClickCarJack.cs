@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class ClickCarJack : ClickObjects
@@ -14,6 +15,9 @@ public class ClickCarJack : ClickObjects
     [SerializeField] private float _goDuration = 1f;
     [SerializeField] private float _returnDuration = 1f;
     [SerializeField] private float _heightCar = 1f;
+
+    
+    public UnityAction OnCarJackSet;
 
     public bool IsSet { get; set; }
 
@@ -37,12 +41,12 @@ public class ClickCarJack : ClickObjects
         _initPos = transform.position;
         _initRota = transform.rotation;
         
-        CarSpawner.Instance.OnCarAtPosition += CheckUpgradeAutoMove;
+        CarSpawner.Instance.OnCarAtClickPoint += CheckUpgradeAutoMove;
     }
 
     public void CheckUpgradeAutoMove()
     {
-        if(UpgradeManager.Instance.CurrentRepairPower[(int)_myType] == 1 && !IsSet)
+        if(UpgradeManager.Instance.CurrentMecanoPower[(int)_myType] == 1 && !IsSet)
             MoveToJackPoint();
     }
     private void MoveToJackPoint()
@@ -50,6 +54,8 @@ public class ClickCarJack : ClickObjects
         transform.DOKill();
 
         IsSet = true;
+        OnCarJackSet?.Invoke();
+        
         GasCan.Instance.CheckUpgradeAutoMove();
         
         transform.DOMove(_jackPoint.position, _goDuration).SetEase(Ease.InOutQuad).OnComplete(() => SetHeightCurrentCar(true));
@@ -90,7 +96,7 @@ public class ClickCarJack : ClickObjects
 
     public override void OnClicked(Vector3 hitPoint)
     {
-        if (UpgradeManager.Instance.CurrentRepairPower[(int)_myType] == 1)
+        if (UpgradeManager.Instance.CurrentMecanoPower[(int)_myType] == 1)
             return;
         
         if (CarSpawner.Instance.CurrentCar == null) return;
