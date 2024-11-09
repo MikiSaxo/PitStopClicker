@@ -37,8 +37,8 @@ public class BtnScreen : MonoBehaviour
     private void BounceAnim()
     {
         transform.DOKill();
-        Vector3 upScale = _initScale * 1.1f;
+        Vector3 upScale = _initScale * 1.5f;
 
-        transform.DOScale(upScale, 0.05f).SetEase(Ease.InOutQuad).OnComplete(() => { transform.DOScale(_initScale, 0.05f).SetEase(Ease.InOutQuad); });
+        transform.DOScale(upScale, 0.15f).SetEase(Ease.OutBounce).OnComplete(() => { transform.DOScale(_initScale, 0.05f); });
     }
 }

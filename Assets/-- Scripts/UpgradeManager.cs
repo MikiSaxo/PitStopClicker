@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class UpgradeManager : MonoBehaviour
     public List<UpgradeInfo> Repairlvl = new List<UpgradeInfo>();
     public List<MecanoInfo> MecanoLvl = new List<MecanoInfo>();
      
-    [HideInInspector] public List<float> CurrentRepairPower = new List<float>();
-    [HideInInspector] public List<float> CurrentMecanoPower = new List<float>();
+    public List<float> CurrentRepairPower = new List<float>();
+    public List<float> CurrentMecanoPower = new List<float>();
 
     private void Awake()
     {
@@ -22,10 +23,10 @@ public class UpgradeManager : MonoBehaviour
         {
             CurrentRepairPower.Add(repair.UpgradePrices[0].Bonus);
         }
-        
-        foreach (var mecano in MecanoLvl)
+
+        for (int i = 0; i < MecanoLvl.Count+1; i++)
         {
-            CurrentMecanoPower.Add(mecano.UpgradePrices[0].Bonus);
+            CurrentMecanoPower.Add(0);
         }
     }
 }
@@ -48,14 +49,15 @@ public class UpgradeInfo
 public class MecanoInfo
 {
     public UpgradeType MyUpgradeType;
-    public List<MecanoPrice> UpgradePrices = new List<MecanoPrice>();
+    public List<MecanoPrice> MecanoPrices = new List<MecanoPrice>();
 }
 
 [System.Serializable]
 public class MecanoPrice
 {
     public int PriceLevel;
-    public float Bonus;
+    public float Speed;
+    public float Power;
     public Mesh MecanoMesh;
     public Material MecanoMaterial;
 }

@@ -54,7 +54,7 @@ public class PointsManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
-            UpdatePoints(100);
+            UpdatePoints(1000);
     }
 
     private IEnumerator AnimatePoints(int startPoints, int endPoints)
@@ -78,7 +78,7 @@ public class PointsManager : MonoBehaviour
 
     private void SetPointsText(int points, int index)
     {
-        _pointsText[index].SetText($"{points} PS");
+        _pointsText[index].SetText($"{points}");
     }
 
     public void AddPS(Vector3 pos)

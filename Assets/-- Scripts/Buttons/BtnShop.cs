@@ -10,23 +10,26 @@ using UnityEngine.Serialization;
 public class BtnShop : BtnScreen
 {
     [SerializeField] protected bool _isOneTimePurchase;
-    [FormerlySerializedAs("_updateType")] [SerializeField] protected UpgradeType _upgradeType;
+    [SerializeField] protected UpgradeType _upgradeType;
 
     [Header("--- Texts")] 
     [SerializeField] private TMP_Text _textPrice;
     [SerializeField] private TMP_Text _textLevel;
     [SerializeField] private TMP_Text _textBtn;
     [SerializeField] private Color[] _colorCanBuy;
+    
+    [Header("--- Boughtable")] 
+    [SerializeField] protected BoughtableAnim _boughtable;
 
     protected int _currentLevel = 0;
     protected int _pointsToUpgrade = 100;
-    protected float _bonusPower;
+    protected float _bonus;
     protected bool _isPurchased;
 
     public override void Start()
     {
         base.Start();
-        _currentLevel = 1;
+        _currentLevel = 0;
         UpdatePointsToUpgrade();
         UpdateScreenText();
         PointsManager.Instance.OnPointsUpdated += UpdateScreenText;
@@ -43,20 +46,28 @@ public class BtnShop : BtnScreen
     {
         if (PointsManager.Instance.CanBuy(_pointsToUpgrade))
         {
-            _currentLevel++;
-            PointsManager.Instance.UpdatePoints(-_pointsToUpgrade);
-            
-            CheckOneTimePurchase();
-         
-            base.OnMouseDown();
-            UpdateScreenText();
-            ClickHandler.Instance.CreateFXRepairGood(transform.position);
-            
-            CarSpawner.Instance.CurrentCar.UpdateClickPower(_upgradeType, _bonusPower);
+            BuyUpgrade();
         }
         else
         {
             CantBuyAnim();
+        }
+    }
+
+    public virtual void BuyUpgrade()
+    {
+        PointsManager.Instance.UpdatePoints(-_pointsToUpgrade);
+            
+        _currentLevel++;
+        CheckOneTimePurchase();
+        base.OnMouseDown();
+         
+        UpdateScreenText();
+        
+        if (_boughtable != null)
+        {
+            _boughtable.BuyAnim();
+            ClickHandler.Instance.CreateFXRepairGood(_boughtable.transform.position);
         }
     }
     
@@ -65,14 +76,25 @@ public class BtnShop : BtnScreen
         UpdatePointsToUpgrade();
     } 
 
-    public virtual void UpdatePointsToUpgrade( )
+    public virtual void UpdatePointsToUpgrade()
     {
         foreach (var repair in UpgradeManager.Instance.Repairlvl)
         {
             if(repair.MyUpgradeType == _upgradeType)
             {
-                _pointsToUpgrade = repair.UpgradePrices[_currentLevel].PriceLevel;
-                _bonusPower = repair.UpgradePrices[_currentLevel].Bonus;
+                if (_currentLevel < repair.UpgradePrices.Count)
+                {
+                    _pointsToUpgrade = repair.UpgradePrices[_currentLevel].PriceLevel;
+                    _bonus = repair.UpgradePrices[_currentLevel].Bonus;
+                }
+                else
+                {
+                    _pointsToUpgrade = Mathf.RoundToInt(_pointsToUpgrade * 1.5f / 10) * 10;
+                    _bonus *= 1.5f;
+                }
+
+                UpgradeManager.Instance.CurrentRepairPower[(int)_upgradeType] = _bonus;
+                
                 break;
             }
         }
@@ -91,7 +113,7 @@ public class BtnShop : BtnScreen
                 ? $"<color=#{ColorUtility.ToHtmlStringRGBA(_colorCanBuy[0])}>{_pointsToUpgrade} PS" 
                 : $"<color=#{ColorUtility.ToHtmlStringRGBA(_colorCanBuy[1])}>{_pointsToUpgrade} PS";
 
-            _textLevel.text = !_isOneTimePurchase ? $"lvl. {_currentLevel}" : $"";
+            _textLevel.text = !_isOneTimePurchase ? $"lvl. {_currentLevel+1}" : $"";
         }
     }
     
