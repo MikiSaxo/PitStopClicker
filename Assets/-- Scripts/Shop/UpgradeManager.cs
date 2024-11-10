@@ -9,28 +9,29 @@ public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager Instance;
 
-    public List<UpgradeInfo> Repairlvl = new List<UpgradeInfo>();
-    public List<MecanoInfo> MecanoLvl = new List<MecanoInfo>();
-    public List<CarInfo> CarsLvl = new List<CarInfo>();
+    [SerializeField] private List<UpgradeInfo> _repairLvl = new List<UpgradeInfo>();
+    [SerializeField] private List<MecanoInfo> _mecanoLvl = new List<MecanoInfo>();
+    [FormerlySerializedAs("CarsLvl")] [SerializeField] private List<CarInfo> _carsLvl = new List<CarInfo>();
 
-    [Space(50)]
+    [HideInInspector] public List<float> CurrentRepairPower = new List<float>();
+    [HideInInspector] public List<float> CurrentMecanoPower = new List<float>();
+    [HideInInspector] public List<float> CurrentMecanoSpeed = new List<float>();
 
-    public List<float> CurrentRepairPower = new List<float>();
-    public List<float> CurrentMecanoPower = new List<float>();
-    public List<float> CurrentMecanoSpeed = new List<float>();
-
+    public List<UpgradeInfo> RepairLvl => _repairLvl;
+    public List<MecanoInfo> MecanoLvl => _mecanoLvl;
+    public List<CarInfo> CarsLvl => _carsLvl;
     public int CurrentCarLevel { get; set; }
 
     private void Awake()
     {
         Instance = this;
 
-        foreach (var repair in Repairlvl)
+        foreach (var repair in _repairLvl)
         {
             CurrentRepairPower.Add(repair.UpgradePrices[0].Bonus);
         }
 
-        for (int i = 0; i < MecanoLvl.Count + 1; i++)
+        for (int i = 0; i < _mecanoLvl.Count + 1; i++)
         {
             CurrentMecanoPower.Add(0);
             CurrentMecanoSpeed.Add(0);
@@ -41,12 +42,12 @@ public class UpgradeManager : MonoBehaviour
     
     public int GetCurrentMoneyWin()
     {
-        return CarsLvl[CurrentCarLevel].MoneyWin;
+        return _carsLvl[CurrentCarLevel].MoneyWin;
     }
     
     public CarInfo GetCurrentCarInfo()
     {
-        return CarsLvl[CurrentCarLevel];
+        return _carsLvl[CurrentCarLevel];
     }
 }
 

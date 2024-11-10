@@ -13,7 +13,7 @@ public class BoughtableAnim : MonoBehaviour
     private Vector3 _initPos;
     private float _initRotY;
 
-    private void Start()
+    private void Awake()
     {
         _initPos = transform.position;
         _initRotY = transform.rotation.eulerAngles.y;

@@ -31,6 +31,7 @@ public class CarMovement : MonoBehaviour
         _carInfo = carInfo;
         _movementPoints = movPoints;
         transform.position = _movementPoints[0].position;
+        GetComponent<Collider>().enabled = false;
 
         _initClickPos = _movementPoints[1].position;
         _initClickRota = transform.rotation;
@@ -42,8 +43,18 @@ public class CarMovement : MonoBehaviour
 
         MoveToClickPoint();
 
-
         return clickObjectsList;
+    }
+
+    public void InitCarGarage()
+    {
+        foreach (var obj in _clickObjects)
+        {
+            obj.gameObject.SetActive(false);
+        }
+        
+        AddRandomModel();
+        SetActiveCircuitFX(false);
     }
 
     private void AddRandomModel()

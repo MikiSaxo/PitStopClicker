@@ -78,7 +78,7 @@ public class BtnShop : BtnScreen
 
     public virtual void UpdatePointsToUpgrade()
     {
-        foreach (var repair in UpgradeManager.Instance.Repairlvl)
+        foreach (var repair in UpgradeManager.Instance.RepairLvl)
         {
             if(repair.MyUpgradeType == _upgradeType)
             {
