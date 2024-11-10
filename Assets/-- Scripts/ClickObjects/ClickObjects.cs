@@ -12,6 +12,7 @@ public class ClickObjects : MonoBehaviour, IClickable
     [Header("--- Type")]
     [SerializeField] protected UpgradeType _myType;
 
+    public UpgradeType MyType => _myType;
     public bool IsActive { get; protected set; }
     public bool IsRepaired { get; protected set; }
 

@@ -28,7 +28,7 @@ public class CarMovement : MonoBehaviour
     private Vector3 _initClickPos;
     private Quaternion _initClickRota;
 
-    public void Init(Transform[] movPoints)
+    public List<ClickObjects> Init(Transform[] movPoints)
     {
         _movementPoints = movPoints;
         transform.position = _movementPoints[0].position;
@@ -37,10 +37,15 @@ public class CarMovement : MonoBehaviour
         _initClickRota = transform.rotation;
 
         AddRandomModel();
-        AddRandomRepair();
+        
+        List<ClickObjects> clickObjectsList = new List<ClickObjects>();
+        clickObjectsList = AddRandomRepair();
+            
         MoveToClickPoint();
 
         _clickLimit = 5;
+
+        return clickObjectsList;
     }
 
     private void AddRandomModel()
@@ -52,7 +57,7 @@ public class CarMovement : MonoBehaviour
         _wheelAnim = go.GetComponent<WheelAnim>();
     }
 
-    private void AddRandomRepair()
+    private List<ClickObjects> AddRandomRepair()
     {
         foreach (var obj in _clickObjects)
         {
@@ -63,6 +68,7 @@ public class CarMovement : MonoBehaviour
         int randomActiveCount = Random.Range(1, totalObjects - 1);
 
         List<int> activeIndexes = new List<int>();
+        List<ClickObjects> activeObjects = new List<ClickObjects>();
 
         while (activeIndexes.Count < randomActiveCount)
         {
@@ -72,8 +78,11 @@ public class CarMovement : MonoBehaviour
                 activeIndexes.Add(randomIndex);
                 _clickObjects[randomIndex].gameObject.SetActive(true);
                 _clickObjects[randomIndex].Init(this, _clickLimit);
+                
+                activeObjects.Add(_clickObjects[randomIndex]);
             }
         }
+        return activeObjects;
     }
     
     private void MoveToClickPoint()

@@ -8,10 +8,12 @@ using UnityEngine.Serialization;
 public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager Instance;
-    
+
     public List<UpgradeInfo> Repairlvl = new List<UpgradeInfo>();
     public List<MecanoInfo> MecanoLvl = new List<MecanoInfo>();
-     [Space(50)]
+
+    [Space(50)]
+
     public List<float> CurrentRepairPower = new List<float>();
     public List<float> CurrentMecanoPower = new List<float>();
     public List<float> CurrentMecanoSpeed = new List<float>();
@@ -19,13 +21,13 @@ public class UpgradeManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-       
+
         foreach (var repair in Repairlvl)
         {
             CurrentRepairPower.Add(repair.UpgradePrices[0].Bonus);
         }
 
-        for (int i = 0; i < MecanoLvl.Count+1; i++)
+        for (int i = 0; i < MecanoLvl.Count + 1; i++)
         {
             CurrentMecanoPower.Add(0);
             CurrentMecanoSpeed.Add(0);

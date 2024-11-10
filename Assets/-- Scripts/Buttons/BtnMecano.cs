@@ -49,7 +49,7 @@ public class BtnMecano : BtnShop
     {
         base.BuyUpgrade();
 
-        MecanoManager.Instance.SetActiveMecano((int)_upgradeType, true);
+        MecanoManager.Instance.SetActiveMecano(_upgradeType, true);
         
         if(_boughtable != null)
             MecanoManager.Instance.UpdateMecanoMesh((int)_upgradeType, _currentLevel);

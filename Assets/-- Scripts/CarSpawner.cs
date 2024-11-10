@@ -15,6 +15,7 @@ public class CarSpawner : MonoBehaviour
     public GameObject SaveModel { get; set; }
     public CarMovement CurrentCar { get; set; }
 
+    public List<ClickObjects> ClickObjectsList = new List<ClickObjects>();
     
     public UnityAction OnCarAtClickPoint;
     public UnityAction OnCarRepaired;
@@ -47,7 +48,7 @@ public class CarSpawner : MonoBehaviour
             OnCarDestroyed += HandleCarDestroyed;
         }
         
-        carMovement.Init(_movementPoints);
+        ClickObjectsList = carMovement.Init(_movementPoints);
     }
 
     private void HandleCarDestroyed()

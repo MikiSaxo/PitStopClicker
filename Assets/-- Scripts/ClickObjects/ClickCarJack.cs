@@ -54,11 +54,13 @@ public class ClickCarJack : ClickObjects
         transform.DOKill();
 
         IsSet = true;
-        OnCarJackSet?.Invoke();
-        
         GasCan.Instance.CheckUpgradeAutoMove();
         
-        transform.DOMove(_jackPoint.position, _goDuration).SetEase(Ease.InOutQuad).OnComplete(() => SetHeightCurrentCar(true));
+        transform.DOMove(_jackPoint.position, _goDuration).SetEase(Ease.InOutQuad).OnComplete(() =>
+        {
+            SetHeightCurrentCar(true);
+            OnCarJackSet?.Invoke();
+        });
         transform.DORotateQuaternion(_jackPoint.rotation, _goDuration).SetEase(Ease.InOutQuad);
     }
 

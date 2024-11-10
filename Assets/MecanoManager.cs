@@ -8,10 +8,10 @@ public class MecanoManager : MonoBehaviour
 {
     public static MecanoManager Instance;
 
-    [SerializeField] private List<MecanoMeshes> _mecanoMeshes = new List<MecanoMeshes>();
-    
-    private List<MecanoAnim> _mecanoAnims = new List<MecanoAnim>();
+    [SerializeField] private List<MecanoObj> _mecanoObjs = new List<MecanoObj>();
 
+    private List<MecanoAnim> _mecanoAnimsActivated = new List<MecanoAnim>();
+    
     private void Awake()
     {
         Instance = this;
@@ -19,83 +19,100 @@ public class MecanoManager : MonoBehaviour
 
     private void Start()
     {
-        ClickCarJack.Instance.OnCarJackSet += LaunchMecano;
-        CarSpawner.Instance.OnCarRepaired += GoBackMecano;
-        
-        GetMecanoAnim();
-        
-        for (int i = 0; i < _mecanoMeshes.Count; i++)
+        for (int i = 0; i < _mecanoObjs.Count; i++)
         {
             UpdateMecanoMesh(i, 0);
-            
-            SetActiveMecano(i, false);
-            
-            if(_mecanoMeshes[i].MecanoMR.Length > 0)
-                _mecanoMeshes[i].MecanoMR[0].gameObject.SetActive(true);
+            SetActiveMecano((UpgradeType)i, false);
         }
-    }
-
-    private void GetMecanoAnim()
-    {
-        foreach (var mecanoMesh in _mecanoMeshes)
-        {
-            foreach (var mr in mecanoMesh.MecanoMR)
-            {
-                if(mr.GetComponent<MecanoAnim>() != null)
-                    _mecanoAnims.Add(mr.GetComponent<MecanoAnim>());
-            }
-        }
+        
+        ClickCarJack.Instance.OnCarJackSet += LaunchMecaAnim;
+        CarSpawner.Instance.OnCarRepaired += StopMecaAnim;
     }
 
     public void UpdateMecanoMesh(int index, int level)
     {
-        if (_mecanoMeshes[index] == null) return;
+        if (_mecanoObjs[index] == null
+            || UpgradeManager.Instance.MecanoLvl[index].MecanoPrices.Count == 0) return;
 
-        if (level >= UpgradeManager.Instance.MecanoLvl[index].MecanoPrices.Count)
-        {
-            level = UpgradeManager.Instance.MecanoLvl[index].MecanoPrices.Count - 1;
-        }
+        var lvlCount = UpgradeManager.Instance.MecanoLvl[index].MecanoPrices.Count;
+        // if max level is reached
+        if (level >= lvlCount)
+            level = lvlCount - 1;
 
-        foreach (var mecanoMR in _mecanoMeshes[index].MecanoMR)
-        {
-            mecanoMR.GetComponent<MeshFilter>().sharedMesh = UpgradeManager.Instance.MecanoLvl[index].MecanoPrices[level].MecanoMesh;
-            mecanoMR.material = UpgradeManager.Instance.MecanoLvl[index].MecanoPrices[level].MecanoMaterial;
-        }
-    }
-
-    public void SetActiveMecano(int index, bool active)
-    {
-        if (_mecanoMeshes[index] == null || _mecanoMeshes[index].MecanoMR.Length == 0) return;
+        var mecaMesh = UpgradeManager.Instance.MecanoLvl[index].MecanoPrices[level].MecanoMesh;
+        var mecaMaterial = UpgradeManager.Instance.MecanoLvl[index].MecanoPrices[level].MecanoMaterial;
         
-        foreach (var mecano in _mecanoMeshes[index].MecanoMR)
+        foreach (var mecaMR in _mecanoObjs[index].MecanoGarage)
         {
-            mecano.gameObject.SetActive(active);
+            mecaMR.GetComponent<MeshFilter>().sharedMesh = mecaMesh;
+            mecaMR.material = mecaMaterial;
+        }
+
+        foreach (var mecaAnim in _mecanoObjs[index].MecanoAnim)
+        {
+            mecaAnim.UpdateMeshRenderer(mecaMesh, mecaMaterial);
         }
     }
 
-    private void LaunchMecano()
+    public void SetActiveMecano(UpgradeType type, bool active)
     {
-        foreach (var meca in _mecanoAnims)
+        foreach (var mecanoMesh in _mecanoObjs)
         {
-            if(meca.gameObject.activeSelf)
-                meca.LaunchAnim();
+            // Check same Type
+            if (mecanoMesh.MecanoType == type)
+            {
+                // Check if there is any MecanoAnim
+                if (mecanoMesh.MecanoAnim == null || mecanoMesh.MecanoAnim.Length == 0) return;
+
+                foreach (var mecano in mecanoMesh.MecanoAnim)
+                {
+                    mecano.gameObject.SetActive(active);
+
+                    // If active, launch anim
+                    if (active && mecano != null)
+                    {
+                        _mecanoAnimsActivated.Add(mecano);
+                        mecano.LaunchAnim();
+                    }
+                }
+
+                break;
+            }
         }
     }
 
-    private void GoBackMecano()
+    private void LaunchMecaAnim()
     {
-        
+        if(_mecanoAnimsActivated.Count == 0) return;
+        print("Launch MecaAnim");
+
+        foreach (var mecanoAnim in _mecanoAnimsActivated)
+        {
+            mecanoAnim.LaunchAnim();
+        }
+    }
+
+    private void StopMecaAnim()
+    {
+        if(_mecanoAnimsActivated.Count == 0) return;
+        print("StopMecaAnim");
+        foreach (var mecanoAnim in _mecanoAnimsActivated)
+        {
+            mecanoAnim.StopAnim();
+        }
     }
 
     private void OnDisable()
     {
-        CarSpawner.Instance.OnCarAtClickPoint -= LaunchMecano;
-        CarSpawner.Instance.OnCarRepaired -= GoBackMecano;
+        ClickCarJack.Instance.OnCarJackSet -= LaunchMecaAnim;
+        CarSpawner.Instance.OnCarRepaired -= StopMecaAnim;
     }
 }
 
 [System.Serializable]
-public class MecanoMeshes
+public class MecanoObj
 {
-    public MeshRenderer[] MecanoMR;
+    public UpgradeType MecanoType;
+    public MeshRenderer[] MecanoGarage;
+    public MecanoAnim[] MecanoAnim;
 }
