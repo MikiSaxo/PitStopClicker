@@ -12,7 +12,6 @@ public class CleanDirty : ClickObjects
     [SerializeField] private float _returnDuration = 0.5f;
 
     [Header("--- Clean ")]
-    [SerializeField] private GameObject _cleanFX;
     [SerializeField] private Vector3 _cleanRotation;
     private float _cleanPower => UpgradeManager.Instance.CurrentRepairPower[(int)_myType];
 
@@ -27,9 +26,7 @@ public class CleanDirty : ClickObjects
 
     private Vector3 _lastPosition;
     private bool _isCollidingWithCleanable;
-    private bool _isRepaired;
     private bool _isJumping;
-    private float _cleanProgress;
     private float _cleaningThreshold = 0.2f;
 
     readonly float _jumpPower = 0.2f;
@@ -53,8 +50,7 @@ public class CleanDirty : ClickObjects
     public void NewCarComing(ClickCarClean clickCarClean)
     {
         ClickCarClean = clickCarClean;
-        _isRepaired = false;
-        _cleanProgress = 0;
+        IsRepaired = false;
 
         _hasClickedOnIt = false;
         GoInitPos();
@@ -145,20 +141,11 @@ public class CleanDirty : ClickObjects
 
         if (Vector3.Dot(direction.normalized, (_lastPosition - _initPos).normalized) < 0)
         {
-            _cleanProgress += _cleanPower;
-            ClickCarClean.UpdateDecalProjector(_cleanPower);
-            if (_cleanProgress >= 1)
+            ClickCarClean.UpdateCurrentClicks(_cleanPower);
+
+            if(!ClickCarClean.CheckIfCleaned())
             {
-                if (!_isRepaired)
-                {
-                    _isRepaired = true;
-                    ClickHandler.Instance.CreateFXRepairGood(transform.position);
-                    ClickCarClean.CleanFinished();
-                }
-            }
-            else
-            {
-                Instantiate(_cleanFX, transform.position, _cleanFX.transform.rotation);
+                ClickCarClean.WashFX(transform.position);
             }
         }
 

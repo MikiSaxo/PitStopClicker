@@ -180,6 +180,7 @@ MonoBehaviour:
   _transformB: {fileID: 437337578}
   _moveDuration: 0.5
   _isOneTimePurchased: 0
+  _isTireFront: 0
 --- !u!1001 &20708252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -795,8 +796,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112361521}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
-  m_LocalPosition: {x: 38.566, y: 0.30799997, z: -4.1099997}
+  m_LocalRotation: {x: -0, y: 0.86602545, z: -0, w: 0.49999994}
+  m_LocalPosition: {x: 39.401993, y: 0.30799997, z: -5.1099997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -888,7 +889,7 @@ Transform:
   m_GameObject: {fileID: 128329010}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 40.160004, y: 2.742, z: -6.6969995}
+  m_LocalPosition: {x: 40.03, y: 2.88, z: -6.6969995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1492,8 +1493,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239423677}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 38.566, y: 0.30799997, z: -10.401}
+  m_LocalRotation: {x: -0, y: 0.13052616, z: -0, w: 0.9914449}
+  m_LocalPosition: {x: 39.401993, y: 0.30799997, z: -9.624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2135,7 +2136,7 @@ Transform:
   m_GameObject: {fileID: 437337577}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
-  m_LocalPosition: {x: 39.401993, y: 0.30799997, z: -5.11}
+  m_LocalPosition: {x: 38.544, y: 0.30799997, z: -4.614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2668,22 +2669,22 @@ MonoBehaviour:
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
     - PriceLevel: 20
       Speed: 0.5
-      Power: 1
+      Power: 0.05
       MecanoMesh: {fileID: 4300000, guid: c81a40491ec7bab4e84a8a6d6f899eb5, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
     - PriceLevel: 29
       Speed: 0.4
-      Power: 2
+      Power: 0.05
       MecanoMesh: {fileID: 4300000, guid: 172467d6a5769ac45b7717fdbd75c019, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
     - PriceLevel: 40
       Speed: 0.3
-      Power: 3
+      Power: 0.05
       MecanoMesh: {fileID: 4300000, guid: 703e652989779ff45809b190c677f988, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
     - PriceLevel: 100
       Speed: 0.2
-      Power: 5
+      Power: 0.05
       MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
   - MyUpgradeType: 3
@@ -5416,7 +5417,7 @@ Transform:
   m_GameObject: {fileID: 1123547491}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 40.160004, y: 2.742, z: -4.464}
+  m_LocalPosition: {x: 40.03, y: 2.88, z: -4.464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5523,6 +5524,7 @@ MonoBehaviour:
   _transformB: {fileID: 1123547492}
   _moveDuration: 0.5
   _isOneTimePurchased: 0
+  _isTireFront: 0
 --- !u!4 &1160280827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438532, guid: bd409a4a526fda841a2d311cb872fb53, type: 3}
@@ -6248,6 +6250,7 @@ MonoBehaviour:
   _transformB: {fileID: 12467485}
   _moveDuration: 0.5
   _isOneTimePurchased: 0
+  _isTireFront: 0
 --- !u!1 &1341637433 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8723288276697657072, guid: 3d14a960d8d0ceb4e9088f015f6f9ad7, type: 3}
@@ -6270,6 +6273,7 @@ MonoBehaviour:
   _transformB: {fileID: 0}
   _moveDuration: 0.5
   _isOneTimePurchased: 1
+  _isTireFront: 0
 --- !u!4 &1351639809 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3221529889536992851, guid: f03bb0716b00364449637c122b2b4341, type: 3}
@@ -7564,7 +7568,7 @@ Transform:
   m_GameObject: {fileID: 1614252757}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 39.401993, y: 0.30799997, z: -9.624}
+  m_LocalPosition: {x: 38.466, y: 0.30799997, z: -10.255}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8327,6 +8331,7 @@ MonoBehaviour:
   _transformB: {fileID: 1614252758}
   _moveDuration: 0.5
   _isOneTimePurchased: 0
+  _isTireFront: 1
 --- !u!4 &1830202880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 425856, guid: 88b8a00058d11254d948ddba0654218d, type: 3}
@@ -9739,6 +9744,7 @@ MonoBehaviour:
   - {fileID: 1750422164}
   - {fileID: 129453309}
   _carPrefab: {fileID: 9046286243864572466, guid: 8da19ba617d06954fafe444b1bb8bd52, type: 3}
+  ClickObjectsList: []
 --- !u!114 &1952526000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10325,6 +10331,7 @@ MonoBehaviour:
   _transformB: {fileID: 0}
   _moveDuration: 0.5
   _isOneTimePurchased: 1
+  _isTireFront: 0
 --- !u!1001 &2136960070
 PrefabInstance:
   m_ObjectHideFlags: 0

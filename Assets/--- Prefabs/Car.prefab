@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7890648671832155568}
   - component: {fileID: 3289929553865174571}
-  - component: {fileID: 3748299333297726055}
+  - component: {fileID: 455134273583874235}
   m_Layer: 0
   m_Name: --TireFront
   m_TagString: Untagged
@@ -55,7 +55,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.53967285, y: 1.2, z: 1.2}
   m_Center: {x: -0.109939575, y: 0, z: 0}
---- !u!114 &3748299333297726055
+--- !u!114 &455134273583874235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,12 +64,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 105539725735899161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3236041d11c0c4543b63eeb37b65722c, type: 3}
+  m_Script: {fileID: 11500000, guid: d52e230c83998634e8e833ac73648bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myType: 0
   _fxPrefab: {fileID: 2216172659447519292, guid: 5d44bbc8759c18c41bc4c4d8c4076b47, type: 3}
   _fxParent: {fileID: 4201274769168460493}
+  _myType: 0
+  <IsFront>k__BackingField: 1
 --- !u!1 &1552569127128008758
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,9 +203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3236041d11c0c4543b63eeb37b65722c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myType: 1
   _fxPrefab: {fileID: 19885000, guid: 3a73a5bfaa568274a891e4212e24a824, type: 3}
   _fxParent: {fileID: 2291745719412283385}
+  _myType: 1
 --- !u!1 &3907070130877019803
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,13 +231,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3907070130877019803}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.54846436, y: -0.44629255, z: 0.4462452, w: 0.5485208}
-  m_LocalPosition: {x: 0.297, y: 1.076, z: 0.26}
+  m_LocalRotation: {x: 0.5393131, y: -0.45730907, z: 0.45726284, w: 0.5393705}
+  m_LocalPosition: {x: 0.29700685, y: 0.6470001, z: 0.26000214}
   m_LocalScale: {x: 0.96113, y: -0.48441437, z: 0.96113}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8840257448607315854}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 78.26}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 80.581}
 --- !u!114 &1026443360893015550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,9 +430,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32dcf38c5d935345b41660f88929a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myType: 2
   _fxPrefab: {fileID: 2216172659447519292, guid: ec4fa22c80417fe46919185db0e992e5, type: 3}
   _fxParent: {fileID: 8634361736057093569}
+  _myType: 2
+  _cleanFX: {fileID: 101130, guid: dcc64738c5492be40a347b4604f1ff0b, type: 3}
   _decalProjector:
   - {fileID: 1340877776880291611}
   - {fileID: 1026443360893015550}
@@ -587,8 +589,8 @@ MonoBehaviour:
   _clickObjects:
   - {fileID: 8473263149200985577}
   - {fileID: 7544521159919634980}
-  - {fileID: 3748299333297726055}
-  - {fileID: 2080891793962600128}
+  - {fileID: 455134273583874235}
+  - {fileID: 857293102784029496}
   - {fileID: 8760370461094615074}
   _spawnDuration: 1
   _exitDuration: 0.75
@@ -669,7 +671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4728512843250518147}
   - component: {fileID: 7375600076509228503}
-  - component: {fileID: 2080891793962600128}
+  - component: {fileID: 857293102784029496}
   m_Layer: 0
   m_Name: --TireRear
   m_TagString: Untagged
@@ -714,7 +716,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.53967285, y: 1.2, z: 1.2}
   m_Center: {x: -0.109939575, y: 0, z: 0}
---- !u!114 &2080891793962600128
+--- !u!114 &857293102784029496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -723,12 +725,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 9180898462013522252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3236041d11c0c4543b63eeb37b65722c, type: 3}
+  m_Script: {fileID: 11500000, guid: d52e230c83998634e8e833ac73648bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myType: 0
   _fxPrefab: {fileID: 2452922066540291424, guid: 4b49e3982aead1044808637d0604b127, type: 3}
   _fxParent: {fileID: 2886972346937837897}
+  _myType: 0
+  <IsFront>k__BackingField: 0
 --- !u!1001 &1646972535900396610
 PrefabInstance:
   m_ObjectHideFlags: 0

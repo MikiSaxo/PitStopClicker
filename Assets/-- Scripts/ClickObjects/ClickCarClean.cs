@@ -6,50 +6,78 @@ using UnityEngine.Rendering.Universal;
 
 public class ClickCarClean : ClickObjects
 {
+    [Header("--- Clean ")]
+    [SerializeField] private GameObject _cleanFX;
     [SerializeField] private DecalProjector[] _decalProjector;
-    
+
+    private float _cleanProgress;
     private ParticleSystem _fxToRepair;
-    
+
     public override void Init(CarMovement myCar, int clickNeeded)
     {
         base.Init(myCar, clickNeeded);
 
         IsActive = true;
         CleanDirty.Instance.NewCarComing(this);
-        
+        _cleanProgress = 0;
+
         _fxToRepair = Instantiate(_fxPrefab, _fxParent);
     }
 
     public override void OnClicked(Vector3 hitPoint)
     {
         if (!CanClick()) return;
-        
+
         if (ClickCarJack.Instance.IsSet == false)
         {
             ClickCarJack.Instance.SelectMeAnim();
             return;
         }
-        
+
         CleanDirty.Instance.SelectMeAnim();
     }
 
-    public void UpdateDecalProjector(float intensity)
+    public override void UpdateCurrentClicks(float value)
+    {
+        if (CheckIfCleaned() == false)
+        {
+            _cleanProgress += value;
+            UpdateDecalProjector(value);
+            WashFX(transform.position);
+        }
+    }
+
+    private void UpdateDecalProjector(float intensity)
     {
         foreach (var decal in _decalProjector)
         {
             decal.fadeFactor -= intensity;
         }
-
         SetFX();
     }
 
-    public void CleanFinished()
+    public void WashFX(Vector3 pos)
     {
-        IsRepaired = true;
-        _fxToRepair.Stop();
-        _myCar.CheckAllRepairing();
+        Instantiate(_cleanFX, pos, _cleanFX.transform.rotation);
     }
-    
+
+    public bool CheckIfCleaned()
+    {
+        if (_cleanProgress >= 1)
+        {
+            if (!IsRepaired)
+            {
+                IsRepaired = true;
+
+                ClickHandler.Instance.CreateFXRepairGood(transform.position);
+                _fxToRepair.Stop();
+                _myCar.CheckAllRepairing();
+            }
+        }
+
+        return IsRepaired;
+    }
+
     public override void SetFX()
     {
         float progress = 1 / (float)_currentClicks;

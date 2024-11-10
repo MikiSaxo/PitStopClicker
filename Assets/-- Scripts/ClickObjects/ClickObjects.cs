@@ -31,7 +31,11 @@ public class ClickObjects : MonoBehaviour, IClickable
         if (!IsRepaired)
             ClickHandler.Instance.CreateFXClick(hitPoint);
     }
-    
+
+    public virtual void UpdateCurrentClicks(float value)
+    {
+        
+    }
     public virtual void SelectMeAnim()
     {
     }

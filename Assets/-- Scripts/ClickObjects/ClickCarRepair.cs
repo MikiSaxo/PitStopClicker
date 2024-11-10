@@ -37,21 +37,30 @@ public class ClickCarRepair : ClickObjects
         
         base.OnClicked(hitPoint);
 
-        _currentClicks += (int)_power;
-
+        UpdateCurrentClicks(_power);
+    }
+    
+    public override void UpdateCurrentClicks(float value)
+    {
+        _currentClicks += (int)value;
         SetFX();
         _myCar.OnClickFeedback();
 
-        if (_fxIntensity <= 0f)
-        {
-            _fxToRepair.Stop();
-        }
+        CheckIsRepaired();
+    }
 
+    private void CheckIsRepaired()
+    {
         if (_currentClicks >= _clickNeeded && !IsRepaired)
         {
             IsRepaired = true;
             ClickHandler.Instance.CreateFXRepairGood(transform.position);
             _myCar.CheckAllRepairing();
+        }
+        
+        if (_fxIntensity <= 0f)
+        {
+            _fxToRepair.Stop();
         }
     }
 
