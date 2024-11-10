@@ -8,20 +8,19 @@ public class MecanoAnim : MonoBehaviour
 {
     [field: SerializeField] public UpgradeType MyType { get; private set; }
 
-    [SerializeField] private Transform _transformA;
-    [SerializeField] private Transform _transformB;
     [SerializeField] private float _moveDuration = 0.5f;
     [SerializeField] private bool _isOneTimePurchased;
     [SerializeField] private bool _isTireFront;
 
-
+    private Transform[] _transformPoints;
     private Collider _collider;
+    private ClickObjects _currentClickObj;
+    
     private MeshRenderer _meshRenderer;
     private Vector3 _startPos;
     private Quaternion _startRot;
     private float _startRotY;
     private bool _canRepair;
-    private ClickObjects _currentClickObj;
 
     private float _speed => UpgradeManager.Instance.CurrentMecanoSpeed[(int)MyType];
     private float _power => UpgradeManager.Instance.CurrentMecanoPower[(int)MyType];
@@ -50,18 +49,18 @@ public class MecanoAnim : MonoBehaviour
         _collider.enabled = false;
 
         yield return DOTween.Sequence()
-            .Append(transform.DOMove(_transformA.position, _moveDuration))
-            .Join(transform.DORotate(_transformA.rotation.eulerAngles, _moveDuration))
+            .Append(transform.DOMove(_transformPoints[0].position, _moveDuration))
+            .Join(transform.DORotate(_transformPoints[0].rotation.eulerAngles, _moveDuration))
             .WaitForCompletion();
 
         while (_canRepair)
         {
             _currentClickObj.UpdateCurrentClicks(_power);
             yield return DOTween.Sequence()
-                .Append(transform.DOMove(_transformB.position, _speed)).SetEase(Ease.Linear)
-                .Join(transform.DORotate(_transformB.rotation.eulerAngles, _speed))
-                .Append(transform.DOMove(_transformA.position, _speed)).SetEase(Ease.Linear)
-                .Join(transform.DORotate(_transformA.rotation.eulerAngles, _speed))
+                .Append(transform.DOMove(_transformPoints[1].position, _speed)).SetEase(Ease.Linear)
+                .Join(transform.DORotate(_transformPoints[1].rotation.eulerAngles, _speed))
+                .Append(transform.DOMove(_transformPoints[0].position, _speed)).SetEase(Ease.Linear)
+                .Join(transform.DORotate(_transformPoints[0].rotation.eulerAngles, _speed))
                 .WaitForCompletion();
             
             if(_currentClickObj.IsRepaired)
@@ -98,20 +97,20 @@ public class MecanoAnim : MonoBehaviour
 
                 if (MyType == UpgradeType.Tire)
                 {
-                    if (_isTireFront && ClickObj.gameObject.GetComponent<ClickCarTire>().IsFront
-                        || _isTireFront == false && ClickObj.gameObject.GetComponent<ClickCarTire>().IsFront == false)
+                    if (_isTireFront && ClickObj.gameObject.GetComponent<ClickCarTire>().IsFront)
                     {
-                        _canRepair = true;
-                        _currentClickObj = ClickObj;
-                        StartCoroutine(AnimateMovement());
+                        GoRepair(ClickObj);
+                        return;
+                    }
+                    if(_isTireFront == false && ClickObj.gameObject.GetComponent<ClickCarTire>().IsFront == false)
+                    {
+                        GoRepair(ClickObj);
                         return;
                     }
                 }
                 else
                 {
-                    _canRepair = true;
-                    _currentClickObj = ClickObj;
-                    StartCoroutine(AnimateMovement());
+                    GoRepair(ClickObj);
                     return;
                 }
             }
@@ -120,6 +119,13 @@ public class MecanoAnim : MonoBehaviour
         }
     }
 
+    private void GoRepair(ClickObjects ClickObj)
+    {
+        _transformPoints = ClickObj.MecanoPoints;
+        _canRepair = true;
+        _currentClickObj = ClickObj;
+        StartCoroutine(AnimateMovement());
+    }
     private void RotateAnim()
     {
         transform.DORotate(new Vector3(0, _startRotY + 360, 0), _moveDuration, RotateMode.FastBeyond360)

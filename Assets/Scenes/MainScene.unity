@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &12467485
 Transform:
   m_ObjectHideFlags: 0
@@ -176,8 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MyType>k__BackingField: 0
-  _transformA: {fileID: 112361522}
-  _transformB: {fileID: 437337578}
   _moveDuration: 0.5
   _isOneTimePurchased: 0
   _isTireFront: 0
@@ -787,7 +785,7 @@ GameObject:
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &112361522
 Transform:
   m_ObjectHideFlags: 0
@@ -879,7 +877,7 @@ GameObject:
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &128329011
 Transform:
   m_ObjectHideFlags: 0
@@ -1484,7 +1482,7 @@ GameObject:
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &239423678
 Transform:
   m_ObjectHideFlags: 0
@@ -2126,7 +2124,7 @@ GameObject:
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &437337578
 Transform:
   m_ObjectHideFlags: 0
@@ -5407,7 +5405,7 @@ GameObject:
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1123547492
 Transform:
   m_ObjectHideFlags: 0
@@ -5520,8 +5518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MyType>k__BackingField: 2
-  _transformA: {fileID: 128329011}
-  _transformB: {fileID: 1123547492}
   _moveDuration: 0.5
   _isOneTimePurchased: 0
   _isTireFront: 0
@@ -6246,8 +6242,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MyType>k__BackingField: 1
-  _transformA: {fileID: 1380038143}
-  _transformB: {fileID: 12467485}
   _moveDuration: 0.5
   _isOneTimePurchased: 0
   _isTireFront: 0
@@ -6269,8 +6263,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MyType>k__BackingField: 5
-  _transformA: {fileID: 0}
-  _transformB: {fileID: 0}
   _moveDuration: 0.5
   _isOneTimePurchased: 1
   _isTireFront: 0
@@ -6417,7 +6409,7 @@ GameObject:
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1380038143
 Transform:
   m_ObjectHideFlags: 0
@@ -7558,7 +7550,7 @@ GameObject:
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1614252758
 Transform:
   m_ObjectHideFlags: 0
@@ -8327,8 +8319,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MyType>k__BackingField: 0
-  _transformA: {fileID: 239423678}
-  _transformB: {fileID: 1614252758}
   _moveDuration: 0.5
   _isOneTimePurchased: 0
   _isTireFront: 1
@@ -10327,8 +10317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MyType>k__BackingField: 4
-  _transformA: {fileID: 0}
-  _transformB: {fileID: 0}
   _moveDuration: 0.5
   _isOneTimePurchased: 1
   _isTireFront: 0

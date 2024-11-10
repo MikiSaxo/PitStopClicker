@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ClickObjects : MonoBehaviour, IClickable
 {
@@ -11,6 +12,11 @@ public class ClickObjects : MonoBehaviour, IClickable
     
     [Header("--- Type")]
     [SerializeField] protected UpgradeType _myType;
+    
+    [Header("--- Mecano Points")]
+    [SerializeField] private Transform[] _mecanoPoints;
+
+    public Transform[] MecanoPoints => _mecanoPoints;
 
     public UpgradeType MyType => _myType;
     public bool IsActive { get; protected set; }
