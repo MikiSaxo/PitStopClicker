@@ -28,7 +28,7 @@ public class GasCan : ClickObjects
     private Transform _gasPoint;
     private Collider _collider;
     private float _currentRotaY;
-    private float _fillDuration => UpgradeManager.Instance.CurrentRepairPower[(int)_myType];
+    private float _fillPower => UpgradeManager.Instance.CurrentRepairPower[(int)_myType];
     private float _fillAuto => UpgradeManager.Instance.CurrentRepairPower[(int)_mySecondType];
     
     private readonly float _rotateDuration = 0.1f;
@@ -85,7 +85,7 @@ public class GasCan : ClickObjects
         transform.DOMove(_initPos, _returnDuration).SetEase(Ease.InOutQuad).OnComplete(() =>
         {
             // Refuel Gas
-            _fillGas.transform.DOScale(new Vector3(1, 1, 1), _fillDuration * .25f).SetEase(Ease.InOutQuad);
+            _fillGas.transform.DOScale(new Vector3(1, 1, 1), .5f).SetEase(Ease.InOutQuad);
             _collider.enabled = true;
             IsSet = false;
         });
@@ -137,8 +137,9 @@ public class GasCan : ClickObjects
 
     private void FillAnim()
     {
-        _fillGas.transform.DOScale(new Vector3(1, 0.01f, 1), _fillDuration).SetEase(Ease.InOutQuad).OnComplete(ReturnFromGasPoint);
-        ClickGasCan.LaunchGasAnim(_fillDuration);
+        var fillDuration = ClickGasCan.FillDurationCar / _fillPower;
+        _fillGas.transform.DOScale(new Vector3(1, 0.01f, 1), fillDuration).SetEase(Ease.InOutQuad).OnComplete(ReturnFromGasPoint);
+        ClickGasCan.LaunchGasAnim(fillDuration);
     }
 
     private void OnDisable()

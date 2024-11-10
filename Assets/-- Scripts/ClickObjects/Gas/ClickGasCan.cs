@@ -5,16 +5,18 @@ using UnityEngine;
 
 public class ClickGasCan : ClickObjects
 {
+    public float FillDurationCar { get; set; }
     private GasAnim _gasAnim;
     private void Start()
     {
         _gasAnim = GetComponent<GasAnim>();
     }
 
-    public override void Init(CarMovement myCar, int clickNeeded)
+    public override void Init(CarMovement myCar, float fillDurationCar)
     {
-        base.Init(myCar, clickNeeded);
+        base.Init(myCar, fillDurationCar);
 
+        FillDurationCar = fillDurationCar;
         IsActive = true;
         GasCan.Instance.ClickGasCan = this;
     }

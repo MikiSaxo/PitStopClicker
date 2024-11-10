@@ -470,7 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 710120616860150312}
   m_Layer: 0
-  m_Name: TireRear_B
+  m_Name: TireFront_B
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 3329760719209632755}
   - component: {fileID: 6647561502807819567}
   m_Layer: 0
-  m_Name: Car
+  m_Name: Car_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -829,8 +829,6 @@ MonoBehaviour:
   _circuitFX:
   - {fileID: 3862831614405778948}
   - {fileID: 3606960127435851745}
-  _tireTransform: []
-  _washTransform: []
 --- !u!1 &9056920124443324711
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,7 +871,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5651438023497928811}
   m_Layer: 0
-  m_Name: TireRear_A
+  m_Name: TireFront_A
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

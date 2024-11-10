@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PointsManager : MonoBehaviour
@@ -11,8 +12,6 @@ public class PointsManager : MonoBehaviour
     public static PointsManager Instance;
 
     [Header("--- Points")]
-    [SerializeField] private int _points = 0;
-
     [SerializeField] private TMP_Text[] _pointsText;
     [SerializeField] private float _textAnimDuration = 0.5f;
 
@@ -29,6 +28,8 @@ public class PointsManager : MonoBehaviour
     [SerializeField] private float _delayBetweenMovesToTarget = 0.075f;
     
     public Action OnPointsUpdated;
+    
+    private int _currentPoints = 0;
 
     private void Awake()
     {
@@ -42,9 +43,9 @@ public class PointsManager : MonoBehaviour
 
     public void UpdatePoints(int pointsToAdd)
     {
-        int startPoints = _points;
-        int targetPoints = _points + pointsToAdd;
-        _points = targetPoints;
+        int startPoints = _currentPoints;
+        int targetPoints = _currentPoints + pointsToAdd;
+        _currentPoints = targetPoints;
 
         OnPointsUpdated?.Invoke();
 
@@ -110,7 +111,7 @@ public class PointsManager : MonoBehaviour
             ps.transform.DOMove(_psTarget.position, _moveToTargetDuration).SetEase(Ease.InExpo).OnComplete(() =>
             {
                 BounceAnim();
-                UpdatePoints(10);
+                UpdatePoints((int)(UpgradeManager.Instance.GetCurrentMoneyWin() * .1f));
                 ps.transform.DOScale(Vector3.zero, 0.1f).OnComplete(() => { Destroy(ps); });
             });
             yield return new WaitForSeconds(_delayBetweenMovesToTarget);
@@ -127,7 +128,7 @@ public class PointsManager : MonoBehaviour
     
     public bool CanBuy(int price)
     {
-        if(_points >= price)
+        if(_currentPoints >= price)
         {
             return true;
         }

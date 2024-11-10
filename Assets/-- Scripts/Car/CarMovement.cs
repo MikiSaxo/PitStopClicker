@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 public class CarMovement : MonoBehaviour
 {
-    [SerializeField] private int _clickLimit = 5;
-
     [Header("--- Car Models")]
     [SerializeField] private Transform _modelParent;
     [SerializeField] private GameObject[] _models;
@@ -21,22 +19,16 @@ public class CarMovement : MonoBehaviour
     [Header("--- FX Drive")]
     [SerializeField] private ParticleSystem[] _circuitFX;
 
-    
-    [SerializeField] private Transform[] _tireTransform;
-    [SerializeField] private Transform[] _washTransform;
-
-
-    public Transform[] TireTransform => _tireTransform;
-    public Transform[] WashTransform => _washTransform;
     public bool IsAtClickPoint { get; private set; }
 
-    private WheelAnim _wheelAnim;
     private Transform[] _movementPoints;
     private Vector3 _initClickPos;
     private Quaternion _initClickRota;
+    private CarInfo _carInfo;
 
-    public List<ClickObjects> Init(Transform[] movPoints)
+    public List<ClickObjects> Init(Transform[] movPoints, CarInfo carInfo)
     {
+        _carInfo = carInfo;
         _movementPoints = movPoints;
         transform.position = _movementPoints[0].position;
 
@@ -50,7 +42,6 @@ public class CarMovement : MonoBehaviour
 
         MoveToClickPoint();
 
-        _clickLimit = 5;
 
         return clickObjectsList;
     }
@@ -61,7 +52,6 @@ public class CarMovement : MonoBehaviour
         GameObject go = Instantiate(_models[rdn], _modelParent);
 
         CarSpawner.Instance.SaveModel = go;
-        _wheelAnim = go.GetComponent<WheelAnim>();
     }
 
     private List<ClickObjects> AddRandomRepair()
@@ -84,13 +74,33 @@ public class CarMovement : MonoBehaviour
             {
                 activeIndexes.Add(randomIndex);
                 _clickObjects[randomIndex].gameObject.SetActive(true);
-                _clickObjects[randomIndex].Init(this, _clickLimit);
-
+                _clickObjects[randomIndex].Init(this, CarPowerInit(_clickObjects[randomIndex].MyType));
                 activeObjects.Add(_clickObjects[randomIndex]);
             }
         }
-
         return activeObjects;
+    }
+
+    private float CarPowerInit(UpgradeType type)
+    {
+        float power = 0f;
+
+        switch (type)
+        {
+            case UpgradeType.Engine:
+                power = Random.Range(_carInfo.EngineNbClicks.x, _carInfo.EngineNbClicks.y);
+                break;
+            case UpgradeType.Tire:
+                power = Random.Range(_carInfo.TireNbClicks.x, _carInfo.TireNbClicks.y);
+                break;
+            case UpgradeType.Wash:
+                power = _carInfo.WashCleanValue;
+                break;
+            case UpgradeType.Gas:
+                power = _carInfo.GasDuration;
+                break;
+        }
+        return power;
     }
 
     private void MoveToClickPoint()
@@ -103,7 +113,6 @@ public class CarMovement : MonoBehaviour
         transform.DOMove(_movementPoints[1].position, _spawnDuration).OnComplete(() =>
         {
             IsAtClickPoint = true;
-            _wheelAnim.StopRotation();
             SetActiveCircuitFX(false);
             CarSpawner.Instance.OnCarAtClickPoint?.Invoke();
         });
@@ -148,11 +157,7 @@ public class CarMovement : MonoBehaviour
 
         SetActiveCircuitFX(true);
 
-        transform.DOMove(_movementPoints[2].position, _exitDuration).SetEase(Ease.InQuart).OnComplete(() =>
-        {
-            _wheelAnim.StopRotation();
-            DestroyCar();
-        });
+        transform.DOMove(_movementPoints[2].position, _exitDuration).SetEase(Ease.InQuart).OnComplete(DestroyCar);
     }
 
     private void DestroyCar()

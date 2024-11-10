@@ -11,12 +11,14 @@ public class ClickCarClean : ClickObjects
     [SerializeField] private DecalProjector[] _decalProjector;
 
     private float _cleanProgress;
+    private float _cleanToReach;
     private ParticleSystem _fxToRepair;
 
-    public override void Init(CarMovement myCar, int clickNeeded)
+    public override void Init(CarMovement myCar, float cleanToReach)
     {
-        base.Init(myCar, clickNeeded);
+        base.Init(myCar, cleanToReach);
 
+        _cleanToReach = cleanToReach;
         IsActive = true;
         CleanDirty.Instance.NewCarComing(this);
         _cleanProgress = 0;
@@ -63,7 +65,7 @@ public class ClickCarClean : ClickObjects
 
     public bool CheckIfCleaned()
     {
-        if (_cleanProgress >= 1)
+        if (_cleanProgress >= _cleanToReach)
         {
             if (!IsRepaired)
             {

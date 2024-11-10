@@ -10,10 +10,10 @@ public class ClickCarRepair : ClickObjects
     private ParticleSystem _fxToRepair;
 
 
-    public override void Init(CarMovement myCar, int clickNeeded)
+    public override void Init(CarMovement myCar, float power)
     {
-        base.Init(myCar, clickNeeded);
-        _clickNeeded = clickNeeded;
+        base.Init(myCar, power);
+        _clickNeeded = (int)power;
 
         _fxToRepair = Instantiate(_fxPrefab, _fxParent);
 

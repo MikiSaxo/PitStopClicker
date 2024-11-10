@@ -11,12 +11,15 @@ public class UpgradeManager : MonoBehaviour
 
     public List<UpgradeInfo> Repairlvl = new List<UpgradeInfo>();
     public List<MecanoInfo> MecanoLvl = new List<MecanoInfo>();
+    public List<CarInfo> CarsLvl = new List<CarInfo>();
 
     [Space(50)]
 
     public List<float> CurrentRepairPower = new List<float>();
     public List<float> CurrentMecanoPower = new List<float>();
     public List<float> CurrentMecanoSpeed = new List<float>();
+
+    public int CurrentCarLevel { get; set; }
 
     private void Awake()
     {
@@ -32,6 +35,18 @@ public class UpgradeManager : MonoBehaviour
             CurrentMecanoPower.Add(0);
             CurrentMecanoSpeed.Add(0);
         }
+        
+        CurrentCarLevel = 0;
+    }
+    
+    public int GetCurrentMoneyWin()
+    {
+        return CarsLvl[CurrentCarLevel].MoneyWin;
+    }
+    
+    public CarInfo GetCurrentCarInfo()
+    {
+        return CarsLvl[CurrentCarLevel];
     }
 }
 
@@ -64,6 +79,21 @@ public class MecanoPrice
     public float Power;
     public Mesh MecanoMesh;
     public Material MecanoMaterial;
+}
+
+[System.Serializable]
+public class CarInfo
+{
+    public GameObject CarPrefab;
+    [Header("--- Repair")]
+    public Vector2 EngineNbClicks;
+    public Vector2 TireNbClicks;
+    public float WashCleanValue;
+    public float GasDuration;
+    [Header("--- Money")]
+    public int MoneyWin;
+    public int BuyPrice;
+    
 }
 
 public enum UpgradeType
