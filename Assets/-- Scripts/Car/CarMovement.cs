@@ -129,6 +129,7 @@ public class CarMovement : MonoBehaviour
             IsAtClickPoint = true;
             SetActiveCircuitFX(false);
             CarSpawner.Instance.OnCarAtClickPoint?.Invoke();
+            AudioManager.Instance.PlaySound("EngineLoop");
         });
     }
 
@@ -170,7 +171,9 @@ public class CarMovement : MonoBehaviour
         ClickCarJack.Instance.ReturnFromJackPoint();
         PointsManager.Instance.AddPS(transform.position);
         CarSpawner.Instance.OnCarRepaired?.Invoke();
+        
         AudioManager.Instance.PlaySound("Repair");
+        AudioManager.Instance.StopSound("EngineLoop");
 
         StartCoroutine(MoveToExitPoint());
     }

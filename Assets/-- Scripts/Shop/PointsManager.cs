@@ -17,12 +17,10 @@ public class PointsManager : MonoBehaviour
 
     [Header("--- PS")]
     [SerializeField] private GameObject _psPrefab;
-
     [SerializeField] private Transform _psTarget;
 
     [Header("--- Timings")]
     [SerializeField] private float _spawnDelay = 0.04f;
-
     [SerializeField] private float _initialMoveDuration = 0.5f;
     [SerializeField] private float _moveToTargetDuration = 0.5f;
     [SerializeField] private float _delayBetweenMovesToTarget = 0.075f;
@@ -34,6 +32,7 @@ public class PointsManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        LoadPoints();
     }
 
     private void Start()
@@ -50,6 +49,7 @@ public class PointsManager : MonoBehaviour
         OnPointsUpdated?.Invoke();
 
         StartCoroutine(AnimatePoints(startPoints, targetPoints));
+        SavePoints();
     }
 
     private void Update()
@@ -135,5 +135,22 @@ public class PointsManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+    
+    private void OnApplicationQuit()
+    {
+        SavePoints();
+    }
+
+    public void SavePoints()
+    {
+        PlayerPrefs.SetInt("CurrentPoints", _currentPoints);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadPoints()
+    {
+        _currentPoints = PlayerPrefs.GetInt("CurrentPoints", 0);
+        UpdatePoints(0); // Update the UI with the loaded points
     }
 }

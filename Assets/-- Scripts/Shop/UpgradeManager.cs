@@ -31,7 +31,7 @@ public class UpgradeManager : MonoBehaviour
             CurrentRepairPower.Add(repair.UpgradePrices[0].Bonus);
         }
 
-        for (int i = 0; i < _mecanoLvl.Count + 1; i++)
+        for (int i = 0; i < _mecanoLvl.Count + 2; i++)
         {
             CurrentMecanoPower.Add(0);
             CurrentMecanoSpeed.Add(0);

@@ -84,7 +84,6 @@ public class MecanoManager : MonoBehaviour
     private void LaunchMecaAnim()
     {
         if(_mecanoAnimsActivated.Count == 0) return;
-        print("Launch MecaAnim");
 
         foreach (var mecanoAnim in _mecanoAnimsActivated)
         {
@@ -95,7 +94,7 @@ public class MecanoManager : MonoBehaviour
     private void StopMecaAnim()
     {
         if(_mecanoAnimsActivated.Count == 0) return;
-        print("StopMecaAnim");
+
         foreach (var mecanoAnim in _mecanoAnimsActivated)
         {
             mecanoAnim.StopAnim();

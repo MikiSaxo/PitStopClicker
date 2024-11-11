@@ -29,7 +29,8 @@ public class BtnShop : BtnScreen
     public override void Start()
     {
         base.Start();
-        _currentLevel = 0;
+        LoadCurrentLevel();
+        CheckOneTimePurchase();
         UpdatePointsToUpgrade();
         UpdateScreenText();
         PointsManager.Instance.OnPointsUpdated += UpdateScreenText;
@@ -61,6 +62,7 @@ public class BtnShop : BtnScreen
         PointsManager.Instance.UpdatePoints(-_pointsToUpgrade);
             
         _currentLevel++;
+        SaveCurrentLevel();
         CheckOneTimePurchase();
         base.OnMouseDown();
          
@@ -75,6 +77,8 @@ public class BtnShop : BtnScreen
     
     public virtual void CheckOneTimePurchase()
     { 
+        if (_currentLevel == 0) return;
+
         UpdatePointsToUpgrade();
     } 
 
@@ -131,5 +135,16 @@ public class BtnShop : BtnScreen
     private void OnDisable()
     {
         PointsManager.Instance.OnPointsUpdated -= UpdateScreenText;
+    }
+    
+    private void SaveCurrentLevel()
+    {
+        PlayerPrefs.SetInt($"{name}_{_upgradeType}_CurrentLevel", _currentLevel);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadCurrentLevel()
+    {
+        _currentLevel = PlayerPrefs.GetInt($"{name}_{_upgradeType}_CurrentLevel", 0);
     }
 }

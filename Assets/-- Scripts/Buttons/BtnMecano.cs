@@ -8,15 +8,28 @@ public class BtnMecano : BtnShop
 
     public override void CheckOneTimePurchase()
     {
+        if (_currentLevel == 0) return;
+        
         if (_isOneTimePurchase)
         {
             _isPurchased = true;
             UpgradeManager.Instance.CurrentMecanoPower[(int)_upgradeType] = 1;
             ClickCarJack.Instance.CheckUpgradeAutoMove();
             GasCan.Instance.CheckUpgradeAutoMove();
+
+            StartCoroutine(WaitActiveMecano());
         }
         else
             UpdatePointsToUpgrade();
+    }
+
+    IEnumerator WaitActiveMecano()
+    {
+        yield return new WaitForSeconds(.2f);
+
+        MecanoManager.Instance.SetActiveMecano(_upgradeType, true);
+        if(_boughtable != null)
+            MecanoManager.Instance.UpdateMecanoMesh((int)_upgradeType, _currentLevel);
     }
     
     public override void UpdatePointsToUpgrade()

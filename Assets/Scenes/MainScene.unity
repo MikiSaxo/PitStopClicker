@@ -6507,6 +6507,12 @@ MonoBehaviour:
     Pitch: 1
     Loop: 1
     Source: {fileID: 0}
+  - Name: EngineLoop
+    Clip: {fileID: 8300000, guid: 96eaf8645a09a4e4f9c21b76e26306b4, type: 3}
+    Volume: 0.091
+    Pitch: 1
+    Loop: 1
+    Source: {fileID: 0}
 --- !u!4 &1167183105
 Transform:
   m_ObjectHideFlags: 0
@@ -10335,10 +10341,10 @@ MonoBehaviour:
     MoneyWin: 150
     BuyPrice: 1000
   - CarPrefab: {fileID: 9046286243864572466, guid: 5e2d03b8c7ebbb44085b3d4fe7891243, type: 3}
-    EngineNbClicks: {x: 50, y: 70}
-    TireNbClicks: {x: 30, y: 50}
-    WashCleanValue: 10
-    GasDuration: 30
+    EngineNbClicks: {x: 15, y: 20}
+    TireNbClicks: {x: 10, y: 15}
+    WashCleanValue: 5
+    GasDuration: 10
     MoneyWin: 1500
     BuyPrice: 10000
   CurrentRepairPower: []
