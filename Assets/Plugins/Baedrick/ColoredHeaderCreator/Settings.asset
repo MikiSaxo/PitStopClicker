@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   headerSettings:
-    headerText: Garage
-    headerColor: {r: 0.330901, g: 0.38679248, b: 0.3083393, a: 1}
+    headerText: Mecanos
+    headerColor: {r: 0.9019608, g: 0.30980393, b: 0.68951696, a: 1}
     textAlignmentOptions: 0
     fontStyleOptions: 0
     fontSize: 12

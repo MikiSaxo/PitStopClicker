@@ -90,10 +90,7 @@ public class ClickCarJack : ClickObjects
     {
         _currentCar = CarSpawner.Instance.CurrentCar;
 
-        if (isUp)
-            _currentCar.transform.DOMoveY(_currentCar.transform.position.y + _heightCar, 0.25f);
-        else
-            _currentCar.transform.DOMoveY(_currentCar.transform.position.y - _heightCar, 0.1f);
+        _currentCar.SetHeightCarJack(isUp, _heightCar);
     }
 
     public override void OnClicked(Vector3 hitPoint)

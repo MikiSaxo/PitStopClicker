@@ -5,18 +5,18 @@ using System.Collections.Generic;
 
 public class CarMovement : MonoBehaviour
 {
-    [Header("--- Car Models")]
+    [Header("--- Car Models")] 
     [SerializeField] private Transform _modelParent;
     [SerializeField] private GameObject[] _models;
 
-    [Header("--- Car Repair")]
+    [Header("--- Car Repair")] 
     [SerializeField] private ClickObjects[] _clickObjects;
 
     [Header("--- Timing")]
     [SerializeField] private float _spawnDuration = 2f;
     [SerializeField] private float _exitDuration = 1f;
 
-    [Header("--- FX Drive")]
+    [Header("--- FX Drive")] 
     [SerializeField] private ParticleSystem[] _circuitFX;
 
     public bool IsAtClickPoint { get; private set; }
@@ -52,7 +52,7 @@ public class CarMovement : MonoBehaviour
         {
             obj.gameObject.SetActive(false);
         }
-        
+
         AddRandomModel();
         SetActiveCircuitFX(false);
     }
@@ -89,6 +89,7 @@ public class CarMovement : MonoBehaviour
                 activeObjects.Add(_clickObjects[randomIndex]);
             }
         }
+
         return activeObjects;
     }
 
@@ -111,6 +112,7 @@ public class CarMovement : MonoBehaviour
                 power = _carInfo.GasDuration;
                 break;
         }
+
         return power;
     }
 
@@ -142,6 +144,19 @@ public class CarMovement : MonoBehaviour
             });
     }
 
+    public void SetHeightCarJack(bool isUp, float height)
+    {
+        transform.DOComplete();
+        
+        if (isUp)
+        {
+            transform.DOMoveY(transform.position.y + height, 0.25f);
+            _initClickPos = new Vector3(transform.position.x, transform.position.y + height, transform.position.z);
+        }
+        else
+            transform.DOMoveY(transform.position.y - height, 0.1f);
+    }
+
     public void CheckAllRepairing()
     {
         foreach (var obj in _clickObjects)
@@ -155,10 +170,10 @@ public class CarMovement : MonoBehaviour
         PointsManager.Instance.AddPS(transform.position);
         CarSpawner.Instance.OnCarRepaired?.Invoke();
 
-        MoveToExitPoint();
+        StartCoroutine(MoveToExitPoint());
     }
 
-    private void MoveToExitPoint()
+    private IEnumerator MoveToExitPoint()
     {
         IsAtClickPoint = false;
 
@@ -167,6 +182,9 @@ public class CarMovement : MonoBehaviour
         // _wheelAnim.StartRotation(linearSpeed);
 
         SetActiveCircuitFX(true);
+        
+        //Wait for the CarJack to release the car
+        yield return new WaitForSeconds(0.1f);
 
         transform.DOMove(_movementPoints[2].position, _exitDuration).SetEase(Ease.InQuart).OnComplete(DestroyCar);
     }
