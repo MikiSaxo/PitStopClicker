@@ -37,6 +37,7 @@ public class BtnShop : BtnScreen
 
     public override void OnMouseDown()
     {
+        AudioManager.Instance.PlaySound("Pop");
         if (_isOneTimePurchase && _isPurchased) return;
 
         CheckEnoughMoneyBuy();
@@ -47,6 +48,7 @@ public class BtnShop : BtnScreen
         if (PointsManager.Instance.CanBuy(_pointsToUpgrade))
         {
             BuyUpgrade();
+            AudioManager.Instance.PlaySound("Buy");
         }
         else
         {

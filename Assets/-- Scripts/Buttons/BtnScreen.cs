@@ -22,6 +22,8 @@ public class BtnScreen : MonoBehaviour
 
     public virtual void OnMouseDown()
     {
+        AudioManager.Instance.PlaySound("Pop");
+
         AnimateCassette();
     }
 

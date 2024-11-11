@@ -27,6 +27,7 @@ public class BoughtableAnim : MonoBehaviour
     private void JumpAnim()
     {
         transform.DOJump(_initPos, _jumpPower, 1, _jumpDuration);
+        AudioManager.Instance.PlaySound("ClickBoughtable");
     }
 
     private void RotateAnim()

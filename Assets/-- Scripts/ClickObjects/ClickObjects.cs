@@ -9,6 +9,7 @@ public class ClickObjects : MonoBehaviour, IClickable
     [Header("--- FX")]
     [SerializeField] protected ParticleSystem _fxPrefab;
     [SerializeField] protected Transform _fxParent;
+    [SerializeField] protected string _sfxName;
     
     [Header("--- Type")]
     [SerializeField] protected UpgradeType _myType;
@@ -50,6 +51,10 @@ public class ClickObjects : MonoBehaviour, IClickable
     {
     }
 
+    protected void PlaySoundClick()
+    {
+        AudioManager.Instance.PlaySound($"{_sfxName}");
+    }
     protected virtual void CantSelectAnim()
     {
         transform.DOKill();

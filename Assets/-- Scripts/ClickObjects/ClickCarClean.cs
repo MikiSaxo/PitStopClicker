@@ -10,6 +10,7 @@ public class ClickCarClean : ClickObjects
     [SerializeField] private GameObject _cleanFX;
     [SerializeField] private DecalProjector[] _decalProjector;
 
+    private int _washCount = 0;
     private float _cleanProgress;
     private float _cleanToReach;
     private ParticleSystem _fxToRepair;
@@ -61,6 +62,8 @@ public class ClickCarClean : ClickObjects
     public void WashFX(Vector3 pos)
     {
         Instantiate(_cleanFX, pos, _cleanFX.transform.rotation);
+        AudioManager.Instance.PlaySound($"CleanGlass{_washCount%2}");
+        _washCount++;
     }
 
     public bool CheckIfCleaned()
@@ -70,6 +73,7 @@ public class ClickCarClean : ClickObjects
             if (!IsRepaired)
             {
                 IsRepaired = true;
+                AudioManager.Instance.PlaySound("Ding");
 
                 ClickHandler.Instance.CreateFXRepairGood(transform.position);
                 _fxToRepair.Stop();

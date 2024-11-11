@@ -71,6 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fxPrefab: {fileID: 2216172659447519292, guid: 5d44bbc8759c18c41bc4c4d8c4076b47, type: 3}
   _fxParent: {fileID: 4201274769168460493}
+  _sfxName: ClickTire
   _myType: 0
   _mecanoPoints:
   - {fileID: 5651438023497928811}
@@ -305,6 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fxPrefab: {fileID: 19885000, guid: 3a73a5bfaa568274a891e4212e24a824, type: 3}
   _fxParent: {fileID: 2291745719412283385}
+  _sfxName: ClickEngine
   _myType: 1
   _mecanoPoints:
   - {fileID: 3086574867477671152}
@@ -630,6 +632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fxPrefab: {fileID: 2216172659447519292, guid: ec4fa22c80417fe46919185db0e992e5, type: 3}
   _fxParent: {fileID: 8634361736057093569}
+  _sfxName: CleanGlass1
   _myType: 2
   _mecanoPoints:
   - {fileID: 3764606166132826492}
@@ -1016,6 +1019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fxPrefab: {fileID: 2452922066540291424, guid: 4b49e3982aead1044808637d0604b127, type: 3}
   _fxParent: {fileID: 2886972346937837897}
+  _sfxName: ClickTire
   _myType: 0
   _mecanoPoints:
   - {fileID: 798725289353086063}
@@ -1080,6 +1084,10 @@ PrefabInstance:
     - target: {fileID: 8018710051348038752, guid: 8d480c7151038014ea610d617b2f2d93, type: 3}
       propertyPath: _myType
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8018710051348038752, guid: 8d480c7151038014ea610d617b2f2d93, type: 3}
+      propertyPath: _sfxName
+      value: ClickGas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

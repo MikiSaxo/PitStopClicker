@@ -26,6 +26,7 @@ public class CarSpawnerCircuit : MonoBehaviour
 
     private void MoveCarToEndPoint(GameObject car)
     {
+        AudioManager.Instance.PlaySound("CarCircuit");
         car.transform.DOMove(_endPoint.position, _moveDuration)
             .SetEase(Ease.InSine)
             .OnComplete(() => OnCarReachedEndPoint(car));

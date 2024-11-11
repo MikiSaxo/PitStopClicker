@@ -45,15 +45,18 @@ public class ClickCarRepair : ClickObjects
         _currentClicks += (int)value;
         SetFX();
         _myCar.OnClickFeedback();
+        
+        PlaySoundClick();
 
         CheckIsRepaired();
     }
-
+    
     private void CheckIsRepaired()
     {
         if (_currentClicks >= _clickNeeded && !IsRepaired)
         {
             IsRepaired = true;
+            AudioManager.Instance.PlaySound("Ding");
             ClickHandler.Instance.CreateFXRepairGood(transform.position);
             _myCar.CheckAllRepairing();
         }

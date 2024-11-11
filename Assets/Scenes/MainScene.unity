@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.85882354, g: 0.86036813, b: 0.93333334, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 08ea2f5ee9c7f9a49928cbe918aeb6ab, type: 2}
   m_HaloStrength: 0.5
@@ -2960,6 +2960,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3356908037935666019, guid: 4f24bcbce6413db489bd9148d8914641, type: 3}
+      propertyPath: _sfxName
+      value: CarJack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356908037935666019, guid: 4f24bcbce6413db489bd9148d8914641, type: 3}
       propertyPath: _jackPoint
       value: 
       objectReference: {fileID: 1548960589}
@@ -3923,13 +3927,13 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.6
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -4542,7 +4546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &824697904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5914,6 +5918,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4441340621740597047, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
+      propertyPath: _sfxName
+      value: ClickGas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441340621740597047, guid: 7f77c2525f2756244ac563b68f3a5344, type: 3}
       propertyPath: _mySecondType
       value: 4
       objectReference: {fileID: 0}
@@ -6361,6 +6369,159 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 443556, guid: 3c3b6d9e20a8cfe47b6e7f13639d9685, type: 3}
   m_PrefabInstance: {fileID: 1189350943}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1167183103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1167183105}
+  - component: {fileID: 1167183104}
+  m_Layer: 0
+  m_Name: --- AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1167183104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167183103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7959e378e1bd34fb562f4892200a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: Buy
+    Clip: {fileID: 8300000, guid: d53ce4709a47d8249923ce603de3acd9, type: 3}
+    Volume: 0.445
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: CarCircuit
+    Clip: {fileID: 8300000, guid: 234a3b22c60a9b74abf59e463d5d41b2, type: 3}
+    Volume: 0.159
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: CarJack
+    Clip: {fileID: 8300000, guid: d22114bb602f858489d1aeebb5725863, type: 3}
+    Volume: 0.416
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: CleanGlass0
+    Clip: {fileID: 8300000, guid: 693032276c8e6ed4287b5d59d50ac409, type: 3}
+    Volume: 0.308
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: CleanGlass1
+    Clip: {fileID: 8300000, guid: cec3b24a90f896d429a93782a6633df0, type: 3}
+    Volume: 0.128
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: ClickBoughtable
+    Clip: {fileID: 8300000, guid: 909d2a1cb1dc11c4ba588a3d216c837c, type: 3}
+    Volume: 0.123
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: ClickEngine
+    Clip: {fileID: 8300000, guid: b6ee9b18cfaadaf4c972cd73fae8b811, type: 3}
+    Volume: 0.57
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: CoinCollect
+    Clip: {fileID: 8300000, guid: 146077e2182eb874f99818505fe8d3c3, type: 3}
+    Volume: 0.084
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: PiecePop
+    Clip: {fileID: 8300000, guid: 85442391da60b004baad1afe85b446bc, type: 3}
+    Volume: 0.117
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: ClickTire
+    Clip: {fileID: 8300000, guid: 5119417739f143c419d5a9fb410174e8, type: 3}
+    Volume: 0.411
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Repair
+    Clip: {fileID: 8300000, guid: 6806c6bdc762b2043b31d3bfad8b3e14, type: 3}
+    Volume: 0.262
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Pop
+    Clip: {fileID: 8300000, guid: c518523f2501d9a4ca7e48972824dff4, type: 3}
+    Volume: 0.304
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: CarArriving
+    Clip: {fileID: 8300000, guid: ae63cc71936435845a20a45097347310, type: 3}
+    Volume: 0.304
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: CarAccelerate
+    Clip: {fileID: 8300000, guid: e065172c17389a04494610b70d5dd240, type: 3}
+    Volume: 0.393
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: ClickGas
+    Clip: {fileID: 8300000, guid: dff84834929a1334fb8b41ec6cad9639, type: 3}
+    Volume: 0.304
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: LoadingFillGas
+    Clip: {fileID: 8300000, guid: 4d58d330c36c6b545a562138642ffdac, type: 3}
+    Volume: 0.63
+    Pitch: 1
+    Loop: 1
+    Source: {fileID: 0}
+  - Name: Ding
+    Clip: {fileID: 8300000, guid: c3ac078fe9355d74eb94a81e26d8d156, type: 3}
+    Volume: 0.63
+    Pitch: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: MusicGame
+    Clip: {fileID: 8300000, guid: a49fe2a51932b5749ba0b92767482a2b, type: 3}
+    Volume: 0.15
+    Pitch: 1
+    Loop: 1
+    Source: {fileID: 0}
+--- !u!4 &1167183105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167183103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 55.182327, y: 7.1136904, z: -9.91394}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1170091320 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6103023466817764591, guid: f03bb0716b00364449637c122b2b4341, type: 3}
@@ -8832,7 +8993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1687002530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8874,7 +9035,7 @@ Light:
   m_InnerSpotAngle: 22.474586
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -9301,7 +9462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 1304314447}
   _endPoint: {fileID: 449563722}
-  _moveDuration: 3
+  _moveDuration: 2
 --- !u!4 &1758641124
 Transform:
   m_ObjectHideFlags: 0
@@ -13983,3 +14144,4 @@ SceneRoots:
   - {fileID: 2049642464}
   - {fileID: 364824550}
   - {fileID: 476258286}
+  - {fileID: 1167183105}

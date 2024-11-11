@@ -67,6 +67,7 @@ public class GasCan : ClickObjects
         if (ClickGasCan == null)
             return;
 
+        PlaySoundClick();
         transform.DOKill();
         
         _gasPoint = ClickGasCan.transform;
@@ -79,6 +80,9 @@ public class GasCan : ClickObjects
 
     public void ReturnFromGasPoint()
     {
+        AudioManager.Instance.StopSound("LoadingFillGas");
+        AudioManager.Instance.PlaySound("Ding");
+
         transform.DOKill();
         
         // Go Back
@@ -137,6 +141,7 @@ public class GasCan : ClickObjects
 
     private void FillAnim()
     {
+        AudioManager.Instance.PlaySound("LoadingFillGas");
         var fillDuration = ClickGasCan.FillDurationCar / _fillPower;
         _fillGas.transform.DOScale(new Vector3(1, 0.01f, 1), fillDuration).SetEase(Ease.InOutQuad).OnComplete(ReturnFromGasPoint);
         ClickGasCan.LaunchGasAnim(fillDuration);

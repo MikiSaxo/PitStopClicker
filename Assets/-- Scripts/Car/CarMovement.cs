@@ -122,6 +122,7 @@ public class CarMovement : MonoBehaviour
         // float linearSpeed = distance / _spawnDuration;
         // _wheelAnim.StartRotation(linearSpeed);
 
+        AudioManager.Instance.PlaySound("CarArriving");
 
         transform.DOMove(_movementPoints[1].position, _spawnDuration).OnComplete(() =>
         {
@@ -169,6 +170,7 @@ public class CarMovement : MonoBehaviour
         ClickCarJack.Instance.ReturnFromJackPoint();
         PointsManager.Instance.AddPS(transform.position);
         CarSpawner.Instance.OnCarRepaired?.Invoke();
+        AudioManager.Instance.PlaySound("Repair");
 
         StartCoroutine(MoveToExitPoint());
     }
@@ -181,6 +183,8 @@ public class CarMovement : MonoBehaviour
         // float linearSpeed = distance / _exitDuration;
         // _wheelAnim.StartRotation(linearSpeed);
 
+        AudioManager.Instance.PlaySound("CarAccelerate");
+        
         SetActiveCircuitFX(true);
         
         //Wait for the CarJack to release the car

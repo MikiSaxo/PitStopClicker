@@ -51,6 +51,7 @@ public class ClickCarJack : ClickObjects
     }
     private void MoveToJackPoint()
     {
+        AudioManager.Instance.PlaySound("CarJack");
         transform.DOKill();
 
         IsSet = true;

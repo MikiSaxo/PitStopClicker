@@ -96,6 +96,7 @@ public class PointsManager : MonoBehaviour
             float rdn = Random.Range(-1.5f, 1.5f);
             float rdnY = Random.Range(0f, 2f);
 
+            AudioManager.Instance.PlaySound("PiecePop");
             GameObject go = Instantiate(_psPrefab, pos + new Vector3(0, 2f, 0), Quaternion.identity);
             go.transform.DOMove(new Vector3(pos.x + rdn, pos.y + 4f + rdnY, pos.z + rdn), _initialMoveDuration).SetEase(Ease.OutQuad);
 
@@ -115,6 +116,7 @@ public class PointsManager : MonoBehaviour
                 ps.transform.DOScale(Vector3.zero, 0.1f).OnComplete(() => { Destroy(ps); });
             });
             yield return new WaitForSeconds(_delayBetweenMovesToTarget);
+            AudioManager.Instance.PlaySound("CoinCollect");
         }
     }
 
