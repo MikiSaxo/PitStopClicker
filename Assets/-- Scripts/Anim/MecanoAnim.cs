@@ -88,7 +88,9 @@ public class MecanoAnim : MonoBehaviour
 
     public void LaunchAnim()
     {
-        if (!ClickCarJack.Instance.IsSet || !CarSpawner.Instance.CurrentCar.IsAtClickPoint) return;
+        if (CarSpawner.Instance.CurrentCar == null 
+            || !ClickCarJack.Instance.IsSet 
+            || !CarSpawner.Instance.CurrentCar.IsAtClickPoint) return;
 
         if (_isOneTimePurchased)
         {

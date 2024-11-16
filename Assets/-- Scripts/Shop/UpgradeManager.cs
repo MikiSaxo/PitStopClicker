@@ -11,7 +11,7 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] private List<UpgradeInfo> _repairLvl = new List<UpgradeInfo>();
     [SerializeField] private List<MecanoInfo> _mecanoLvl = new List<MecanoInfo>();
-    [FormerlySerializedAs("CarsLvl")] [SerializeField] private List<CarInfo> _carsLvl = new List<CarInfo>();
+    [SerializeField] private List<CarInfo> _carsLvl = new List<CarInfo>();
 
     [HideInInspector] public List<float> CurrentRepairPower = new List<float>();
     [HideInInspector] public List<float> CurrentMecanoPower = new List<float>();
@@ -19,7 +19,6 @@ public class UpgradeManager : MonoBehaviour
 
     public List<UpgradeInfo> RepairLvl => _repairLvl;
     public List<MecanoInfo> MecanoLvl => _mecanoLvl;
-    public List<CarInfo> CarsLvl => _carsLvl;
     public int CurrentCarLevel { get; set; }
 
     private void Awake()
@@ -36,8 +35,6 @@ public class UpgradeManager : MonoBehaviour
             CurrentMecanoPower.Add(0);
             CurrentMecanoSpeed.Add(0);
         }
-        
-        CurrentCarLevel = 0;
     }
     
     public int GetCurrentMoneyWin()

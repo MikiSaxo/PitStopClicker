@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
@@ -33,6 +34,14 @@ public class CarSpawner : MonoBehaviour
             Debug.LogError("Please assign 3 movement points (Spawn, Click, Exit) in the inspector.");
             return;
         }
+
+        StartCoroutine(WaitSpawnFirstCar());
+    }
+
+    IEnumerator WaitSpawnFirstCar()
+    {
+        yield return new WaitForSeconds(0.1f);
+        
         SpawnCar();
     }
 

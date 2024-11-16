@@ -9,8 +9,6 @@ public class ClickHandler : MonoBehaviour
     [SerializeField] private GameObject _fxClick;
     [SerializeField] private GameObject _fxRepairGood;
 
-    private IClickable _clickable;
-    
     private void Awake()
     {
         Instance = this;
@@ -33,17 +31,21 @@ public class ClickHandler : MonoBehaviour
                 IClickable clickable = hit.transform.GetComponent<IClickable>();
                 if (clickable != null)
                 {
-                    _clickable = clickable;
                     clickable.OnClicked(hit.point);
                 }
-                _clickable = null;
             }
         }
     }
     
-    public void CreateFXClick(Vector3 position)
+    public void CreateFXClick(Vector3 position, int power)
     {
-        Instantiate(_fxClick, position, Quaternion.identity);
+        if (power > 5) power = 5;
+        if (power <= 0) power = 1;
+        
+        for (int i = 0; i < power; i++)
+        {
+            Instantiate(_fxClick, position, _fxClick.transform.rotation);
+        }
     }
     public void CreateFXRepairGood(Vector3 position)
     {

@@ -7,8 +7,7 @@ using UnityEngine;
 public class BtnCar : BtnShop
 {
     private GameObject _car;
-
-
+    
     private void Awake()
     {
         _car = _boughtable.gameObject;
@@ -33,5 +32,17 @@ public class BtnCar : BtnShop
         Destroy(_car);
 
         _car = newCar;
+    }
+    
+    public override void SaveCurrentLevel()
+    {
+        PlayerPrefs.SetInt($"Car_CurrentLevel", _currentLevel);
+        PlayerPrefs.Save();
+    }
+
+    public override void LoadCurrentLevel()
+    {
+        _currentLevel = PlayerPrefs.GetInt($"Car_CurrentLevel", 0);
+        UpgradeManager.Instance.CurrentCarLevel = _currentLevel;
     }
 }

@@ -36,7 +36,7 @@ public class ClickObjects : MonoBehaviour, IClickable
     public virtual void OnClicked(Vector3 hitPoint)
     {
         if (!IsRepaired)
-            ClickHandler.Instance.CreateFXClick(hitPoint);
+            ClickHandler.Instance.CreateFXClick(hitPoint, (int)UpgradeManager.Instance.CurrentRepairPower[(int)_myType]);
     }
 
     public virtual void UpdateCurrentClicks(float value)

@@ -52,7 +52,8 @@ public class GasCan : ClickObjects
     
     public void CheckUpgradeAutoMove()
     {
-        if (UpgradeManager.Instance.CurrentMecanoPower[(int)_mySecondType] == 1
+        if (CarSpawner.Instance.CurrentCar != null
+            && UpgradeManager.Instance.CurrentMecanoPower[(int)_mySecondType] == 1
             && ClickCarJack.Instance.IsSet
             && CarSpawner.Instance.CurrentCar.IsAtClickPoint
             && ClickGasCan != null
