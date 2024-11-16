@@ -21,12 +21,18 @@ public class MecanoManager : MonoBehaviour
     {
         for (int i = 0; i < _mecanoObjs.Count; i++)
         {
-            UpdateMecanoMesh(i, 0);
-            SetActiveMecano((UpgradeType)i, false);
+            int savedLevel = LoadMecanoLevel((UpgradeType)i);
+            UpdateMecanoMesh(i, savedLevel);
+            SetActiveMecano((UpgradeType)i, savedLevel > 0);
         }
         
         ClickCarJack.Instance.OnCarJackSet += LaunchMecaAnim;
         CarSpawner.Instance.OnCarRepaired += StopMecaAnim;
+    }
+    
+    private int LoadMecanoLevel(UpgradeType type)
+    {
+        return PlayerPrefs.GetInt($"Meca_{type}_CurrentLevel", 0);
     }
 
     public void UpdateMecanoMesh(int index, int level)

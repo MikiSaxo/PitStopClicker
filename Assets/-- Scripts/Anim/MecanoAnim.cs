@@ -68,13 +68,6 @@ public class MecanoAnim : MonoBehaviour
             transform.DOMove(_transformPoints[0].position, _speed).SetEase(Ease.InExpo);
             transform.DORotate(_transformPoints[0].rotation.eulerAngles, _speed);
             
-            // yield return DOTween.Sequence()
-            //     .Append(transform.DOMove(_transformPoints[1].position, _speed)).SetEase(Ease.Linear)
-            //     .Join(transform.DORotate(_transformPoints[1].rotation.eulerAngles, _speed))
-            //     .Append(transform.DOMove(_transformPoints[0].position, _speed)).SetEase(Ease.Linear)
-            //     .Join(transform.DORotate(_transformPoints[0].rotation.eulerAngles, _speed))
-            //     .WaitForCompletion();
-            
             if(_currentClickObj.IsRepaired)
                 StopAnim();
             
@@ -95,42 +88,38 @@ public class MecanoAnim : MonoBehaviour
 
     public void LaunchAnim()
     {
-        if (ClickCarJack.Instance.IsSet == false) return;
+        if (!ClickCarJack.Instance.IsSet || !CarSpawner.Instance.CurrentCar.IsAtClickPoint) return;
 
         if (_isOneTimePurchased)
         {
-            if (MyType == UpgradeType.AutoGas && GasCan.Instance.IsSet
-                || MyType == UpgradeType.AutoCarJack)
-                RotateAnim();
-        }
-        else
-        {
-            foreach (var ClickObj in CarSpawner.Instance.ClickObjectsList)
+            if ((MyType == UpgradeType.AutoGas && GasCan.Instance.IsSet) || MyType == UpgradeType.AutoCarJack)
             {
-                if (ClickObj.MyType != MyType) continue;
+                RotateAnim();
+            }
+            return;
+        }
 
-                if (MyType == UpgradeType.Tire)
+        foreach (var clickObj in CarSpawner.Instance.ClickObjectsList)
+        {
+            if (clickObj.MyType != MyType) continue;
+
+            if (MyType == UpgradeType.Tire)
+            {
+                var clickCarTire = clickObj.gameObject.GetComponent<ClickCarTire>();
+                if ((_isTireFront && clickCarTire.IsFront) || (!_isTireFront && !clickCarTire.IsFront))
                 {
-                    if (_isTireFront && ClickObj.gameObject.GetComponent<ClickCarTire>().IsFront)
-                    {
-                        GoRepair(ClickObj);
-                        return;
-                    }
-                    if(_isTireFront == false && ClickObj.gameObject.GetComponent<ClickCarTire>().IsFront == false)
-                    {
-                        GoRepair(ClickObj);
-                        return;
-                    }
-                }
-                else
-                {
-                    GoRepair(ClickObj);
+                    GoRepair(clickObj);
                     return;
                 }
             }
-
-            StopAnim();
+            else
+            {
+                GoRepair(clickObj);
+                return;
+            }
         }
+
+        StopAnim();
     }
 
     private void GoRepair(ClickObjects ClickObj)
@@ -140,7 +129,7 @@ public class MecanoAnim : MonoBehaviour
         _currentClickObj = ClickObj;
         StartCoroutine(AnimateMovement());
     }
-    private void RotateAnim()
+    public void RotateAnim()
     {
         transform.DORotate(new Vector3(0, _startRotY + 360, 0), _moveDuration, RotateMode.FastBeyond360)
             .SetEase(Ease.InOutQuad).OnComplete(() => transform.DORotate(new Vector3(0, _startRotY, 0), 0.1f));

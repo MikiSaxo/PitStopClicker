@@ -45,7 +45,7 @@ public class ClickCarClean : ClickObjects
         if (CheckIfCleaned() == false)
         {
             _cleanProgress += value;
-            UpdateDecalProjector(value);
+            UpdateDecalProjector(value / _cleanToReach);
             WashFX(transform.position);
         }
     }

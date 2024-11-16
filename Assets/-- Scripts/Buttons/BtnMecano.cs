@@ -67,4 +67,15 @@ public class BtnMecano : BtnShop
         if(_boughtable != null)
             MecanoManager.Instance.UpdateMecanoMesh((int)_upgradeType, _currentLevel);
     }
+    
+    public override void SaveCurrentLevel()
+    {
+        PlayerPrefs.SetInt($"Meca_{_upgradeType}_CurrentLevel", _currentLevel);
+        PlayerPrefs.Save();
+    }
+
+    public override void LoadCurrentLevel()
+    {
+        _currentLevel = PlayerPrefs.GetInt($"Meca_{_upgradeType}_CurrentLevel", 0);
+    }
 }

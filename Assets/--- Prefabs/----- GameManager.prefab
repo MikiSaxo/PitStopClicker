@@ -210,24 +210,29 @@ MonoBehaviour:
   _mecanoLvl:
   - MyUpgradeType: 1
     MecanoPrices:
+    - PriceLevel: 1000
+      Speed: 0
+      Power: 0
+      MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
+      MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
     - PriceLevel: 2200
-      Speed: 4
+      Speed: 2
       Power: 1
       MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
     - PriceLevel: 4000
-      Speed: 2
-      Power: 3
+      Speed: 1
+      Power: 1
       MecanoMesh: {fileID: 4300000, guid: c81a40491ec7bab4e84a8a6d6f899eb5, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
     - PriceLevel: 6000
       Speed: 1
-      Power: 7
+      Power: 2
       MecanoMesh: {fileID: 4300000, guid: 172467d6a5769ac45b7717fdbd75c019, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
     - PriceLevel: 12000
       Speed: 0.8
-      Power: 10
+      Power: 5
       MecanoMesh: {fileID: 4300000, guid: 703e652989779ff45809b190c677f988, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 1d7d915bcbae09c4e8297cfd758ea6a8, type: 2}
     - PriceLevel: 20000
@@ -283,24 +288,24 @@ MonoBehaviour:
       MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
     - PriceLevel: 3000
-      Speed: 4
+      Speed: 2
       Power: 1
-      MecanoMesh: {fileID: 4300000, guid: c81a40491ec7bab4e84a8a6d6f899eb5, type: 3}
+      MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
     - PriceLevel: 9000
       Speed: 2
-      Power: 3
-      MecanoMesh: {fileID: 4300000, guid: 172467d6a5769ac45b7717fdbd75c019, type: 3}
+      Power: 1
+      MecanoMesh: {fileID: 4300000, guid: c81a40491ec7bab4e84a8a6d6f899eb5, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
     - PriceLevel: 15000
       Speed: 1
-      Power: 7
-      MecanoMesh: {fileID: 4300000, guid: 703e652989779ff45809b190c677f988, type: 3}
+      Power: 2
+      MecanoMesh: {fileID: 4300000, guid: 172467d6a5769ac45b7717fdbd75c019, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
     - PriceLevel: 20000
       Speed: 0.8
-      Power: 10
-      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
+      Power: 5
+      MecanoMesh: {fileID: 4300000, guid: 703e652989779ff45809b190c677f988, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
     - PriceLevel: 27000
       Speed: 0.6
@@ -349,29 +354,69 @@ MonoBehaviour:
       MecanoMaterial: {fileID: 2100000, guid: 386270fd98c83cc47ad06abdee1cb105, type: 2}
   - MyUpgradeType: 2
     MecanoPrices:
-    - PriceLevel: 10
+    - PriceLevel: 2500
       Speed: 0
       Power: 0
       MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
-    - PriceLevel: 20
-      Speed: 0.5
-      Power: 0.05
+    - PriceLevel: 5000
+      Speed: 2
+      Power: 0.5
+      MecanoMesh: {fileID: 4300000, guid: 87f63a90118a58e459dd11234f7d4ee0, type: 3}
+      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
+    - PriceLevel: 10000
+      Speed: 1
+      Power: 0.5
       MecanoMesh: {fileID: 4300000, guid: c81a40491ec7bab4e84a8a6d6f899eb5, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
-    - PriceLevel: 29
-      Speed: 0.4
-      Power: 0.05
+    - PriceLevel: 25000
+      Speed: 1
+      Power: 1
       MecanoMesh: {fileID: 4300000, guid: 172467d6a5769ac45b7717fdbd75c019, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
-    - PriceLevel: 40
-      Speed: 0.3
-      Power: 0.05
+    - PriceLevel: 35000
+      Speed: 0.8
+      Power: 5
       MecanoMesh: {fileID: 4300000, guid: 703e652989779ff45809b190c677f988, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
-    - PriceLevel: 100
+    - PriceLevel: 70000
+      Speed: 0.6
+      Power: 18
+      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
+      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
+    - PriceLevel: 110000
+      Speed: 0.4
+      Power: 21
+      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
+      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
+    - PriceLevel: 160000
       Speed: 0.2
-      Power: 0.05
+      Power: 24
+      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
+      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
+    - PriceLevel: 200000
+      Speed: 0.1
+      Power: 26
+      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
+      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
+    - PriceLevel: 400000
+      Speed: 0.1
+      Power: 29
+      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
+      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
+    - PriceLevel: 700000
+      Speed: 0.1
+      Power: 33
+      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
+      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
+    - PriceLevel: 1000000
+      Speed: 0.1
+      Power: 40
+      MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
+      MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
+    - PriceLevel: 2000000
+      Speed: 0.1
+      Power: 50
       MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: cd207c08167163b4e9cf959c19d8f3f1, type: 2}
   - MyUpgradeType: 3

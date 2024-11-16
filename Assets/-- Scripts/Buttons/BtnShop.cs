@@ -137,14 +137,14 @@ public class BtnShop : BtnScreen
         PointsManager.Instance.OnPointsUpdated -= UpdateScreenText;
     }
     
-    private void SaveCurrentLevel()
+    public virtual void SaveCurrentLevel()
     {
-        PlayerPrefs.SetInt($"{name}_{_upgradeType}_CurrentLevel", _currentLevel);
+        PlayerPrefs.SetInt($"Click_{_upgradeType}_CurrentLevel", _currentLevel);
         PlayerPrefs.Save();
     }
 
-    private void LoadCurrentLevel()
+    public virtual void LoadCurrentLevel()
     {
-        _currentLevel = PlayerPrefs.GetInt($"{name}_{_upgradeType}_CurrentLevel", 0);
+        _currentLevel = PlayerPrefs.GetInt($"Click_{_upgradeType}_CurrentLevel", 0);
     }
 }
