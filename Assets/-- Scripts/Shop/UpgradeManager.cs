@@ -39,11 +39,17 @@ public class UpgradeManager : MonoBehaviour
     
     public int GetCurrentMoneyWin()
     {
+        if(CurrentCarLevel >= _carsLvl.Count)
+            return _carsLvl[^1].MoneyWin;
+        
         return _carsLvl[CurrentCarLevel].MoneyWin;
     }
     
     public CarInfo GetCurrentCarInfo()
     {
+        if(CurrentCarLevel >= _carsLvl.Count)
+            return _carsLvl[^1];
+        
         return _carsLvl[CurrentCarLevel];
     }
 }

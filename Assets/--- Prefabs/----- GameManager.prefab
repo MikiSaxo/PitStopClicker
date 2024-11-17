@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fxClick: {fileID: 101130, guid: 332b3a8edf932754db52d989f365c98a, type: 3}
-  _fxRepairGood: {fileID: 9099326215604032861, guid: 285be47224cba084d8b4cbc1d4d2f84c, type: 3}
+  _fxRepairGood: {fileID: 9099326215604032861, guid: 285be47224cba084d8b4cbc1d4d2f84c,
+    type: 3}
 --- !u!114 &2178855635926733452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,21 +155,21 @@ MonoBehaviour:
   - MyUpgradeType: 2
     UpgradePrices:
     - PriceLevel: 250
-      Bonus: 0.05
+      Bonus: 0.1
     - PriceLevel: 500
-      Bonus: 0.15
+      Bonus: 0.25
     - PriceLevel: 1200
-      Bonus: 0.3
+      Bonus: 0.5
     - PriceLevel: 3000
-      Bonus: 0.8
+      Bonus: 1
     - PriceLevel: 4500
-      Bonus: 1.5
+      Bonus: 2
     - PriceLevel: 9000
-      Bonus: 3
+      Bonus: 5
     - PriceLevel: 13000
-      Bonus: 6
-    - PriceLevel: 30000
       Bonus: 10
+    - PriceLevel: 30000
+      Bonus: 15
     - PriceLevel: 45000
       Bonus: 20
     - PriceLevel: 100000
@@ -446,55 +447,62 @@ MonoBehaviour:
       MecanoMesh: {fileID: 4300000, guid: cdda1469e3c0da14b87efb1077209ff6, type: 3}
       MecanoMaterial: {fileID: 2100000, guid: d55f410006df1db498b1db3d3d026636, type: 2}
   _carsLvl:
-  - CarPrefab: {fileID: 9046286243864572466, guid: 8da19ba617d06954fafe444b1bb8bd52, type: 3}
+  - CarPrefab: {fileID: 9046286243864572466, guid: 8da19ba617d06954fafe444b1bb8bd52,
+      type: 3}
     EngineNbClicks: {x: 15, y: 20}
     TireNbClicks: {x: 12, y: 15}
     WashCleanValue: 2
     GasDuration: 5
-    MoneyWin: 100
+    MoneyWin: 150
     BuyPrice: 1500
-  - CarPrefab: {fileID: 9046286243864572466, guid: 5e2d03b8c7ebbb44085b3d4fe7891243, type: 3}
+  - CarPrefab: {fileID: 9046286243864572466, guid: 5e2d03b8c7ebbb44085b3d4fe7891243,
+      type: 3}
     EngineNbClicks: {x: 50, y: 60}
     TireNbClicks: {x: 40, y: 50}
     WashCleanValue: 10
     GasDuration: 20
     MoneyWin: 800
     BuyPrice: 16000
-  - CarPrefab: {fileID: 707265682723370055, guid: ce0bf7460e6d7754388f4be78bc96977, type: 3}
+  - CarPrefab: {fileID: 707265682723370055, guid: ce0bf7460e6d7754388f4be78bc96977,
+      type: 3}
     EngineNbClicks: {x: 190, y: 210}
     TireNbClicks: {x: 150, y: 160}
     WashCleanValue: 50
     GasDuration: 100
     MoneyWin: 3000
     BuyPrice: 75000
-  - CarPrefab: {fileID: 6122682318183640769, guid: 67fe55c75445978459d1f0e30349ca91, type: 3}
+  - CarPrefab: {fileID: 6122682318183640769, guid: 67fe55c75445978459d1f0e30349ca91,
+      type: 3}
     EngineNbClicks: {x: 300, y: 330}
     TireNbClicks: {x: 270, y: 280}
     WashCleanValue: 200
     GasDuration: 500
     MoneyWin: 9000
     BuyPrice: 270000
-  - CarPrefab: {fileID: 2033842266741048772, guid: 7d6cd34935b4bcd4e8db16cd2bb93606, type: 3}
+  - CarPrefab: {fileID: 2033842266741048772, guid: 7d6cd34935b4bcd4e8db16cd2bb93606,
+      type: 3}
     EngineNbClicks: {x: 700, y: 740}
     TireNbClicks: {x: 600, y: 620}
     WashCleanValue: 500
     GasDuration: 1200
     MoneyWin: 18000
     BuyPrice: 1500000
-  - CarPrefab: {fileID: 7297296981347929284, guid: add5e49355fd26c44909f9f294f3c835, type: 3}
+  - CarPrefab: {fileID: 7297296981347929284, guid: add5e49355fd26c44909f9f294f3c835,
+      type: 3}
     EngineNbClicks: {x: 1500, y: 1600}
     TireNbClicks: {x: 1300, y: 1350}
     WashCleanValue: 900
     GasDuration: 2300
     MoneyWin: 52000
     BuyPrice: 5000000
-  - CarPrefab: {fileID: 586357696018155034, guid: f6c2cf7376897da479c58ea075b4563f, type: 3}
-    EngineNbClicks: {x: 3000, y: 3300}
-    TireNbClicks: {x: 2800, y: 300}
-    WashCleanValue: 1300
-    GasDuration: 3500
+  - CarPrefab: {fileID: 586357696018155034, guid: f6c2cf7376897da479c58ea075b4563f,
+      type: 3}
+    EngineNbClicks: {x: 10000, y: 12000}
+    TireNbClicks: {x: 5000, y: 6000}
+    WashCleanValue: 2500
+    GasDuration: 7000
     MoneyWin: 250000
-    BuyPrice: 50000000
+    BuyPrice: 500000000
   CurrentRepairPower: []
   CurrentMecanoPower: []
   CurrentMecanoSpeed: []

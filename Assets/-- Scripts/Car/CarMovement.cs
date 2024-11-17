@@ -23,7 +23,6 @@ public class CarMovement : MonoBehaviour
 
     private Transform[] _movementPoints;
     private Vector3 _initClickPos;
-    private Quaternion _initClickRota;
     private CarInfo _carInfo;
 
     public List<ClickObjects> Init(Transform[] movPoints, CarInfo carInfo)
@@ -34,7 +33,6 @@ public class CarMovement : MonoBehaviour
         GetComponent<Collider>().enabled = false;
 
         _initClickPos = _movementPoints[1].position;
-        _initClickRota = transform.rotation;
 
         AddRandomModel();
 
@@ -135,14 +133,14 @@ public class CarMovement : MonoBehaviour
 
     public void OnClickFeedback()
     {
-        transform.DOKill();
-        float randomAngle = Random.Range(-20f, 20f);
-        transform.DOPunchScale(Vector3.one * 0.05f, 0.05f, 10, 1);
-        transform.DORotate(new Vector3(0, 0, randomAngle), 0.1f, RotateMode.LocalAxisAdd).SetEase(Ease.OutQuad)
+        _modelParent.transform.DOKill();
+        float randomAngleZ = Random.Range(-20f, 20f);
+        _modelParent.transform.DOPunchScale(Vector3.one * 0.05f, 0.05f, 10, 1);
+        _modelParent.transform.DORotate(new Vector3(0, 0, randomAngleZ), 0.1f, RotateMode.LocalAxisAdd).SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
-                transform.DOMove(_initClickPos, 0.1f);
-                transform.DORotateQuaternion(_initClickRota, 0.1f);
+                _modelParent.transform.DOMove(_initClickPos, 0.1f);
+                _modelParent.transform.DORotate(new Vector3(0, 180, 0), 0.1f);
             });
     }
 
