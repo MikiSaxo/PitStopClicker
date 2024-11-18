@@ -123,7 +123,7 @@ MonoBehaviour:
     - PriceLevel: 300000
       Bonus: 50
     - PriceLevel: 900000
-      Bonus: 100
+      Bonus: 1000
   - MyUpgradeType: 1
     UpgradePrices:
     - PriceLevel: 250
@@ -151,7 +151,7 @@ MonoBehaviour:
     - PriceLevel: 400000
       Bonus: 70
     - PriceLevel: 1200000
-      Bonus: 120
+      Bonus: 1000
   - MyUpgradeType: 2
     UpgradePrices:
     - PriceLevel: 250
@@ -179,7 +179,7 @@ MonoBehaviour:
     - PriceLevel: 1000000
       Bonus: 100
     - PriceLevel: 3000000
-      Bonus: 150
+      Bonus: 300
   - MyUpgradeType: 3
     UpgradePrices:
     - PriceLevel: 200
@@ -207,7 +207,7 @@ MonoBehaviour:
     - PriceLevel: 800000
       Bonus: 800
     - PriceLevel: 1500000
-      Bonus: 1000
+      Bonus: 1500
   _mecanoLvl:
   - MyUpgradeType: 1
     MecanoPrices:

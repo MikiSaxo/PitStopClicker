@@ -55,7 +55,7 @@ public class PointsManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
-            UpdatePoints(10000);
+            UpdatePoints(10000000);
     }
 
     private IEnumerator AnimatePoints(int startPoints, int endPoints)

@@ -15,7 +15,21 @@ public class BtnCar : BtnShop
 
     public override void OnMouseDown()
     {
+        if (PointsManager.Instance.CanBuy(_pointsToUpgrade) == false && _isPurchased == false)
+        {
+            CantBuyAnim();
+            return;
+        }
+
         UpgradeManager.Instance.CurrentCarLevel++;
+
+        print($"car lvl : {UpgradeManager.Instance.CurrentCarLevel} - car count : {UpgradeManager.Instance.CarsLvl.Count}");
+        if (UpgradeManager.Instance.CurrentCarLevel >= UpgradeManager.Instance.CarsLvl.Count-1)
+        {
+            _isPurchased = true;
+            BuyUpgrade();
+        }
+        
         base.OnMouseDown();
     }
 
@@ -37,12 +51,14 @@ public class BtnCar : BtnShop
     public override void SaveCurrentLevel()
     {
         PlayerPrefs.SetInt($"Car_CurrentLevel", _currentLevel);
+        PlayerPrefs.SetInt($"Car_IsPurchased", _isPurchased ? 1 : 0);
         PlayerPrefs.Save();
     }
 
     public override void LoadCurrentLevel()
     {
         _currentLevel = PlayerPrefs.GetInt($"Car_CurrentLevel", 0);
+        _isPurchased = PlayerPrefs.GetInt($"Car_IsPurchased", 0) == 1;
         UpgradeManager.Instance.CurrentCarLevel = _currentLevel;
     }
 }

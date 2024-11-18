@@ -38,7 +38,7 @@ public class BtnMecano : BtnShop
         {
             if(repair.MyUpgradeType == _upgradeType)
             {
-                if (_currentLevel < repair.MecanoPrices.Count)
+                if (_currentLevel < repair.MecanoPrices.Count - 1)
                 {
                     _pointsToUpgrade = repair.MecanoPrices[_currentLevel].PriceLevel;
                     _bonus = repair.MecanoPrices[_currentLevel].Speed;
@@ -46,9 +46,10 @@ public class BtnMecano : BtnShop
                 }
                 else
                 {
-                    _pointsToUpgrade = Mathf.RoundToInt(_pointsToUpgrade * 1.5f / 10) * 10;
-                    _bonus *= 1.5f;
-                    _power *= 1.5f;
+                    _isPurchased = true;
+                    _pointsToUpgrade = repair.MecanoPrices[^1].PriceLevel;
+                    _bonus = repair.MecanoPrices[^1].Speed;
+                    _power = repair.MecanoPrices[^1].Power;
                 }
                 UpgradeManager.Instance.CurrentMecanoSpeed[(int)_upgradeType] = _bonus;
                 UpgradeManager.Instance.CurrentMecanoPower[(int)_upgradeType] = _power;
@@ -71,11 +72,13 @@ public class BtnMecano : BtnShop
     public override void SaveCurrentLevel()
     {
         PlayerPrefs.SetInt($"Meca_{_upgradeType}_CurrentLevel", _currentLevel);
+        PlayerPrefs.SetInt($"Meca_{_upgradeType}_IsPurchased", _isPurchased ? 1 : 0);
         PlayerPrefs.Save();
     }
 
     public override void LoadCurrentLevel()
     {
         _currentLevel = PlayerPrefs.GetInt($"Meca_{_upgradeType}_CurrentLevel", 0);
+        _isPurchased = PlayerPrefs.GetInt($"Meca_{_upgradeType}_IsPurchased", 0) == 1;
     }
 }

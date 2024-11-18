@@ -19,6 +19,8 @@ public class UpgradeManager : MonoBehaviour
 
     public List<UpgradeInfo> RepairLvl => _repairLvl;
     public List<MecanoInfo> MecanoLvl => _mecanoLvl;
+    
+    public List<CarInfo> CarsLvl => _carsLvl;
     public int CurrentCarLevel { get; set; }
 
     private void Awake()

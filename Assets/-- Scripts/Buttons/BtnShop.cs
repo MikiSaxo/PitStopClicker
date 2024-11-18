@@ -46,7 +46,7 @@ public class BtnShop : BtnScreen
 
     private void CheckEnoughMoneyBuy()
     {
-        if (PointsManager.Instance.CanBuy(_pointsToUpgrade))
+        if (PointsManager.Instance.CanBuy(_pointsToUpgrade) && !_isPurchased)
         {
             BuyUpgrade();
             AudioManager.Instance.PlaySound("Buy");
@@ -62,8 +62,9 @@ public class BtnShop : BtnScreen
         PointsManager.Instance.UpdatePoints(-_pointsToUpgrade);
             
         _currentLevel++;
-        SaveCurrentLevel();
+        
         CheckOneTimePurchase();
+        SaveCurrentLevel();
         base.OnMouseDown();
          
         UpdateScreenText();
@@ -95,8 +96,8 @@ public class BtnShop : BtnScreen
                 }
                 else
                 {
-                    _pointsToUpgrade = Mathf.RoundToInt(_pointsToUpgrade * 1.5f / 10) * 10;
-                    _bonus *= 1.5f;
+                    _currentLevel--;
+                    _isPurchased = true;
                 }
 
                 UpgradeManager.Instance.CurrentRepairPower[(int)_upgradeType] = _bonus;
@@ -105,12 +106,12 @@ public class BtnShop : BtnScreen
             }
         }
     }
-    private void UpdateScreenText()
+    protected void UpdateScreenText()
     {
         if (_isPurchased)
         {
             _textPrice.text = $"<color=yellow>---------";
-            _textLevel.text = $"";
+            _textLevel.text = $"lvl. <color=yellow>Max";
             _textBtn.text = $"<color=yellow>Owned";
         }
         else
@@ -123,7 +124,7 @@ public class BtnShop : BtnScreen
         }
     }
     
-    private void CantBuyAnim()
+    protected void CantBuyAnim()
     {
         _textPrice.transform.DOKill();
         transform.DOLocalRotate(new Vector3(0, 0, 10), 0.1f).SetLoops(4, LoopType.Yoyo).SetEase(Ease.InOutQuad).OnComplete(() =>
@@ -140,11 +141,13 @@ public class BtnShop : BtnScreen
     public virtual void SaveCurrentLevel()
     {
         PlayerPrefs.SetInt($"Click_{_upgradeType}_CurrentLevel", _currentLevel);
+        PlayerPrefs.SetInt($"Click_{_upgradeType}_IsPurchased", _isPurchased ? 1 : 0);
         PlayerPrefs.Save();
     }
 
     public virtual void LoadCurrentLevel()
     {
         _currentLevel = PlayerPrefs.GetInt($"Click_{_upgradeType}_CurrentLevel", 0);
+        _isPurchased = PlayerPrefs.GetInt($"Click_{_upgradeType}_IsPurchased", 0) == 1;
     }
 }

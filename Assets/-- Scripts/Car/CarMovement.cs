@@ -141,6 +141,7 @@ public class CarMovement : MonoBehaviour
             {
                 _modelParent.transform.DOMove(_initClickPos, 0.1f);
                 _modelParent.transform.DORotate(new Vector3(0, 180, 0), 0.1f);
+                _modelParent.transform.DOScale(Vector3.one, 0.1f);
             });
     }
 
